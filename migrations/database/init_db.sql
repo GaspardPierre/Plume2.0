@@ -1,3 +1,3 @@
-CREATE USER admin_plume20 WITH LOGIN PASSWORD 'plume20';
+CREATE plume WITH LOGIN PASSWORD 'plume';
 
-CREATE DATABASE plume20 OWNER admin_plume20;wo
+CREATE DATABASE plume OWNER plume
