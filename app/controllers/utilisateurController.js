@@ -60,7 +60,7 @@ const utilisateurController = {
         res.json(updatedUtilisateur);
       },
 
-      async deleteMember(req, res) {
+      async deleteUtilisateur(req, res) {
         const utilisateurId = req.params.id;
         const deletedUtilisateur = await memberModel.delate(utilisateurId);
       
@@ -72,3 +72,4 @@ const utilisateurController = {
       }
       
 }
+module.exports = utilisateurController;
