@@ -17,16 +17,18 @@ node_modules
 package-lock.json
 *.gz
 
-#log
-**/*.log
-**/*.log.*
+
 
 #vscode
 .vs_code/
 
 #config
 .env
-sqitch.conf
+#medias
+public
+#log
+**/*.log
+**/*.log.*
 
-#test
-coverage/
+#vscode
+.vs_code/
