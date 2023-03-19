@@ -26,6 +26,6 @@ Le site web devrait être accessible depuis votre navigateur en accédant à l'U
 
 ## Auteur
 
-Plume20 a été développé par [Pierre Dillard]. Si vous avez des questions, vous pouvez me contacter par email à [pierredillard@gmail.com].
+Plume20 a été développé par Pierre Dillard. Si vous avez des questions, vous pouvez me contacter par email à pierredillard@gmail.com.
 
 Merci d'utiliser Plume20 !
