@@ -56,5 +56,3 @@ Plume 2.0 est un blog d'écriture, de poésie et de nouvelles. Vous pouvez consu
 
 1. Ouvrez un terminal dans le dossier du projet.
 2. Lancez le serveur avec nodemon.
-
-
