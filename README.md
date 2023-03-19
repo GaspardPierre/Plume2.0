@@ -53,6 +53,7 @@ Plume 2.0 est un blog d'écriture, de poésie et de nouvelles. Vous pouvez consu
 2. Tapez "npm run dev" pour lancer l'application.
 
 ### Backend
+Plume20 a été développé par Pierre Dillard. Si vous avez des questions, vous pouvez me contacter par email à pierredillard@gmail.com.
 
 1. Ouvrez un terminal dans le dossier du projet.
 2. Lancez le serveur avec nodemon.
