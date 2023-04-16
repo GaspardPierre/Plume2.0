@@ -1,2 +1,2 @@
-const utilisateurModel = require('./member');
+const memberModel = require('./member');
 const workModel = require('./oeuvre');
