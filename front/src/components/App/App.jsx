@@ -13,7 +13,7 @@ import './App.scss'
 
 export default function App() {
   return (
-    <div className="main__container" style={{ backgroundImage: `url(${bgImage})` }}>
+    <div className="content" style={{ backgroundImage: `url(${bgImage})` }}>
       <Routes>
         <Route path="/" element={<Home />} exact />
         <Route path="/signin" element={<Signin />} />
@@ -26,3 +26,4 @@ export default function App() {
     </div>
   );
 }
+

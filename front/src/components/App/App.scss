@@ -1,5 +1,7 @@
-.main__container {
 
+
+.content {
+  position: relative;
   width: 100%;
   min-height: 100vh;
   background-size: cover;
@@ -7,3 +9,5 @@
   background-repeat: no-repeat;
   overflow-y: auto;
 }
+
+
