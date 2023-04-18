@@ -1,0 +1,15 @@
+.custom-btn{
+    padding: 1.5rem;
+    background-color: #FAD480;
+    width: 45%;
+    border-radius: 2.5rem;
+    color: black;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+}
+
+    @media (max-width: 767px) {
+        .btn { 
+      width: 100%;
+    }
+  }

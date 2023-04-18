@@ -1,9 +1,10 @@
 
 
 .content {
-  position: relative;
+  position: sticky;
   width: 100%;
   min-height: 100vh;
+  max-height: 100vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,4 +1,18 @@
 .home__main__container {
-    padding: 20px;
-  }
+  padding: 20px;
+  min-height: 100vh;
   
+  .home__h1{
+    font-family: 'Fraunces', serif;
+    font-size: 6rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    @media (max-width: 767px) {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+     
+    }
+  }
+
+
+}
