@@ -3,12 +3,12 @@ const bcrypt = require("bcrypt");
 
 const memberController = {
 
-    async getAllUmembers(req,res) {
+    async getAllMembers(req,res) {
 
         const members = await memberModel.findAll();
         res.json(members);
     },
-    async addUtilisateur(req,res) {
+    async addMember(req,res) {
         const { pseudo, email, password } = req.body;
         console.log(req.body);
         const member = await memberModel.findByEmail(email);
