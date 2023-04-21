@@ -31,7 +31,7 @@ const workModel = {
     async insert (work) {
         try {
             const sqlQuery = `INSERT INTO work  (content, author, title,note, member_id ) VALUES ($1, $2, $3,$4,$5) RETURNIG *;`;
-            const values = [work.content, work.author, work.titre,work.note, work.member_id];
+            const values = [work.content, work.author, work.title,work.note, work.member_id];
 
             const result = await client.query( sqlQuery,  values);
             console.log(result.rows[0]);

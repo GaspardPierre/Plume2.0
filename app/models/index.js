@@ -1,2 +1,2 @@
 const memberModel = require('./member');
-const workModel = require('./oeuvre');
+const workModel = require('./work');
