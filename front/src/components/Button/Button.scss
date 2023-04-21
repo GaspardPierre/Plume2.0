@@ -1,15 +1,18 @@
-.custom-btn{
-    padding: 1.5rem;
-    background-color: #FAD480;
-    width: 45%;
-    border-radius: 2.5rem;
-    color: black;
-    margin-bottom: 1rem;
-    margin-left: 2rem;
-}
+@import 'node_modules/bootstrap/scss/bootstrap';
 
-    @media (max-width: 767px) {
-        .btn { 
-      width: 100%;
-    }
+// Personnalisez les boutons ici
+.btn-custom {
+    margin-left: 2rem;
+    width: 25%;
+  font-size: 1.2rem;
+  padding: 1.5rem;
+  background-color: rgb(250, 212, 128);
+  border-color: #3498db;
+  color: #fff;
+
+  &:hover,
+  &:focus {
+    background-color: #2980b9;
+    border-color: #2980b9;
   }
+}

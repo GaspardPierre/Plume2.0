@@ -1,14 +1,10 @@
-
-
 .content {
   position: sticky;
   width: 100%;
-  min-height: 100vh;
-  max-height: 100vh;
+  height: 100vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  overflow-y: auto;
+  background-attachment: fixed;
+  overflow-y: hidden;
 }
-
-

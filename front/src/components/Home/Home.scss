@@ -1,17 +1,27 @@
+.text-center{
+  font-family: 'Dancing Script', cursive;
+  font-size: 6em;
+  margin-top: 1em;
+  @media (max-width: 767px) {
+    font-size: 3rem;
+ 
+   
+  }
+}
+.btn-custom{
+  width: 35%;
+}
+
 .home__main__container {
-  padding: 20px;
+
   min-height: 100vh;
   
   .home__h1{
-    font-family: 'Fraunces', serif;
-    font-size: 6rem;
+   
+  
     text-align: center;
-    margin-bottom: 4rem;
-    @media (max-width: 767px) {
-      font-size: 3rem;
-      margin-bottom: 2rem;
-     
-    }
+    margin-bottom: 2rem;
+   
   }
 
 

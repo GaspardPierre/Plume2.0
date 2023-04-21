@@ -1,1 +1,40 @@
-@import "bootstrap/scss/bootstrap";
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+a {
+  all: initial;
+}
+.btn-custom {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  // width: 35%;
+  font-size: 1.1em;
+  padding: 1rem;
+  margin: 2rem;
+  background-color: rgb(250, 212, 128);
+  border-color: rgb(250, 212, 128);
+  border-color: black;
+  border-radius: 1.5rem;
+  text-align: center;
+  
+  &:visited{
+    text-decoration: none;
+    color: black;
+  }
+  &:hover{cursor:pointer;background-color : rgb(238, 175, 41);}
+  &:focus {
+    background-color : rgb(238, 175, 41);
+    border-color: black;
+  }
+
+  @media screen {
+    @media (max-width: 768px) {
+      width: 100%;
+      margin: 1rem;
+    }
+    
+  }
+}
+.error{
+  color: rgb(228, 5, 5);
+}

@@ -1,22 +1,25 @@
 import React from "react";
-import Button from "../Button/Button";
+import { Link } from "react-router-dom";
 import "./Home.scss";
 
 
 export default function Home() {
   return (
     <>
-      <h1 className="text-center">Page de la home</h1>
+     <title>Plume 2.0 - Accueil</title>
+      <meta name="description" content="Bienvenue sur Plume 2.0 - la plateforme de partage de poèmes et de nouvelles en ligne" />
+      <meta name="keywords" content="plume, poèmes, nouvelles, partage, écriture" />
+      <h1 className="text-center">Plume 2.0</h1>
       <div className="home__main__container d-flex align-items-center">
         <div className="container-fluid">
           <div className="row justify-content-center">
             <div className="col-12 col-lg-6 d-flex justify-content-center flex-wrap">
-              <Button >Inscription</Button>
-              <Button >Connexion</Button>
-              <Button>Poèmes</Button>
-              <Button >Nouvelles</Button>
-              <Button >Hors Catégories</Button>
-              <Button >A Propos</Button>
+              <Link to="/signin" className="btn-custom">Inscription</Link>
+              <Link to="/login" className="btn-custom">Connexion</Link>
+              <Link to="/poems" className="btn-custom">Poèmes</Link>
+              <Link to="/novels" className="btn-custom">Nouvelles</Link>
+              <Link to="/unclassifiable" className="btn-custom">Hors Catégories</Link>
+              <Link to="/about" className="btn-custom">A Propos</Link>
             </div>
           </div>
         </div>
@@ -24,3 +27,4 @@ export default function Home() {
     </>
   );
 }
+//comment faire disparaitre le scroll horizontale sur la page d'accueil?
