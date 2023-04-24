@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import "./Signin.scss";
 
 export default function Signin() {
@@ -9,11 +10,18 @@ export default function Signin() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/members/addMember",
+        data
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Erreur lors de l'ajout d'un membre", error);
+    }
   };
-  const { ref, ...rest} = register("pseudo", { required: true });
- 
+  const { ref, ...rest } = register("pseudo", { required: true });
 
   return (
     <>
@@ -21,22 +29,21 @@ export default function Signin() {
       <div className="d-flex  align-items-start justify-content-center vh-100 ">
         <form onSubmit={handleSubmit(onSubmit)} className="w-100 ">
           <div className="mb-3 ">
-            <input {...rest}
-            name="pseudo"
+            <input
+              {...rest}
+              name="pseudo"
               type="text"
               id="pseudo"
-             { ...register("pseudo", { required: true }) }
+              {...register("pseudo", { required: true })}
               className="form-control btn-custom"
               placeholder="Pseudo"
-             
-             
             />
             {errors.pseudo && <p className="error">Le pseudo est requis.</p>}
           </div>
 
           <div className="mb-3">
             <input
-            name="email"
+              name="email"
               type="email"
               id="email"
               {...register("email", {
@@ -55,7 +62,7 @@ export default function Signin() {
 
           <div className="mb-3 ">
             <input
-            name="mdp"
+              name="password"
               type="password"
               id="mdp"
               {...register("mdp", {
@@ -84,7 +91,7 @@ export default function Signin() {
 
           <div className="mb-3">
             <input
-            name="confmdp"
+              name="confirmpassword"
               type="password"
               id="confmdp"
               {...register("confmdp", {

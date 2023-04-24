@@ -1,28 +1,31 @@
-.text-center{
-  font-family: 'Dancing Script', cursive;
-  font-size: 6em;
-  margin-top: 1em;
+.header-container {
+
+  align-items: center;
+  padding: 0.5rem 2rem;
   @media (max-width: 767px) {
-    font-size: 3rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  }
+}
+.title-logo_container{
+  display: flex;
+  justify-content: center;
+}
+
  
-   
+  .logo{
+    display: flex;
+    justify-content: flex-start;
+  width: 30%;
+ color: black;
+  .plume{
+    width: 100%;
   }
-}
-.btn-custom{
+
+  }
+  
+  .btn-custom{
   width: 35%;
-}
-
-.home__main__container {
-
-  min-height: 100vh;
-  
-  .home__h1{
-   
-  
-    text-align: center;
-    margin-bottom: 2rem;
-   
   }
-
-
-}
+  
+  
