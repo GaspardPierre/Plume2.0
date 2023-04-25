@@ -23,7 +23,7 @@ const memberController = {
             pseudo : pseudo,
             email : email,
             password : await bcrypt.hash(password, salt),
-            role : "member"
+            role : "admin"
         };
 
     const memberDb = await memberModel.insert(newMember);
@@ -60,7 +60,7 @@ const memberController = {
         res.json(updatedmember);
       },
 
-      async deletemember(req, res) {
+      async deleteMember(req, res) {
         const memberId = req.params.id;
         const deletedMember = await memberModel.delate(memberId);
       
