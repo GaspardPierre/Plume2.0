@@ -1,17 +1,20 @@
-const { loginModel } = require(".");
-const client = require("./dbClient");
+const { PrismaClient } = require('@prisma/client');
 
+const prisma = new PrismaClient();
 
-const loginModel = {    
+const loginModel = {
   async findByPseudo(pseudo) {
     try {
-      const sqlQuery = `SELECT * FROM members WHERE pseudo = $1;`;
-      const values = [pseudo];
-      const result = await client.query(sqlQuery, values);
-      return result.rows[0];
+      const member = await prisma.member.findUnique({
+        where: {
+          pseudo: pseudo,
+        },
+      });
+      return member;
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 };
-  module.exports = loginModel;
+
+module.exports = loginModel;

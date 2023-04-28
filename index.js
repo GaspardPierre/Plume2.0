@@ -9,6 +9,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
+const port = process.env.PORT || 3000;
+
 app.use(session( {
     secret: process.env.SESSION_SECRET,
     resave: true, //sauvegarde la session à chaque changement
