@@ -1,23 +1,14 @@
-const { Pool } = require ('pg');
 
-/*Le pool perme de gérer plusieurs clients en même temps*/
-const pool = new Pool(); 
+const { PrismaClient } = require('@prisma/client');
+
+const prisma = new PrismaClient();
 
 module.exports = {
+  prisma, // Exportez l'instance de Prisma pour l'utiliser dans votre application
 
-    // Mise en place d'un système de tracking de mes requêtes
+  async query(...params) {
 
-    originalPool : pool,
-
-    async query(...params) {
-                // j'ajoute l'appel à debug pour afficher le détail de ma requête
-
-        debug(...params)
-        
-        return this.originalPool.query(...params);
-    }
-}
-
-
-// l'export standard (sans le tracking) :
-module.exports = pool;
+    debug(...params)
+    return prisma.$queryRaw(...params); // Utilisez $queryRaw pour exécuter des requêtes brutes avec Prisma
+  }
+};

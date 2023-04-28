@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["views"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Member {
+  id         Int      @id @default(autoincrement())
+  pseudo     String
+  email      String   @unique
+  password   String
+  role       String
+  works      Work[]
+  notes      Note[]
+  comments   Comment[]
+  create_at  DateTime @default(now())
+  update_at  DateTime @default(now())
+}
+
+model Work {
+  id         Int      @id @default(autoincrement())
+  content    String
+  author     String
+  title      String
+  member_id  Int
+  member     Member   @relation(fields: [member_id], references: [id])
+  labels     Label[]  @relation("WorkLabel")
+  notes      Note[]
+  comments   Comment[]
+  create_at  DateTime @default(now())
+  update_at  DateTime @default(now())
+}
+
+model Label {
+  id         Int      @id @default(autoincrement())
+  tag        String
+  works      Work[]   @relation("WorkLabel")
+  create_at  DateTime @default(now())
+  update_at  DateTime @default(now())
+}
+
+model Note {
+  id         Int      @id @default(autoincrement())
+  average    Int
+  member_id  Int
+  member     Member   @relation(fields: [member_id], references: [id])
+  work_id    Int
+  work       Work     @relation(fields: [work_id], references: [id])
+  create_at  DateTime @default(now())
+  update_at  DateTime @default(now())
+}
+
+model Comment {
+  id         Int      @id @default(autoincrement())
+  content    String
+  member_id  Int
+  member     Member   @relation(fields: [member_id], references: [id])
+  work_id    Int
+  work       Work     @relation(fields: [work_id], references: [id])
+}

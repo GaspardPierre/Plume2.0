@@ -1,14 +1,16 @@
-const client = require ("./dbClient");
-const { cpSync } = require("fs");// copie un fichier de manière synchrone, en une seule ligne de code ex : cpSync('chemin/source/fichier.txt', 'chemin/destination/fichier.txt');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 const workModel = {
 
-    async findByTitle(titre) {
+    async findByTitle(title) {
         try {
-            const sqlQuery = `SELECT * FROM work WHERE title = $1;`;
-            const values = [titre];
-            const result = await client.query( sqlQuery,  values);
-            return result.rows[0];
+            const foundTitle = await prisma.work.findUnique({
+                where: {
+                    title: title,
+                },
+            });
+            return foundTitle;
             
         } catch (error) {
             console.log(error);
@@ -17,25 +19,31 @@ const workModel = {
     },
 
     async findAll() {
-        let work
         try {
-            const result = await client.query("SELECT * FROM work;");
-        work = result.rows;
+            const works = await prisma.work.findMany();
+            return works;
             
-        } catch (error) {
+      
+            
+        } catch (error) {   
+            console.log(error);
             
         }
-        return work;
+        return null;
     },
 
     async insert (work) {
         try {
-            const sqlQuery = `INSERT INTO work  (content, author, title,note, member_id ) VALUES ($1, $2, $3,$4,$5) RETURNIG *;`;
-            const values = [work.content, work.author, work.title,work.note, work.member_id];
-
-            const result = await client.query( sqlQuery,  values);
-            console.log(result.rows[0]);
-            return result.rows[0];
+            const newWork = await prisma.work.create({
+                data: {
+                    content: work.content,
+                    author : work.author,
+                    title: work.title,
+                    member_id: work.member_id,
+                },
+            });
+            return newWork;
+            
             
         } catch (error) {
             console.log(error);
@@ -47,26 +55,28 @@ const workModel = {
 async findById(id) {
     let work;
     try {
-        const sqlQuery = `SELECT * FROM work WHERE id = $1;`;
-        const values = [id];
-        const result = await client.query( sqlQuery,  values);
-        work = result.rows[0];
+        const work = await prisma.work.findUnique({
+            where: {
+                id: id,
+            },
+        });
+        return work;
         
     } catch (error) {
         console.log(error);
         
     }
-    return work;
+    
 },
 
 async delete(id) {
 
     try {
-        const sqlQuery = `DELETE FROM work WHERE id = $1;`;
-        const values = [id];
-        const result = await client.query( sqlQuery,  values);
-        return result;
-        
+       await prisma.work.delete({   
+            where: {
+                id: id,
+            },
+        });
     } catch (error) {
         console.log(error);
         
