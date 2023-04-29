@@ -1,6 +1,3 @@
-# Plume20
-
-Bien sûr, voici le README.md pour votre projet Plume20 en utilisant les balises markdown :
 
 # Plume20
 
