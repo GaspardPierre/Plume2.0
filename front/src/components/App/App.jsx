@@ -15,7 +15,7 @@ export default function App() {
   return (
     <div className="content" style={{ backgroundImage: `url(${bgImage})` }}>
       <Routes>
-      
+       
         <Route path="/" element={<Home />} exact />
         <Route path="/signin" element={<Signin />} />
         <Route path="/login" element={<Login />} />

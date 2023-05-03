@@ -1,7 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { addMember } from "../../reducers/member";
 import "./Signin.scss";
+
 
 export default function Signin() {
   const {
@@ -9,14 +13,17 @@ export default function Signin() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
 
   const onSubmit = async (data) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/member/addMember",
-        data
-      );
-      console.log(response.data);
+    try { 
+    await dispatch(addMember(data));   
+         // Redirect <Login />
+         navigate("/login");
+
     } catch (error) {
       console.error("Erreur lors de l'ajout d'un membre", error);
     }
@@ -25,7 +32,7 @@ export default function Signin() {
 
   return (
     <>
-      <h1 className="text-center">Inscription</h1>
+      <h1 className="text-center mb-8">Inscription</h1>
       <div className="d-flex  align-items-start justify-content-center vh-100 ">
         <form onSubmit={handleSubmit(onSubmit)} className="w-100 ">
           <div className="mb-3 ">
@@ -64,8 +71,8 @@ export default function Signin() {
             <input
               name="password"
               type="password"
-              id="mdp"
-              {...register("mdp", {
+              id="password"
+              {...register("password", {
                 required: true,
                 minLength: 8,
                 pattern: /^(?=.*\d).{8,}$/,
@@ -73,15 +80,15 @@ export default function Signin() {
               className="form-control btn-custom"
               placeholder="Mot de passe"
             />
-            {errors.mdp && errors.mdp.type === "required" && (
+            {errors.password && errors.password.type === "required" && (
               <p className="error">Le mot de passe est requis.</p>
             )}
-            {errors.mdp && errors.mdp.type === "minLength" && (
+            {errors.password && errors.password.type === "minLength" && (
               <p className="error">
                 Le mot de passe doit contenir au moins 8 caractères.
               </p>
             )}
-            {errors.mdp && errors.mdp.type === "pattern" && (
+            {errors.password && errors.password.type === "pattern" && (
               <p className="error">
                 Le mot de passe doit contenir au moins 8 caractères et au moins
                 un chiffre.
@@ -94,10 +101,10 @@ export default function Signin() {
               name="confirmpassword"
               type="password"
               id="confmdp"
-              {...register("confmdp", {
+              {...register("password", {
                 required: true,
                 validate: (value) =>
-                  value === document.getElementById("mdp").value,
+                  value === document.getElementById("password").value,
               })}
               className="form-control btn-custom"
               placeholder="Confirmation du mot de passe"

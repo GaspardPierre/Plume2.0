@@ -1,0 +1,39 @@
+
+$form-max-width: 60%;
+$form-max-width-mobile: 80%;
+$form-background: rgb(250, 212, 128);
+
+.d-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+    
+  }
+  
+.header-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+form {
+  max-width: $form-max-width;
+
+.submit{
+    width: 100%;
+}
+  }
+
+
+
+
+.form {
+  background: $form-background;
+//   max-width: $form-max-width;
+//   margin: 0 auto;
+.form-control{
+font-family: 'Oswald', sans-serif;
+}
+}

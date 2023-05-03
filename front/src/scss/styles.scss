@@ -2,7 +2,11 @@
 
 a {
   all: initial;
+  text-decoration: none;
+  color: black;
 }
+
+
 .btn-custom {
   font-family: 'Oswald', sans-serif;
   letter-spacing: 0.2em;
@@ -16,10 +20,13 @@ a {
   border-color: black;
   border-radius: 1.5rem;
   text-align: center;
+  text-decoration: none;
+  color: black;
+  
   
   &:visited{
     text-decoration: none;
-    color: black;
+    color: rgb(78, 77, 77);
   }
   &:hover{cursor:pointer;background-color : rgb(238, 175, 41);}
   &:focus {

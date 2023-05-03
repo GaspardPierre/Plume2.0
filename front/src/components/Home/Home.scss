@@ -1,31 +1,28 @@
 .header-container {
-
   align-items: center;
   padding: 0.5rem 2rem;
+  margin-bottom: 3rem;
   @media (max-width: 767px) {
-  padding: 0.5rem 1rem;
-  margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 2rem;
   }
 }
-.title-logo_container{
+.title-logo_container {
   display: flex;
   justify-content: center;
 }
 
- 
-  .logo{
-    display: flex;
-    justify-content: flex-start;
+.logo {
+  display: flex;
+  justify-content: flex-start;
   width: 30%;
- color: black;
-  .plume{
+  color: black;
+  .plume {
     width: 100%;
   }
+}
 
-  }
-  
-  .btn-custom{
+.btn-custom {
   width: 35%;
-  }
-  
-  
+
+}
