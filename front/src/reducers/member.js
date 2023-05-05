@@ -14,7 +14,9 @@ export const login = createAsyncThunk(
     'login',
     async (data) => {
       const response = await axios.post('http://localhost:5000/api/login', data);
+      console.log(`response.data: ${response.data}`);
       return response.data;
+     
     }
   );
 
@@ -44,7 +46,8 @@ const memberSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.role = action.payload.role;
+        state.role = action.payload.member.role;
+        console.log(`state.role: ${state.role}`)
       })
       .addCase(login.rejected, (state, action) => {
         state.status = 'failed';
