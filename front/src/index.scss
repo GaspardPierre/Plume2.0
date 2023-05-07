@@ -9,9 +9,11 @@
   line-height: 1.5;
   font-weight: 400;
   cursor : url("./assets/logo.png") 0 0, auto;
-  height: 100vh;
+ 
 
-  
+  .body {
+    height: 100%;
+  }
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);

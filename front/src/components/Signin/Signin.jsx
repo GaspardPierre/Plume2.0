@@ -33,8 +33,8 @@ export default function Signin() {
   return (
     <>
       <h1 className="text-center mb-8">Inscription</h1>
-      <div className="d-flex  align-items-start justify-content-center vh-100 ">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-100 ">
+      <div className="d-flex  align-items-start justify-content-center vh-50 ">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-50 ">
           <div className="mb-3 ">
             <input
               {...rest}

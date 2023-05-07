@@ -2,8 +2,25 @@
     width: 100%;
     height : auto;
     white-space: pre-line;
+    border: 0;
+    margin: 20px;
+    padding: 10px;
+    text-align: justify;
+  
+    background: -webkit-linear-gradient(to top, #fffbfb, #fddfde);
+    background: linear-gradient(to top, #f7f7f7, #ffeae9);
+    box-shadow: 2px 2px 20px 0px #9c9090;
+    transition: transform cubic-bezier(0.7, 0.47, 0, 1.65) 400ms;
+    
+    font-family: TCM;
+    font-size: 20px;
+    color: #ed9599
    
 }
+.card:hover {
+    transform: rotate(1deg) scale(1.05);
+    z-index: 10;
+  }
 .card-title{
 font-size: 1.2em;
 font-weight: bold;
@@ -12,7 +29,7 @@ font-weight: bold;
     font-size: 0.5em;
 }
 .btn-custom{
-    width: 40%;
-    padding: 0.3rem;
+    // width: 40%;
+    // padding: 0.3rem;
     font-size: 1rem;
 }
