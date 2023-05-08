@@ -18,24 +18,25 @@ export default function Login() {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(""); // State errorMessage
 
+ 
   const onSubmit = async (data) => {
     try {
       const response = await dispatch(login(data));
-      console.log(`response: ${response.payload}`);
+      console.log(`response.payload.role: ${JSON.stringify(response.payload.role)}`);
 
-      if (response.payload) {
-        setErrorMessage(response.payload);
-        reset();
-      } else {
+      // Vérifier si le rôle existe
+      if (response.payload && response.payload.role) {
         navigate("/");
+      } else {
+        setErrorMessage(response.payload.message);
+        reset();
       }
     } catch (error) {
       console.log(error);
-      setErrorMessage(response.payload);
-    
-     
+      setErrorMessage(error.message);
     }
   };
+  
 
   return (
     <>
