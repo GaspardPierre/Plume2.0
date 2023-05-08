@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../Card/Card";
+import Grid from "../Grid/Grid";
 
 export default function Poems() {
   const poems = [
@@ -165,20 +165,16 @@ export default function Poems() {
     const summary = str.substring(0, 100)+ "...";
     return summary;
   };
-
+  const handleOnClick = (id) => {
+    console.log('Clicked poem with id:', id);
+  };
   return (
     <div className="container-fluid-custom">
-      <div className="row justify-content-center">
-    
-        {poems.map((poem) => (
-          <Card
-            key={poem.id}
-            title={poem.title}
-            excerpt={excerpt(poem.content)}
-          />
-        ))}
-      </div>
+      <Grid
+        poems={poems.map((poem) => ({ ...poem, excerpt: excerpt(poem.content) }))}
+        onClick={handleOnClick}
+      />
     </div>
-  
   );
 }
+
