@@ -4,6 +4,7 @@ import Home from "../Home/Home";
 import Signin from "../Signin/Signin";
 import Login from "../Login/Login";
 import Poems from "../Poems/Poems";
+import Poem from "../Poem/Poem";
 import Novels from "../Novels/Novels";
 import Unclassifiable from "../Unclassifiable/Unclassifiable";
 import About from "../About/About";
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/poems" element={<Poems />} />
+        <Route path="/poem/:id" element={<Poem />} />
         <Route path="/novels" element={<Novels />} />
         <Route path="/unclassifiable" element={<Unclassifiable />} />
         <Route path="/about" element={<About />} />

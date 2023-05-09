@@ -1,5 +1,7 @@
 import React from "react";
 import Grid from "../Grid/Grid";
+import Poem from "../Poem/Poem";
+import { Route, Routes } from "react-router-dom";
 
 export default function Poems() {
   const poems = [
@@ -7,10 +9,10 @@ export default function Poems() {
       id: 1,
       title: "L'espoir",
       content:
-        `Dans les ténèbres les plus épaisses,
-         L'espoir s'est levé,
-         Comme un triomphant soleil,
-         Aux ailes protectrices,
+          `Dans les ténèbres les plus épaisses,
+          L'espoir s'est levé,
+          Comme un triomphant soleil,
+          Aux ailes protectrices,
           L'Espoir a dit "ne retiens pas,
           Il a jailli comme un éclair,
           Dans une nuit de tempête,
@@ -33,10 +35,10 @@ export default function Poems() {
       id: 2,
       title: "L'espoir",
       content:
-        `Dans les ténèbres les plus épaisses,
-         L'espoir s'est levé,
-         Comme un triomphant soleil,
-         Aux ailes protectrices,
+         `Dans les ténèbres les plus épaisses,
+          L'espoir s'est levé,
+          Comme un triomphant soleil,
+          Aux ailes protectrices,
           L'Espoir a dit "ne retiens pas,
           Il a jailli comme un éclair,
           Dans une nuit de tempête,
@@ -85,10 +87,10 @@ export default function Poems() {
       id: 4,
       title: "L'espoir",
       content:
-        `Dans les ténèbres les plus épaisses,
-         L'espoir s'est levé,
-         Comme un triomphant soleil,
-         Aux ailes protectrices,
+          `Dans les ténèbres les plus épaisses,
+          L'espoir s'est levé,
+          Comme un triomphant soleil,
+          Aux ailes protectrices,
           L'Espoir a dit "ne retiens pas,
           Il a jailli comme un éclair,
           Dans une nuit de tempête,
@@ -111,10 +113,10 @@ export default function Poems() {
       id: 5,
       title: "L'espoir",
       content:
-        `Dans les ténèbres les plus épaisses,
-         L'espoir s'est levé,
-         Comme un triomphant soleil,
-         Aux ailes protectrices,
+          `Dans les ténèbres les plus épaisses,
+          L'espoir s'est levé,
+          Comme un triomphant soleil,
+          Aux ailes protectrices,
           L'Espoir a dit "ne retiens pas,
           Il a jailli comme un éclair,
           Dans une nuit de tempête,
@@ -169,12 +171,21 @@ export default function Poems() {
     console.log('Clicked poem with id:', id);
   };
   return (
+   
+    <>  
+    <h1 className="text-center mb-8">Poèmes</h1>
+    <div className="d-flex  align-items-start justify-content-center vh-80">
     <div className="container-fluid-custom">
       <Grid
         poems={poems.map((poem) => ({ ...poem, excerpt: excerpt(poem.content) }))}
         onClick={handleOnClick}
       />
+    
     </div>
+    </div>
+    
+    </>
+    
   );
 }
 
