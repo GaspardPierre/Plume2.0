@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useDispatch } from "react-redux";
 
 // REGISTER ACTION
 export const addMember = createAsyncThunk("member/addMember", async (data) => {

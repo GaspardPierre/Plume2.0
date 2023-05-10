@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import CardCustom from "../CardCustom/CardCustom";
 
 function Grid({ poems }) {
+  console.log("poems:", poems)
   return (
     <Row xs={1} md={2} lg={3} className="g-4">
       {poems.map((poem) => (

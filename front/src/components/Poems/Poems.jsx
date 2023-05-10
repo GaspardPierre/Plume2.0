@@ -1,191 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchWorks } from "../../reducers/work";
 import Grid from "../Grid/Grid";
 import Poem from "../Poem/Poem";
-import { Route, Routes } from "react-router-dom";
 
 export default function Poems() {
-  const poems = [
-    {
-      id: 1,
-      title: "L'espoir",
-      content:
-          `Dans les ténèbres les plus épaisses,
-          L'espoir s'est levé,
-          Comme un triomphant soleil,
-          Aux ailes protectrices,
-          L'Espoir a dit "ne retiens pas,
-          Il a jailli comme un éclair,
-          Dans une nuit de tempête,
-          Il s'est souvenu...
-          L'Espoir a ouvert grand ses bras,
-          Il a regardé au-delà,
-          il a dit "me voici!
-          Et sur le bois il s'est offert,
-          Il a déversé la vie des cieux sur la terre,
-          Il a détrempé mon cœur de ses flots,
-          Il a ouvert une brèche,
-          Et sa lumière est devenue un feu,
-          Brûlant comme un flambeau puissant,
-          Du gouffre vers l'éternité,
-          Avec sa chair et son sang,
-          Il a bâti un pont.`,
-      author: "Pierre Dillard"
-    },
-    {
-      id: 2,
-      title: "L'espoir",
-      content:
-         `Dans les ténèbres les plus épaisses,
-          L'espoir s'est levé,
-          Comme un triomphant soleil,
-          Aux ailes protectrices,
-          L'Espoir a dit "ne retiens pas,
-          Il a jailli comme un éclair,
-          Dans une nuit de tempête,
-          Il s'est souvenu...
-          L'Espoir a ouvert grand ses bras,
-          Il a regardé au-delà,
-          il a dit "me voici!
-          Et sur le bois il s'est offert,
-          Il a déversé la vie des cieux sur la terre,
-          Il a détrempé mon cœur de ses flots,
-          Il a ouvert une brèche,
-          Et sa lumière est devenue un feu,
-          Brûlant comme un flambeau puissant,
-          Du gouffre vers l'éternité,
-          Avec sa chair et son sang,
-          Il a bâti un pont.`,
-      author: "Pierre Dillard"
-    },
-    {
-      id: 3,
-      title: "L'espoir",
-      content:
-          `Dans les ténèbres les plus épaisses,
-          L'espoir s'est levé,
-          Comme un triomphant soleil,
-          Aux ailes protectrices,
-          L'Espoir a dit "ne retiens pas,
-          Il a jailli comme un éclair,
-          Dans une nuit de tempête,
-          Il s'est souvenu...
-          L'Espoir a ouvert grand ses bras,
-          Il a regardé au-delà,
-          il a dit "me voici!
-          Et sur le bois il s'est offert,
-          Il a déversé la vie des cieux sur la terre,
-          Il a détrempé mon cœur de ses flots,
-          Il a ouvert une brèche,
-          Et sa lumière est devenue un feu,
-          Brûlant comme un flambeau puissant,
-          Du gouffre vers l'éternité,
-          Avec sa chair et son sang,
-          Il a bâti un pont.`,
-      author: "Pierre Dillard"
-    },
-    {
-      id: 4,
-      title: "L'espoir",
-      content:
-          `Dans les ténèbres les plus épaisses,
-          L'espoir s'est levé,
-          Comme un triomphant soleil,
-          Aux ailes protectrices,
-          L'Espoir a dit "ne retiens pas,
-          Il a jailli comme un éclair,
-          Dans une nuit de tempête,
-          Il s'est souvenu...
-          L'Espoir a ouvert grand ses bras,
-          Il a regardé au-delà,
-          il a dit "me voici!
-          Et sur le bois il s'est offert,
-          Il a déversé la vie des cieux sur la terre,
-          Il a détrempé mon cœur de ses flots,
-          Il a ouvert une brèche,
-          Et sa lumière est devenue un feu,
-          Brûlant comme un flambeau puissant,
-          Du gouffre vers l'éternité,
-          Avec sa chair et son sang,
-          Il a bâti un pont.`,
-      author: "Pierre Dillard"
-    },
-    {
-      id: 5,
-      title: "L'espoir",
-      content:
-          `Dans les ténèbres les plus épaisses,
-          L'espoir s'est levé,
-          Comme un triomphant soleil,
-          Aux ailes protectrices,
-          L'Espoir a dit "ne retiens pas,
-          Il a jailli comme un éclair,
-          Dans une nuit de tempête,
-          Il s'est souvenu...
-          L'Espoir a ouvert grand ses bras,
-          Il a regardé au-delà,
-          il a dit "me voici!
-          Et sur le bois il s'est offert,
-          Il a déversé la vie des cieux sur la terre,
-          Il a détrempé mon cœur de ses flots,
-          Il a ouvert une brèche,
-          Et sa lumière est devenue un feu,
-          Brûlant comme un flambeau puissant,
-          Du gouffre vers l'éternité,
-          Avec sa chair et son sang,
-          Il a bâti un pont.`,
-      author: "Pierre Dillard"
-    },
-    {
-      id: 6,
-      title: "L'espoir",
-      content:
-          `Dans les ténèbres les plus épaisses,
-          L'espoir s'est levé,
-          Comme un triomphant soleil,
-          Aux ailes protectrices,
-          L'Espoir a dit "ne retiens pas,
-          Il a jailli comme un éclair,
-          Dans une nuit de tempête,
-          Il s'est souvenu...
-          L'Espoir a ouvert grand ses bras,
-          Il a regardé au-delà,
-          il a dit "me voici!
-          Et sur le bois il s'est offert,
-          Il a déversé la vie des cieux sur la terre,
-          Il a détrempé mon cœur de ses flots,
-          Il a ouvert une brèche,
-          Et sa lumière est devenue un feu,
-          Brûlant comme un flambeau puissant,
-          Du gouffre vers l'éternité,
-          Avec sa chair et son sang,
-          Il a bâti un pont.`,
-      author: "Pierre Dillard"
+  const dispatch = useDispatch();
+  const poems = useSelector((state) => state.work.works);
+  const workStatus = useSelector((state) => state.work.status);
+  const error = useSelector((state) => state.work.error);
+
+  useEffect(() => {
+    if (workStatus === "idle") {
+      dispatch(fetchWorks());
     }
-  ];
+  }, [workStatus, dispatch]);
 
   const excerpt = function (str) {
-    const summary = str.substring(0, 100)+ "...";
+    const summary = str.substring(0, 100) + "...";
     return summary;
   };
-  const handleOnClick = (id) => {
-    console.log('Clicked poem with id:', id);
-  };
+
+  let content;
+  if (workStatus === "loading") {
+    content = <div>Chargement des poèmes...</div>;
+  } else if (workStatus === "succeeded") {
+    content = (
+      <div className="d-flex  align-items-start justify-content-center vh-80">
+        <div className="container-fluid-custom">
+          <Grid
+            poems={poems.map((poem) => ({
+              ...poem,
+              excerpt: excerpt(poem.content),
+            }))}
+      
+          />
+        </div>
+      </div>
+    );
+  } else if (workStatus === "failed") {
+    content = <div>Erreur : {error}</div>;
+  }
   return (
-   
-    <>  
-    <h1 className="text-center mb-8">Poèmes</h1>
-    <div className="d-flex  align-items-start justify-content-center vh-80">
-    <div className="container-fluid-custom">
-      <Grid
-        poems={poems.map((poem) => ({ ...poem, excerpt: excerpt(poem.content) }))}
-        onClick={handleOnClick}
-      />
-    
-    </div>
-    </div>
-    
+    <>
+      <h1 className="text-center mb-8">Poèmes</h1>
+      {content}
     </>
-    
   );
 }
-
