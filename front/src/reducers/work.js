@@ -4,6 +4,7 @@ import axios from "axios";
 // FETCH POEMS ACTION
 export const fetchWorks = createAsyncThunk("work/fetchWorks", async () => {
   const response = await axios.get("http://localhost:5000/api/work");
+  console.log(`response.data: ${response.data}`);
 
   return response.data;
 
@@ -23,8 +24,9 @@ const workSlice = createSlice({
       })
       .addCase(fetchWorks.fulfilled, (state, action) => {
         state.status = "succeeded";
+        console.log("ACTION.PAYLOAD", action.payload);
         state.works = action.payload;
-        console.log(`state.poems: ${state.poems}`);
+        console.log('state.works:', state.works);
       })
       .addCase(fetchWorks.rejected, (state, action) => {
         state.status = "failed";

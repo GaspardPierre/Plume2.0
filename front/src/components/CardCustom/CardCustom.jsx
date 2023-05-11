@@ -2,7 +2,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 import './CardCustom.scss';
-import cardBackground from'../../assets/card_bg.png';
+import cardBackground from'../../assets/card_bg.jpg';
 export default function CardCustom({ title, excerpt, id }) {
   const navigate = useNavigate();
   const handleClick = () => {
