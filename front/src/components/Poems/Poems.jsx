@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchWorks } from "../../reducers/work";
+import { Navigate, useNavigate } from "react-router-dom";
 import Grid from "../Grid/Grid";
 import Poem from "../Poem/Poem";
 
@@ -9,6 +10,7 @@ export default function Poems() {
   const poems = useSelector((state) => state.work.works);
   const workStatus = useSelector((state) => state.work.status);
   const error = useSelector((state) => state.work.error);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (workStatus === "idle") {
@@ -20,7 +22,9 @@ export default function Poems() {
     const summary = str.substring(0, 100) + "...";
     return summary;
   };
-
+  const handlePoemClick = (id) => {
+    navigate(`/poem/${id}`);
+  };
   let content;
   if (workStatus === "loading") {
     content = <div>Chargement des poèmes...</div>;
@@ -33,7 +37,7 @@ export default function Poems() {
               ...poem,
               excerpt: excerpt(poem.content),
             }))}
-      
+            onPoemClick={handlePoemClick}
           />
         </div>
       </div>
@@ -45,6 +49,7 @@ export default function Poems() {
     <>
       <h1 className="text-center mb-8">Poèmes</h1>
       {content}
+ 
     </>
   );
 }

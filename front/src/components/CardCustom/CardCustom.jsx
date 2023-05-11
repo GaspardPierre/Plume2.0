@@ -1,13 +1,13 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import { useNavigate } from "react-router-dom";
 import './CardCustom.scss';
 import cardBackground from'../../assets/card_bg.jpg';
-export default function CardCustom({ title, excerpt, id }) {
-  const navigate = useNavigate();
+
+export default function CardCustom({ title, excerpt, id, onCardClick}) {
   const handleClick = () => {
-    navigate(`/poem/${id}`);
+    onCardClick(id); 
   };
+
   return (
     <Card className='card' style={{ backgroundImage: `url(${cardBackground})` }}>
       <Card.Body>
