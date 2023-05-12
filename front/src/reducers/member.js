@@ -18,7 +18,7 @@ export const login = createAsyncThunk(
       const response = await axios.post("http://localhost:5000/api/login", data);
       
     
-      return { status: response.status, message: response.data , payload : response.data, role: response.data.member.role};
+      return { status: response.status, message: response.data , payload : response.data, role: response.data.member.role, pseudo: response.data.member.pseudo};
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -52,7 +52,8 @@ const memberSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.role = action.payload.role;
-        console.log(`state.role: ${state.role}`);
+        state.pseudo = action.payload.pseudo;
+        console.log("state.pseudo:", state.pseudo);
       // dispatch the setMemberRole action creator with the role of the member
       })
       .addCase(login.rejected, (state, action) => {

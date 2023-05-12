@@ -47,7 +47,11 @@ export default function Poems() {
   }
   return (
     <>
-      <h1 className="text-center mb-8">Poèmes</h1>
+     <header className="header-container container mb-8">
+          <div className="row">
+            <h1 className="text-center mb-2">Poèmes</h1>
+          </div>
+        </header>
       {content}
  
     </>

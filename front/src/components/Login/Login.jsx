@@ -11,6 +11,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     reset,
   } = useForm();
@@ -18,11 +19,15 @@ export default function Login() {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(""); // State errorMessage
 
- 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setValue(name, value.toLowerCase());
+  };
+  
   const onSubmit = async (data) => {
     try {
       const response = await dispatch(login(data));
-      console.log(`response.payload.role: ${JSON.stringify(response.payload.role)}`);
+      console.log(`response.payload.role: ${JSON.stringify(response.payload)}`);
 
       // Vérifier si le rôle existe
       if (response.payload && response.payload.role) {
@@ -54,6 +59,7 @@ export default function Login() {
               })}
               className="form-control btn-custom"
               placeholder="Email"
+              onChange={handleInputChange}
             />
             {errors.email && (
               <p className="error">
@@ -74,6 +80,7 @@ export default function Login() {
               })}
               className="form-control btn-custom"
               placeholder="Mot de passe"
+          
             />
             {errors.password && errors.password.type === "required" && (
               <p className="error">Le mot de passe est requis.</p>
@@ -103,6 +110,7 @@ export default function Login() {
               })}
               className="form-control btn-custom"
               placeholder="Confirmation du mot de passe"
+            
             />
             {errors.confmdp && errors.confmdp.type === "required" && (
               <p className="error">

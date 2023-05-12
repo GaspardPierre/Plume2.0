@@ -12,32 +12,52 @@ $background-color: #fafafa;
       width: 80%;
       height: 100%;
       margin: 0 auto;
-      border: solid 1px black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+   
     }
+  .justify-content-center{
+    display: flex;
+    flex-direction: column;
+    min-width: 60%;
+    @media screen and (max-width: 768px) {
+      min-width: 80%;
+    }
+      
   
+ 
     .work-container {
-      width: 60%;
-      border: solid 1px black;
+
+      text-align: center;
+      margin-bottom: 2rem;
       .poem-content{
         white-space: pre-wrap;
+        text-align: left;
+        font-family: 'Dancing Script', cursive;
+        font-size: 1.2rem;
       }
     }
-  
+  .comment-container{
+    width: 100%;
+    background-color: #dcdde1;
+  }
     .comment-rating-container {
       display: flex;
       flex-direction: column;
-      height: 100%;
-      border: solid 1px black;
+      align-items: center;
       
       .rating-container {
         flex: 0 0 20%;
-        border: solid 1px black;
+       
       }
   
       .comment-container {
         flex-grow: 1;
-        border: solid 1px black;
+      
       }
     }
   }
+}
   

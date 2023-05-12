@@ -11,6 +11,7 @@ export default function Signin() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
@@ -28,7 +29,14 @@ export default function Signin() {
       console.error("Erreur lors de l'ajout d'un membre", error);
     }
   };
-  const { ref, ...rest } = register("pseudo", { required: true });
+
+
+  // Transform  input to lowercase 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setValue(name, value.toLowerCase());
+  };
+  
 
   return (
     <>
@@ -37,13 +45,14 @@ export default function Signin() {
         <form onSubmit={handleSubmit(onSubmit)} className="w-50 ">
           <div className="mb-3 ">
             <input
-              {...rest}
+            
               name="pseudo"
               type="text"
               id="pseudo"
               {...register("pseudo", { required: true })}
               className="form-control btn-custom"
               placeholder="Pseudo"
+              onChange={handleInputChange}
             />
             {errors.pseudo && <p className="error">Le pseudo est requis.</p>}
           </div>
@@ -59,6 +68,7 @@ export default function Signin() {
               })}
               className="form-control btn-custom"
               placeholder="Email"
+              onChange={handleInputChange}
             />
             {errors.email && (
               <p className="error">
@@ -79,6 +89,7 @@ export default function Signin() {
               })}
               className="form-control btn-custom"
               placeholder="Mot de passe"
+           
             />
             {errors.password && errors.password.type === "required" && (
               <p className="error">Le mot de passe est requis.</p>
@@ -95,7 +106,6 @@ export default function Signin() {
               </p>
             )}
           </div>
-
           <div className="mb-3">
             <input
               name="confirmpassword"

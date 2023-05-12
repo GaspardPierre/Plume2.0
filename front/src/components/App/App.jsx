@@ -8,13 +8,16 @@ import Poem from "../Poem/Poem";
 import Novels from "../Novels/Novels";
 import Unclassifiable from "../Unclassifiable/Unclassifiable";
 import About from "../About/About";
-// import Layout from "../Layout/Layout";
 import bgImage from '../../assets/background.jpg';
+// import Layout from "../Layout/Layout";
+
 import './App.scss'
 
 export default function App() {
+  document.documentElement.style.setProperty("--bg-image", `url(${bgImage})`);
+
   return (
-    <div className="content" style={{ backgroundImage: `url(${bgImage})` }}>
+    <div className="content" >
       <Routes>
        
         <Route path="/" element={<Home />} exact />
