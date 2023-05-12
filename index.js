@@ -49,7 +49,7 @@ app.use(bodyParser.urlencoded({
 
   app.use('/api', router);
 
-  app.use(router);
+  
 
   app.listen(port, () => {
     console.log(`http://localhost:${port}`);

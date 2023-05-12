@@ -5,9 +5,9 @@ const workModel = {
 
     async findByTitle(title) {
         try {
-            const foundTitle = await prisma.work.findUnique({
+            const foundTitle = await prisma.work.findFirst({
                 where: {
-                    title: title,
+                    title
                 },
             });
             return foundTitle;

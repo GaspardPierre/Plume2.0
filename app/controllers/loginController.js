@@ -11,6 +11,7 @@ const loginControlleur = {
 		const member = await memberModel.findByEmail(email);
 
 		if (!member) {
+			console.log(res.json);
 			return res.status(404).json({ message: "Utilisateur non trouvé" });
 		}
 		// fonction qui permet de comparer le mot de passe et le mot de passe stocqué dans la BDD pour l'itilisateur trouvé.
@@ -26,9 +27,9 @@ const loginControlleur = {
 		// On  retire le mdp de l'objet utilisateur pas de la BDD.
 		delete member.password;
 		// On enregistre l'utilisateur en session
-		req.session.user = member;
+		req.session.user = JSON.stringify(member); 
 		req.session.role = member.role
-		console.log(`req.session.user: ${req.session.user}`);
+		console.log(`req.session.user: ${req.session.user}`, `req.session.role: ${req.session.role}`);
 		res.status(200).json({ member });
 	},
 };
