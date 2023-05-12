@@ -28,7 +28,7 @@ model Work {
   id         Int      @id @default(autoincrement())
   content    String
   author     String
-  title      String
+  title      String 
   member_id  Int
   member     Member   @relation(fields: [member_id], references: [id])
   labels     Label[]  @relation("WorkLabel")

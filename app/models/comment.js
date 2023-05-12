@@ -13,26 +13,19 @@ const commentModel = {
     },
     async insert(comment) {
         try {
-            const newComment = await prisma.comment.create({
-                data: {
-                    content: comment.content,
-                    member : {
-                        connect: {
-                            id: comment.member_id,
-                        },
-                    },
-                    work: {
-                        connect: {
-                            id: comment.work_id,
-                        },
-                    },
-                },
-            });
-            return newComment;
+          const newComment = await prisma.comment.create({
+            data: {
+              content: comment.content,
+              member_id: comment.member_id,
+              work_id: comment.work_id,
+            },
+          });
+          return newComment;
         } catch (error) {
-            console.log(error);
+          console.error("Error while inserting comment:", error);
+          throw error;
         }
-    },
+      },
     async findById(id) {
         try {
             const comment = await prisma.comment.findUnique({

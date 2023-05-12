@@ -23,7 +23,7 @@ const memberController = {
             pseudo : pseudo,
             email : email,
             password : await bcrypt.hash(password, salt),
-            role : "visiteur"
+            role : "admin"
         };
 
     const memberDb = await memberModel.insert(newMember);

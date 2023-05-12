@@ -5,16 +5,18 @@ const commentController = {
         const comments = await commentModel.findAll();
         res.status(200).json(comments); 
     },
-    async addComment (req, res) {
-        const { content, member_id, work_id } = req.body;
+    async addComment(req, res) {
+        console.log("req.body:", req.body);
+        const { content, poemId } = req.body;
         const comment = {
-        content: content,
-        member_id: member_id,
-        work_id: work_id,
+          content: content,
+          member_id: req.session.user.id, // Récupère l'ID du membre à partir de la session
+          work_id: poemId,
         };
         const newComment = await commentModel.insert(comment);
         res.status(200).json(newComment);
-    },
+      },
+      
     async getComment (req, res) {
         const id = parseInt(req.params.id);
         const comment = await commentModel.findById(id);

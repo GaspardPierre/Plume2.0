@@ -3,13 +3,13 @@
 
 const security = {
     checkAdmin(req, res, next) {
-        console.log(req.session);
+        console.log('REQ.SESSION.USER.ROLE ',req.session.role);
     //   Si l'utilisateur n'et pas connecté => 401
         if (!req.session.user) {
           return res.status(401).json('vous devez vous connecter');
         }
     //   Si l'utilisateur n'est pas admin =>401
-        if (req.session.user.role !== 'admin') {
+        if (req.session.role !== 'admin') {
           return res.status(401).json('vous n\'etes pas administrateur');
         }
     //   Si Admin, on passe au midlleware suivant
