@@ -59,7 +59,7 @@ useEffect(() => {
                 <ListGroup className="comment-container">
                   {comments.map((comment, index) => (
                     <ListGroup.Item key={index}>
-                      {pseudo} : {comment}
+                      {pseudo} : {comment.content}
                     </ListGroup.Item>
                   ))}
                 </ListGroup>

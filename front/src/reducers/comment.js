@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
+import api  from "../api";
 // FETCH COMMENT ACTION
 
 export const fetchComments = createAsyncThunk(
     "work/fetchComments",
     async () => {
-        const response = await axios.get("http://localhost:5000/api/comment");
+        const response = await api.get("/comment");
         console.log(`response.data: ${response.data}`);
 
         return response.data;
@@ -18,8 +17,8 @@ export const addComment = createAsyncThunk(
     "comment/addMember",
     async (data) => {
         console.log("Data:", data);    
-        const response = await axios.post(
-            "http://localhost:5000/api/comment/addComment",
+        const response = await  api.post(
+            "/comment/addComment",
             data
         );
         return response.data;
@@ -30,8 +29,8 @@ export const addComment = createAsyncThunk(
 export const deleteComment = createAsyncThunk(
     "comment/deleteComment",
     async (data) => {
-        const response = await axios.delete(
-            "http://localhost:5000/api/comment/:id",
+        const response = await api.delete(
+            "/comment/:id",
             data
         );
     }

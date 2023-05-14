@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../api";
 
 // FETCH POEMS ACTION
 export const fetchWorks = createAsyncThunk("work/fetchWorks", async () => {
-  const response = await axios.get("http://localhost:5000/api/work");
+  const response = await api.get("/work");
   console.log(`response.data: ${response.data}`);
 
   return response.data;
