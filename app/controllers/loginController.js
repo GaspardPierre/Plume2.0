@@ -26,12 +26,15 @@ const loginControlleur = {
 		}
 		// On  retire le mdp de l'objet utilisateur pas de la BDD.
 		delete member.password;
-		// On enregistre l'utilisateur en session
-		req.session.user = JSON.stringify(member); 
+if(member.id){
+		req.session.user ={ id : member.id};
 		req.session.role = member.role
-		console.log(`req.session.user: ${req.session.user}`, `req.session.role: ${req.session.role}`);
+		console.log(`Après connexion, req.session: ${JSON.stringify(req.session)}`);
+}
 		res.status(200).json({ member });
 	},
 };
+
+
 
 module.exports = loginControlleur;

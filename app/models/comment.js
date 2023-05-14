@@ -12,6 +12,7 @@ const commentModel = {
         }
     },
     async insert(comment) {
+        console.log(comment);
         try {
           const newComment = await prisma.comment.create({
             data: {
