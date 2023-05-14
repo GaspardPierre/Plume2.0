@@ -18,7 +18,7 @@ const security = {
       
       checkUser(req, res, next) {
         console.log(req.session);
-        if (req.session.user && req.session.user.role === 'visiteur') {
+        if (req.session.user &&(req.session.role === 'visiteur'|| req.session.role === 'admin')) {
           next();
         } else {
           res.status(401).json('Vous n\'êtes pas autorisé à accéder à cette ressource.');
