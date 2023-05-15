@@ -42,6 +42,13 @@ $background-color: #fafafa;
   .comment-container{
     width: 100%;
     background-color: #dcdde1;
+    .list-group-item {
+      .strong {
+        font-size: 1.2rem;
+        background-color: #cacacc;
+      }
+
+    }
   }
     .comment-rating-container {
       display: flex;

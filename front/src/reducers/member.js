@@ -3,10 +3,7 @@ import api from "../api";
 
 // REGISTER ACTION
 export const addMember = createAsyncThunk("member/addMember", async (data) => {
-  const response = await api.post(
-    "/member/addMember",
-    data
-  );
+  const response = await api.post("/member/addMember", data);
   return response.data;
 });
 
@@ -16,9 +13,15 @@ export const login = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await api.post("/login", data);
-      
-    
-      return { status: response.status, message: response.data , payload : response.data, role: response.data.member.role, pseudo: response.data.member.pseudo};
+
+      return {
+        status: response.status,
+        message: response.data,
+        payload: response.data,
+        role: response.data.member.role,
+        pseudo: response.data.member.pseudo,
+        id: response.data.member.id,
+      };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -32,7 +35,7 @@ const memberSlice = createSlice({
     error: null,
     role: null,
   },
- 
+
   extraReducers: (builder) => {
     builder
       .addCase(addMember.pending, (state) => {
@@ -53,8 +56,8 @@ const memberSlice = createSlice({
         state.status = "succeeded";
         state.role = action.payload.role;
         state.pseudo = action.payload.pseudo;
-        console.log("state.pseudo:", state.pseudo);
-      // dispatch the setMemberRole action creator with the role of the member
+        state.id = action.payload.id;
+        // dispatch the setMemberRole action creator with the role of the member
       })
       .addCase(login.rejected, (state, action) => {
         state.status = "failed";
@@ -62,6 +65,5 @@ const memberSlice = createSlice({
       });
   },
 });
-
 
 export default memberSlice.reducer;
