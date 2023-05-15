@@ -3,7 +3,7 @@ const { noteModel } = require("../models");
 const noteController = {
     async findAllNotes (req, res) {
         const notes = await noteModel.findAll();
-        res.status.json(notes);    
+        res.status(200).json(notes);    
     },
     async addNote (req, res) {
         const { average, member_id, work_id } = req.body;
