@@ -4,8 +4,8 @@ import api  from "../api";
 
 export const fetchComments = createAsyncThunk(
     "work/fetchComments",
-    async () => {
-        const response = await api.get("/comment");
+    async (id) => {
+        const response = await api.get(`/comment/${id}`);
         console.log(`response.data: ${response.data}`);
 
         return response.data;

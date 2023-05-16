@@ -33,7 +33,7 @@ export default function Login() {
       if (response.payload && response.payload.role) {
         navigate("/");
       } else {
-        setErrorMessage(response.payload.message);
+        setErrorMessage(error.message);
         reset();
       }
     } catch (error) {
