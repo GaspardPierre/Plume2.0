@@ -2,6 +2,23 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const commentModel = {
+
+    async findAllByPoemId(poemId) {
+        try {
+            const comments = await prisma.comment.findMany({
+                where: {
+                    work_id: parseInt(poemId),
+                },
+            });
+            console.log("comments:", comments)
+            return comments;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    },
+
+
     async findAll() {
         try {
             const comments = await prisma.comment.findMany();

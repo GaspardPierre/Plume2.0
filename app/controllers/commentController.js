@@ -1,9 +1,17 @@
 const { commentModel } = require("../models");
 
 const commentController = {
-    async findAllComments (req, res) {
-        const comments = await commentModel.findAll();
-        res.status(200).json(comments); 
+    async findAllWorkComments (req, res) {
+        try { 
+       const { id } = req.params;
+       console.log("poemId:", id);
+         const comments = await commentModel.findAllByPoemId(id);
+            return res.status(200).json(comments);
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({ error });
+        }
+    
     },
     async addComment(req, res) {
         console.log("req.session:", req.session);
