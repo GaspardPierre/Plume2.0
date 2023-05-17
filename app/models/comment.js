@@ -87,9 +87,10 @@ const commentModel = {
         }
     },
     async delete(id) {
+        console.log(id);
 await prisma.comment.delete({
     where: {
-        id: id,
+        id: parseInt(id),
     },
 });
     },
