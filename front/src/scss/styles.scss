@@ -3,7 +3,7 @@
 a {
   all: initial;
   text-decoration: none;
-  color: black;
+  color : #333333
 }
 .container-fluid-custom{
   display: flex;
@@ -27,6 +27,12 @@ a {
 }
 .list-group-item{
   background-color: rgb(223, 224, 224);
+  font-family: 'Dancing Script', cursive;
+
+}
+.delete-comment{
+  background-color: rgb(224, 176, 72);
+  border-color: rgb(224, 176, 72);
 }
 .btn-custom {
   font-family: 'Oswald', sans-serif;
@@ -36,8 +42,8 @@ a {
   font-size: 1.1em;
   padding: 1rem;
   margin: 2rem;
-  background-color: rgb(250, 212, 128);
-  border-color: rgb(250, 212, 128);
+  background-color: rgb(224, 176, 72);
+  border-color: rgb(224, 176, 72);
   border-color: black;
   border-radius: 1.5rem;
   text-align: center;

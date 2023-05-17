@@ -4,24 +4,25 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import { ListGroup ,Button} from "react-bootstrap";
+import { ListGroup, Button } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {
   fetchComments,
   addComment,
   deleteComment,
+  resetComment,
 } from "../../reducers/comment";
 import { fetchAverage } from "../../reducers/average";
 import CommentForm from "../CommentForm/CommentForm";
 import "./Poem.scss";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Poem({}) {
   const navigate = useNavigate();
   const { id } = useParams();
-  
+
   const poems = useSelector((state) => state.work.works);
   const poem = poems.find((poem) => poem.id === parseInt(id));
   console.log("poem:", poem);
@@ -31,6 +32,7 @@ export default function Poem({}) {
   const averageByPoem = useSelector((state) => state.average.averageByPoem);
   const average = averageByPoem[poem.id];
   const pseudo = useSelector((state) => state.member.pseudo);
+  const userId = useSelector((state) => state.member.id);
   const role = useSelector((state) => state.member.role);
 
   if (!pseudo) {
@@ -40,16 +42,26 @@ export default function Poem({}) {
   // COMMENT STATE
   const comments = useSelector((state) => state.comment.comments) || [];
   console.log("Commentaires récupérés :", comments);
+
   const dispatch = useDispatch();
   const handleAddComment = (comment) => {
     console.log("LES comments de POEM :", comment);
     dispatch(addComment(comment));
   };
 
+  // ...handleDeleteComment
+  const [commentDeleted, setCommentDeleted] = useState(false); // Ajoute cet état
+
+  const onDeleteComment = (id) => {
+    dispatch(deleteComment({ id: parseInt(id) }));
+    setCommentDeleted(true);
+  };
+
   useEffect(() => {
     dispatch(fetchComments(id));
     dispatch(fetchAverage());
-  }, [dispatch, id]);
+    setCommentDeleted(false);
+  }, [dispatch, id, commentDeleted]);
 
   return (
     <>
@@ -82,12 +94,14 @@ export default function Poem({}) {
                       <strong>{pseudo}</strong> : <br />
                       {comment.content}
                     </div>
-                    <Button
-                      variant="danger"
-                      onClick={() => onDeleteComment(comment.poemId)}
-                    >
-                      <FontAwesomeIcon icon={faTrash} />
-                    </Button>
+                    {comment.member_id === userId ? (
+                      <Button
+                        variant="danger"
+                        onClick={() => onDeleteComment(comment.id)}
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </Button>
+                    ) : null}
                   </ListGroup.Item>
                 ))}
               </ListGroup>
