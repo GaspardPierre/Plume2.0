@@ -49,7 +49,7 @@ const commentController = {
         }
     },
     async deleteComment (req, res) {
-        await commentModel.delete(req.params.id);
+        await commentModel.delete(parseInt(req.params.id));
         res.status(200).json({message: "Comment deleted"});
     }   
 };
