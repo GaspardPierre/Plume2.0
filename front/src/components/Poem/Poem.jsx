@@ -96,7 +96,8 @@ export default function Poem({}) {
                     </div>
                     {comment.member_id === userId ? (
                       <Button
-                        variant="danger"
+                        ClassName="btn-delete"
+                        variant="warning"
                         onClick={() => onDeleteComment(comment.id)}
                       >
                         <FontAwesomeIcon icon={faTrash} />
@@ -107,7 +108,6 @@ export default function Poem({}) {
               </ListGroup>
               {/* Fonctionnalité de notation et commentaires */}
             </Col>
-            <Col className="comment-container"></Col>
           </Row>
         </Container>
       </div>

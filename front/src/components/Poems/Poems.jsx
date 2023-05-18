@@ -4,6 +4,7 @@ import { fetchWorks } from "../../reducers/work";
 import { Navigate, useNavigate } from "react-router-dom";
 import Grid from "../Grid/Grid";
 import Poem from "../Poem/Poem";
+import Loading from "../Loading/Loading";
 
 export default function Poems() {
   const dispatch = useDispatch();
@@ -27,7 +28,8 @@ export default function Poems() {
   };
   let content;
   if (workStatus === "loading") {
-    content = <div>Chargement des poèmes...</div>;
+    content = <Loading variant="warning" />;
+    console.log(Loading);
   } else if (workStatus === "succeeded") {
     content = (
       <div className="d-flex  align-items-start justify-content-center vh-80">
@@ -47,13 +49,12 @@ export default function Poems() {
   }
   return (
     <>
-     <header className="header-container container mb-8">
-          <div className="row">
-            <h1 className="text-center mb-2">Poèmes</h1>
-          </div>
-        </header>
+      <header className="header-container container mb-8">
+        <div className="row">
+          <h1 className="text-center mb-2">Poèmes</h1>
+        </div>
+      </header>
       {content}
- 
     </>
   );
 }

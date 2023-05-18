@@ -30,7 +30,7 @@ console.log("'id du poem dans Comment frm :",poem.id);
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button variant="warning" type="submit">
               Poster le commentaire
             </Button>
           </Form>

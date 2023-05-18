@@ -40,6 +40,8 @@ $background-color: #fafafa;
       }
     }
   .comment-container{
+    flex-grow: 2;
+    
     width: 100%;
     background-color: #dcdde1;
     .list-group-item {

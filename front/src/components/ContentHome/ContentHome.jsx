@@ -23,7 +23,7 @@ export default function ContentHome({role}) {
         <Link to="/admin" className="btn-custom">
           Administrer le blog
         </Link>
-        <Link to="/poèmes" className="btn-custom">
+        <Link to="/poems" className="btn-custom">
           Poèmes
         </Link>
         <Link to="/novels" className="btn-custom">
@@ -43,7 +43,7 @@ export default function ContentHome({role}) {
   } else if (role === "visiteur") {
     content = (
       <>
-        <Link to="/poèmes" className="btn-custom">
+        <Link to="/poems" className="btn-custom">
           Poèmes
         </Link>
         <Link to="/novels" className="btn-custom">
@@ -69,7 +69,7 @@ export default function ContentHome({role}) {
         <Link to="/signin" className="btn-custom">
             Inscription
         </Link>
-        <Link to="/poèmes" className="btn-custom">
+        <Link to="/poems" className="btn-custom">
           Poèmes
         </Link>
         <Link to="/novels" className="btn-custom">
