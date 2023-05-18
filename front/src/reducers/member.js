@@ -27,6 +27,10 @@ export const login = createAsyncThunk(
     }
   }
 );
+// LOGOUT ACTION
+export const logout = createAsyncThunk("logout", async () => {
+  return null;
+});
 
 const memberSlice = createSlice({
   name: "member",
@@ -62,6 +66,12 @@ const memberSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      // Handle logout actions
+      .addCase(logout.fulfilled, (state) => {
+        state.role = null;
+        state.pseudo = null;
+        state.id = null;
       });
   },
 });

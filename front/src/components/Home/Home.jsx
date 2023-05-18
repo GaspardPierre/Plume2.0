@@ -1,14 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import ContentHome from "../ContentHome/ContentHome";
 import { useSelector } from "react-redux";
-import { selectRole } from "../../selectors/memberSelectors";
-
 import "../../scss/styles.scss";
 import "./Home.scss";
 
 export default function Home() {
-  const role = useSelector(selectRole);
-  console.log(role);
+  const role = useSelector((state) => state.member.role);
+  console.log("role:", role);
+  
   return (
     <>
       <title>Plume 2.0 - Accueil</title>
@@ -31,32 +30,7 @@ export default function Home() {
         <div className="home__main__container d-flex align-items-center">
           <div className="container-fluid">
             <div className="row justify-content-center">
-              <div className="col-12 col-lg-6 d-flex justify-content-center flex-wrap">
-                {role === "admin" && (
-                  <Link to="/signin" className="btn-custom">
-                    Administrer le blog
-                  </Link>
-                )}
-
-                <Link to="/signin" className="btn-custom">
-                  Inscription
-                </Link>
-                <Link to="/login" className="btn-custom">
-                  Connexion
-                </Link>
-                <Link to="/poems" className="btn-custom">
-                  Poèmes
-                </Link>
-                <Link to="/novels" className="btn-custom">
-                  Nouvelles
-                </Link>
-                <Link to="/unclassifiable" className="btn-custom">
-                  Hors Catégories
-                </Link>
-                <Link to="/about" className="btn-custom">
-                  A Propos
-                </Link>
-              </div>
+              <ContentHome role={role} />
             </div>
           </div>
         </div>

@@ -33,7 +33,7 @@ export default function Login() {
       if (response.payload && response.payload.role) {
         navigate("/");
       } else {
-        setErrorMessage(error.message);
+        setErrorMessage("Erreur d'email ou de mot de passe");
         reset();
       }
     } catch (error) {
