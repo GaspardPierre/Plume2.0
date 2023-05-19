@@ -1,31 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import { ListGroup, Button } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {
   fetchComments,
   addComment,
   deleteComment,
-  resetComment,
 } from "../../reducers/comment";
 import { fetchAverage } from "../../reducers/average";
+import Comment from "../Comment/Comment";
 import CommentForm from "../CommentForm/CommentForm";
 import "./Poem.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function Poem({}) {
   const navigate = useNavigate();
   const { id } = useParams();
-
   const poems = useSelector((state) => state.work.works);
   const poem = poems.find((poem) => poem.id === parseInt(id));
-  console.log("poem:", poem);
   if (!poem) {
     return <div>Poème introuvable</div>;
   }
@@ -41,27 +37,28 @@ export default function Poem({}) {
 
   // COMMENT STATE
   const comments = useSelector((state) => state.comment.comments) || [];
-  console.log("Commentaires récupérés :", comments);
-
   const dispatch = useDispatch();
-  const handleAddComment = (comment) => {
-    console.log("LES comments de POEM :", comment);
+
+  const handleAddComment = useCallback((comment) => {
     dispatch(addComment(comment));
-  };
+  },[dispatch]);
 
   // ...handleDeleteComment
-  const [commentDeleted, setCommentDeleted] = useState(false); // Ajoute cet état
-
-  const onDeleteComment = (id) => {
+  const [commentDeleted, setCommentDeleted] = useState(false); // to force useEffect to reload comments
+  const onDeleteComment = useCallback((id) => {
     dispatch(deleteComment({ id: parseInt(id) }));
     setCommentDeleted(true);
-  };
+  },[dispatch]);
 
   useEffect(() => {
+    try { 
     dispatch(fetchComments(id));
     dispatch(fetchAverage());
     setCommentDeleted(false);
-  }, [dispatch, id, commentDeleted]);
+  } catch (error) {
+     console.log(error) ;
+  }
+  }, [ id, commentDeleted]);
 
   return (
     <>
@@ -84,28 +81,16 @@ export default function Poem({}) {
                 poem={poem}
                 average={average}
               />
-              <ListGroup className="comment-container">
                 {comments.map((comment, index) => (
-                  <ListGroup.Item
-                    key={index}
-                    className="d-flex justify-content-between align-items-start"
-                  >
-                    <div>
-                      <strong>{pseudo}</strong> : <br />
-                      {comment.content}
-                    </div>
-                    {comment.member_id === userId ? (
-                      <Button
-                        ClassName="btn-delete"
-                        variant="warning"
-                        onClick={() => onDeleteComment(comment.id)}
-                      >
-                        <FontAwesomeIcon icon={faTrash} />
-                      </Button>
-                    ) : null}
-                  </ListGroup.Item>
+                 <Comment
+                 comment ={comment} 
+                  onDeleteComment={onDeleteComment}
+                  pseudo={pseudo}
+                  userId={userId}
+                  key={comment.id}
+                 />
                 ))}
-              </ListGroup>
+             
               {/* Fonctionnalité de notation et commentaires */}
             </Col>
           </Row>

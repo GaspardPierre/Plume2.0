@@ -34,7 +34,7 @@ $background-color: #fafafa;
       margin-bottom: 2rem;
       .poem-content{
         white-space: pre-wrap;
-        text-align: left;
+        text-align: center;
         font-family: 'Dancing Script', cursive;
         font-size: 1.2rem;
       }
@@ -64,7 +64,8 @@ $background-color: #fafafa;
   
       .comment-container {
         flex-grow: 1;
-   
+
+  
       }
     }
   }
