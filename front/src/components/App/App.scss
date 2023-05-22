@@ -10,5 +10,8 @@
   background-attachment: fixed;
   margin: 0;
   padding: 0;
+  @media screen and (max-width: 768px) {
+    background-repeat: no-repeat;
+  }
  
 }

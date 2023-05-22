@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import './CardCustom.scss';
-import cardImage from'../../assets/bg.jpg';
+// import cardImage from'../../assets/bg.jpg';
 
 export default function CardCustom({ title, excerpt, id, onCardClick}) {
   const handleClick = () => {
@@ -10,7 +10,7 @@ export default function CardCustom({ title, excerpt, id, onCardClick}) {
 
   return (
     <Card className='card' >
-     <Card.Img variant="top" src={cardImage}/>
+     {/* <Card.Img variant="bottom" src={cardImage}/> */}
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{excerpt}</Card.Text>

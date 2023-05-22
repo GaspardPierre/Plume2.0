@@ -2,72 +2,65 @@ $primary-color: #3f51b5;
 $secondary-color: #f50057;
 $background-color: #fafafa;
 
-.poem{
-    .main-title {
-      text-align: center;
-      margin-top: 3rem;
-    }
-  
-    .main-container {
-      width: 80%;
-      height: 100%;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-   
-    }
-  .justify-content-center{
+.poem {
+  .main-title {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .main-container {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .justify-content-center {
     display: flex;
     flex-direction: column;
     min-width: 60%;
     @media screen and (max-width: 768px) {
       min-width: 80%;
     }
-      
-  
- 
-    .work-container {
 
+    .work-container {
       text-align: center;
       margin-bottom: 2rem;
-      .poem-content{
+      .poem-content {
         white-space: pre-wrap;
         text-align: center;
-        font-family: 'Dancing Script', cursive;
+        font-family: "Dancing Script", cursive;
         font-size: 1.2rem;
       }
     }
-  .comment-container{
-    flex-grow: 2;
-    
-    width: 100%;
-    background-color: #dcdde1;
-    .list-group-item {
-      .strong {
-        font-size: 1.2rem;
-        background-color: #cacacc;
-      }
+    .comment-container {
+      flex-grow: 2;
 
+      width: 100%;
+      background-color: #dcdde1;
+      .list-group-item {
+        .strong {
+          font-size: 1.2rem;
+          background-color: #cacacc;
+        }
+      }
     }
-  }
     .comment-rating-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      
+
       .rating-container {
         flex: 0 0 20%;
-       
       }
-  
+    
+     
+
       .comment-container {
         flex-grow: 1;
-
-  
       }
     }
   }
 }
-  

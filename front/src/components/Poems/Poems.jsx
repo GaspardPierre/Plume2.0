@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchWorks } from "../../reducers/work";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Grid from "../Grid/Grid";
+import { Link } from "react-router-dom";
+import { logout } from "../../reducers/member";
 import Poem from "../Poem/Poem";
 import Loading from "../Loading/Loading";
 
@@ -12,6 +14,10 @@ export default function Poems() {
   const workStatus = useSelector((state) => state.work.status);
   const error = useSelector((state) => state.work.error);
   const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+};
 
   useEffect(() => {
     if (workStatus === "idle") {
@@ -50,8 +56,17 @@ export default function Poems() {
   return (
     <>
       <header className="header-container container mb-8">
+    
+      <Link to="/" className="btn-custom"  >
+          Accueil
+        </Link>
+        <Link to="/" className="btn-custom" onClick={handleLogout}  >
+          Déconnexion
+        </Link>
+      
         <div className="row">
           <h1 className="text-center mb-2">Poèmes</h1>
+         
         </div>
       </header>
       {content}

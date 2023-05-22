@@ -4,8 +4,10 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
+import { Button } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Fade from "react-bootstrap/Fade";
 import {
   fetchComments,
   addComment,
@@ -38,27 +40,34 @@ export default function Poem({}) {
   // COMMENT STATE
   const comments = useSelector((state) => state.comment.comments) || [];
   const dispatch = useDispatch();
+  const [showCommentForm, setShowCommentForm] = useState(false);
 
-  const handleAddComment = useCallback((comment) => {
-    dispatch(addComment(comment));
-  },[dispatch]);
+  const handleAddComment = useCallback(
+    (comment) => {
+      dispatch(addComment(comment));
+    },
+    [dispatch]
+  );
 
   // ...handleDeleteComment
   const [commentDeleted, setCommentDeleted] = useState(false); // to force useEffect to reload comments
-  const onDeleteComment = useCallback((id) => {
-    dispatch(deleteComment({ id: parseInt(id) }));
-    setCommentDeleted(true);
-  },[dispatch]);
+  const onDeleteComment = useCallback(
+    (id) => {
+      dispatch(deleteComment({ id: parseInt(id) }));
+      setCommentDeleted(true);
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
-    try { 
-    dispatch(fetchComments(id));
-    dispatch(fetchAverage());
-    setCommentDeleted(false);
-  } catch (error) {
-     console.log(error) ;
-  }
-  }, [ id, commentDeleted]);
+    try {
+      dispatch(fetchComments(id));
+      dispatch(fetchAverage());
+      setCommentDeleted(false);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [id, commentDeleted]);
 
   return (
     <>
@@ -81,16 +90,28 @@ export default function Poem({}) {
                 poem={poem}
                 average={average}
               />
-                {comments.map((comment, index) => (
-                 <Comment
-                 comment ={comment} 
-                  onDeleteComment={onDeleteComment}
-                  pseudo={pseudo}
-                  userId={userId}
-                  key={comment.id}
-                 />
-                ))}
-             
+              <Button
+                onClick={() => setShowCommentForm(!showCommentForm)}
+                aria-controls="comment-fade-text"
+                aria-expanded={showCommentForm}
+                className="show-comments-btn"
+              >
+                Voir les commentaires
+              </Button>
+              <Fade in={showCommentForm}>
+                <div id="comment-fade-text">
+                  {comments.map((comment, index) => (
+                    <Comment
+                      comment={comment}
+                      onDeleteComment={onDeleteComment}
+                      pseudo={pseudo}
+                      userId={userId}
+                      key={comment.id}
+                    />
+                  ))}
+                </div>
+              </Fade>
+
               {/* Fonctionnalité de notation et commentaires */}
             </Col>
           </Row>

@@ -14,7 +14,7 @@ export default function Comment({ comment, onDeleteComment, pseudo, userId }) {
       {comment.member_id === userId ? (
         <Button
           ClassName="btn-delete"
-          variant="warning"
+          variant="danger"
           onClick={() => onDeleteComment(comment.id)}
         >
           <FontAwesomeIcon icon={faTrash} />

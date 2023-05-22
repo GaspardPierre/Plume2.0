@@ -38,4 +38,3 @@ export default function Home() {
     </>
   );
 }
-//comment faire disparaitre le scroll horizontale sur la page d'accueil?

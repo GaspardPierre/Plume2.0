@@ -8,7 +8,13 @@ import Poem from "../Poem/Poem";
 import Novels from "../Novels/Novels";
 import Unclassifiable from "../Unclassifiable/Unclassifiable";
 import About from "../About/About";
-import bgImage from '../../assets/background.jpg';
+import Admin from "../Admin/Admin";
+import AdminNav from "../AdminNav/AdminNav";
+import AdminMember from "../AdminMember/AdminMember";
+import AdminWork from "../AdminWork/AdminWork";
+import AdminComment from "../AdminComment/AdminComment";
+import AdminNote from "../AdminNote/AdminNote";
+import bgImage from '../../assets/bg.jpg';
 // import Layout from "../Layout/Layout";
 
 import './App.scss'
@@ -27,7 +33,13 @@ export default function App() {
         <Route path="/poem/:id" element={<Poem />} />
         <Route path="/novels" element={<Novels />} />
         <Route path="/unclassifiable" element={<Unclassifiable />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/about" element={<About />} />
+        <Route path="/about" element={<AdminNav />} />
+        <Route path="/admin/member" element={<AdminMember />} />
+        <Route path="/admin/work" element={<AdminWork />} />
+        <Route path="/admin/comment" element={<AdminComment />} />
+        <Route path="/admin/note" element={<AdminNote />} />
       </Routes>
     </div>
   );
