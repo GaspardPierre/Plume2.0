@@ -13,13 +13,16 @@ router.get('/', memberController.getAllMembers);
 router.post('/addMember', memberController.addMember);
 
 
-router.get('/:id', security.checkAdmin, memberController.getMember);
+
 console.log("route get member")
 
 router.patch('/:id', security.checkAdmin, memberController.modifyMember);
 console.log("route modify member")
 
 router.delete("/:id", security.checkAdmin, memberController.deleteMember);
+
+router.get('/:id', security.checkAdmin, memberController.getMember);
+
 console.log("route delete member")
 
 module.exports = router;

@@ -24,7 +24,15 @@ const memberModel = {
 
   async findAll() {
     try {
-      const members = await prisma.member.findMany();
+      const members = await prisma.member.findMany({
+        select: {
+          id: true,
+          pseudo: true,
+          email: true,
+          role: true,
+
+      },
+      });
       return members;
     } catch (error) {
       console.log(error);

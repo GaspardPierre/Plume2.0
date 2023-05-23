@@ -4,9 +4,13 @@ const bcrypt = require("bcrypt");
 const memberController = {
 
     async getAllMembers(req,res) {
-
+      try {
         const members = await memberModel.findAll();
         res.json(members);
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('Erreur lors de la récupération des membres');
+      }
     },
     async addMember(req,res) {
         const { pseudo, email, password } = req.body;
@@ -23,7 +27,7 @@ const memberController = {
             pseudo : pseudo,
             email : email,
             password : await bcrypt.hash(password, salt),
-            role : "admin"
+            role : "visiteur"
         };
 
     const memberDb = await memberModel.insert(newMember);
@@ -32,7 +36,8 @@ const memberController = {
     },
 
     async getMember(req,res) {
-        await memberModel.findById(req.params.id);
+      const member = await memberModel.findById(req.params.id);
+        
         if(!member) {
             res.status(404).json({ message: `Utilisateur introuvable pour l'id : ${req.params.id}` });
         }
@@ -43,7 +48,7 @@ const memberController = {
         const memberId = req.params.id;
         const memberUpdates = req.body;
       
-        const member = await  memberModel.findById( memberId);
+        let member = await  memberModel.findById( memberId);
       
         // Vérifie si l'utilisateur existe
         if (!member) {
@@ -55,14 +60,14 @@ const memberController = {
           member[key] = memberUpdates[key];
         }
       
-        const updatedmember = await member.save();
+        const updatedmember = await memberModel.update(member);
       
         res.json(updatedmember);
       },
 
       async deleteMember(req, res) {
         const memberId = req.params.id;
-        const deletedMember = await memberModel.delate(memberId);
+        const deletedMember = await memberModel.delete(memberId);
       
         if (!deletedMember)  {
           return res.status(404).json({ message: "Membre introuvable" });
