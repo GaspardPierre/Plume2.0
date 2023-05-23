@@ -1,11 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../api";
 
+// GET ALL MEMBERS ACTION
+export const getAllMembers = createAsyncThunk(
+  "member/getAllMembers",
+  async () => {
+    const response = await api.get("/member");
+    return response.data;
+  }
+);
+
 // REGISTER ACTION
 export const addMember = createAsyncThunk("member/addMember", async (data) => {
   const response = await api.post("/member/addMember", data);
   return response.data;
 });
+// DELETE ACTION
+export const deleteMember = createAsyncThunk(
+  "member/deleteMember",
+  async (id) => {
+    const response = await api.delete(`/member/${id}`);
+    return id;
+  }
+);
+
 
 // LOGIN ACTION
 export const login = createAsyncThunk(
@@ -42,6 +60,20 @@ const memberSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
+
+      // Handle get all members actions
+      .addCase(getAllMembers.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getAllMembers.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.members = action.payload;
+      })
+      .addCase(getAllMembers.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      // Handle register actions
       .addCase(addMember.pending, (state) => {
         state.status = "loading";
       })
@@ -72,8 +104,25 @@ const memberSlice = createSlice({
         state.role = null;
         state.pseudo = null;
         state.id = null;
+      })
+      // Handle delete actions
+       .addCase(deleteMember.pending, (state) => {  
+        state.status = "loading";
+      })
+      .addCase(deleteMember.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.members = state.members.filter(
+          (member) => member.id !== action.payload.id
+        );
+      })
+      .addCase(deleteMember.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+
       });
   },
+    
 });
+  
 
 export default memberSlice.reducer;
