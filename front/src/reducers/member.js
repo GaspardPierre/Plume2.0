@@ -20,9 +20,20 @@ export const deleteMember = createAsyncThunk(
   "member/deleteMember",
   async (id) => {
     const response = await api.delete(`/member/${id}`);
+    console.log(id);
     return id;
   }
 );
+//  UPDATE  ROLE ACTION
+export const updateMemberRole = createAsyncThunk(
+  "member/updateMemberRole",
+  async ({id,role}) => {
+    console.log(`id: ${id}`);
+    const response = await api.patch(`/member/${parseInt(id)}`, role);
+    return response.data;
+  }
+);
+
 
 
 // LOGIN ACTION
@@ -119,10 +130,45 @@ const memberSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
 
+      })
+      // Handle update role actions
+       .addCase(updateMemberRole.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateMemberRole.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.members = state.members.map((member) => {
+          if (member.id === action.payload.id) {
+            return action.payload;
+          }
+          return member;
+        });
+      })
+      
+  
+      .addCase(updateMemberRole.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
-  },
-    
+  
+    }
 });
+
+
+      
+      
+    
+      
+
+ 
   
 
+
+      
+
+
+
+
+
+  
 export default memberSlice.reducer;

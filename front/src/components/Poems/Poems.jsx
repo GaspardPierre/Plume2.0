@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchWorks } from "../../reducers/work";
-import { useNavigate } from "react-router-dom";
+
 import Grid from "../Grid/Grid";
 import { Link } from "react-router-dom";
-import { logout } from "../../reducers/member";
 import Poem from "../Poem/Poem";
 import Loading from "../Loading/Loading";
+import { ListGroupItem } from "react-bootstrap";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 export default function Poems() {
   const dispatch = useDispatch();
@@ -60,9 +61,8 @@ export default function Poems() {
       <Link to="/" className="btn-custom"  >
           Accueil
         </Link>
-        <Link to="/" className="btn-custom" onClick={handleLogout}  >
-          Déconnexion
-        </Link>
+       < LogoutButton />
+      
       
         <div className="row">
           <h1 className="text-center mb-2">Poèmes</h1>

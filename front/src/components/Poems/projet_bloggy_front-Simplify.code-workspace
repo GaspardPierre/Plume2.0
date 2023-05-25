@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "E:/Téléchargements/projet_bloggy_front-Simplify"
+		},
+		{
+			"path": "E:/Téléchargements/projet_bloggy_back-pierre"
+		},
+		{
+			"path": "../../../.."
+		},
+		{
+			"path": "../../../../../vite-project"
+		},
+		{
+			"path": "../../../../../Portfolio"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Portfolio"
+	}
+}

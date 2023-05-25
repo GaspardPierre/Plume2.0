@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useCallback, useState , useEffect} from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getAllMembers } from "../../reducers/member";
+import { Form, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome} from "@fortawesome/free-solid-svg-icons";
+import { getAllMembers , deleteMember} from "../../reducers/member";
 import MemberList from "../MemberList/MemberList";
-
+import LogoutButton from "../LogoutButton/LogoutButton";
 import "./AdminMember.scss";
 
 // Composant AdminMember
@@ -12,15 +15,26 @@ import "./AdminMember.scss";
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedMember, setSelectedMember] = useState(null);
 
-  const onDeleteMember = async (id) => {
+  
+  // handle delete member
+  const [memberDeleted, setMemberDeleted] = useState(false);
+  const onDeleteMember = useCallback ((id) => {
     console.log(`id: ${id}`);
-    try{
-      const response = await dispatch(deleteMember(id));
-    } catch(error) {
+   
+     dispatch(deleteMember(parseInt(id)));
+    setMemberDeleted(true);
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    try {
+      dispatch(getAllMembers());
+      setMemberDeleted(false);
+    } catch (error) {
       console.log(error);
     }
-   
-  };
+  }, [memberDeleted]);
 
   
 
@@ -42,7 +56,16 @@ import "./AdminMember.scss";
  
    
   return (
-    <div  className="d-flex justify-content-center align-items-center vh-100 wh-60">
+    <> 
+    <div className="d-flex justify-content-around mt-3 w80">
+    <Link to="/" className="nav_link">
+    <FontAwesomeIcon icon={faHome} color="rgb(224, 176, 72)" size="2x"  /> Accueil
+    </Link>
+    
+
+   < LogoutButton />
+  </div>
+    <div  className="d-flex justify-content-center align-items-center vh-100 w-80">
    
           <div>
             <Form.Select 
@@ -62,6 +85,7 @@ import "./AdminMember.scss";
           </div>
   
     </div>
+    </>
   );
 
  }
