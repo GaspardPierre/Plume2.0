@@ -57,9 +57,10 @@ const memberModel = {
   },
   async findById(id) {
     try {
+      const memberId = parseInt(id);
       const member = await prisma.member.findUnique({
         where: {
-          id: id,
+          id: memberId,
         },
       });
       return member;
@@ -91,7 +92,7 @@ const memberModel = {
     try {
       await prisma.member.delete({
         where: {
-          id: id,
+          id: parseInt(id),
         },
       });
     } catch (err) {
