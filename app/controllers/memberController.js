@@ -46,7 +46,9 @@ const memberController = {
 
     async  modifyMember(req, res) {
         const memberId = req.params.id;
+   
         const memberUpdates = req.body;
+        console.log("memberUpdates", memberUpdates)
       
         let member = await  memberModel.findById( memberId);
       
