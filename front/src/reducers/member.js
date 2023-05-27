@@ -88,7 +88,7 @@ const memberSlice = createSlice({
       .addCase(addMember.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(addMember.fulfilled, (state, action) => {
+      .addCase(addMember.fulfilled, (state, action) => {  
         state.status = "succeeded";
       })
       .addCase(addMember.rejected, (state, action) => {

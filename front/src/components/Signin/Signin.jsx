@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { addMember } from "../../reducers/member";

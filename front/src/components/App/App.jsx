@@ -35,7 +35,6 @@ export default function App() {
         <Route path="/unclassifiable" element={<Unclassifiable />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/about" element={<About />} />
-        <Route path="/about" element={<AdminNav />} />
         <Route path="/admin/member" element={<AdminMember />} />
         <Route path="/admin/work" element={<AdminWork />} />
         <Route path="/admin/comment" element={<AdminComment />} />
