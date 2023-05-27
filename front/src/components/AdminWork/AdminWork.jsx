@@ -9,6 +9,7 @@ export default function AdminWork() {
   const dispatch = useDispatch();
 
   const onSubmit = (work) => {
+    console.log(work);
     dispatch(addWork(work));
   };
 
@@ -44,7 +45,7 @@ export default function AdminWork() {
               type="text"
               id="content"
               {...register('content', { required: true })}
-              className="form-control btn-custom"
+              className="form-control btn-custom h-100"
               placeholder="Entrez le contenu de l'œuvre ici..."
             />
             {/* You might want to add error handling like in the Signin component */}
