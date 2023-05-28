@@ -12,7 +12,8 @@ export const fetchWorks = createAsyncThunk("work/fetchWorks", async () => {
 
 // ADD POEM ACTION
 export const addWork = createAsyncThunk("work/addWork", async (work) => {
-  const response = await api.post("/addwork", work);
+  console.log(`work: ${work}`);
+  const response = await api.post("/work/addwork", work);
   console.log(`response.data: ${response.data}`);
 
   return response.data;

@@ -1,7 +1,7 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { addWork } from'../../reducers/work'; 
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { addWork } from "../../reducers/work";
 import "./AdminWork.scss";
 
 export default function AdminWork() {
@@ -9,7 +9,6 @@ export default function AdminWork() {
   const dispatch = useDispatch();
 
   const onSubmit = (work) => {
-    console.log(work);
     dispatch(addWork(work));
   };
 
@@ -23,7 +22,7 @@ export default function AdminWork() {
               name="title"
               type="text"
               id="title"
-              {...register('title', { required: true })}
+              {...register("title", { required: true })}
               className="form-control btn-custom"
               placeholder="Entrez le titre de l'œuvre ici..."
             />
@@ -33,7 +32,7 @@ export default function AdminWork() {
             <input
               name="author"
               id="author"
-              {...register('author', { required: true })}
+              {...register("author", { required: true })}
               className="form-control btn-custom"
               placeholder="Entrez le nom de l'auteur"
             />
@@ -44,7 +43,7 @@ export default function AdminWork() {
               name="content"
               type="text"
               id="content"
-              {...register('content', { required: true })}
+              {...register("content", { required: true })}
               className="form-control btn-custom h-100"
               placeholder="Entrez le contenu de l'œuvre ici..."
             />
