@@ -1,16 +1,23 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
+import {set, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addWork } from "../../reducers/work";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import "./AdminWork.scss";
 
 export default function AdminWork() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit ,setValue, reset,} = useForm();
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
 
   const onSubmit = (work) => {
     dispatch(addWork(work));
+    setShowModal(true);
+    reset();
   };
+
+  const handleClose = () => setShowModal(false);
+
 
   return (
     <>
@@ -54,6 +61,7 @@ export default function AdminWork() {
           </button>
         </form>
       </div>
+      { showModal && <ConfirmModal onClose={handleClose} />}
     </>
   );
 }

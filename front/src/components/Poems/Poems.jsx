@@ -8,7 +8,9 @@ import { Link } from "react-router-dom";
 import Poem from "../Poem/Poem";
 import Loading from "../Loading/Loading";
 import { ListGroupItem } from "react-bootstrap";
+import HomeButton from "../HomeButton/HomeButton";
 import LogoutButton from "../LogoutButton/LogoutButton";
+import './Poems.scss';
 
 export default function Poems() {
   const dispatch = useDispatch();
@@ -57,19 +59,18 @@ export default function Poems() {
   }
   return (
     <>
-      <header className="header-container container mb-8">
+      <header className=" d-flex justify-content-around mt-3 w80">
     
-      <Link to="/" className="btn-custom"  >
-          Accueil
-        </Link>
+        <HomeButton />
        < LogoutButton />
+       </header>
       
       
         <div className="row">
           <h1 className="text-center mb-2">Poèmes</h1>
          
         </div>
-      </header>
+    
       {content}
     </>
   );

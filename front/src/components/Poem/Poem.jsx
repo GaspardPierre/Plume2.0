@@ -16,8 +16,9 @@ import {
 import { fetchAverage } from "../../reducers/average";
 import Comment from "../Comment/Comment";
 import CommentForm from "../CommentForm/CommentForm";
+import LogoutButton from "../LogoutButton/LogoutButton";
+import HomeButton from "../HomeButton/HomeButton";
 import "./Poem.scss";
-
 
 export default function Poem({}) {
   const navigate = useNavigate();
@@ -71,11 +72,15 @@ export default function Poem({}) {
 
   return (
     <>
-      <header className="header-container container mb-8">
+      <header className="d-flex justify-content-around mt-3 w80">
+        <HomeButton />
+
+        <LogoutButton />
+        </header>
         <div className="row">
           <h1 className="text-center mb-2">{poem.title}</h1>
         </div>
-      </header>
+    
       <div className="poem">
         <Container className="main-container">
           <Row className="justify-content-center">
