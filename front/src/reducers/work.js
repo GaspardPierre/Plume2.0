@@ -26,6 +26,16 @@ const workSlice = createSlice({
     works: [],
     status: "idle",
     error: null,
+    setShowAdminWork: false,
+    showListWork: false,
+  },
+  reducers: {
+    setShowAdminWork: (state, action) => {
+      state.setShowAdminWork = action.payload;
+    },
+    setShowListWork: (state, action) => {
+      state.showListWork = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -63,5 +73,5 @@ const workSlice = createSlice({
 
   },
 });
-
+export const { setShowAdminWork, setShowListWork } = workSlice.actions;
 export default workSlice.reducer;

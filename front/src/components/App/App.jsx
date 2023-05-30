@@ -11,6 +11,7 @@ import About from "../About/About";
 import Admin from "../Admin/Admin";
 import AdminNav from "../AdminNav/AdminNav";
 import AdminMember from "../AdminMember/AdminMember";
+import AddWork from "../AddWork/AddWork";
 import AdminWork from "../AdminWork/AdminWork";
 import AdminComment from "../AdminComment/AdminComment";
 import AdminNote from "../AdminNote/AdminNote";
@@ -18,6 +19,8 @@ import bgImage from '../../assets/bg.jpg';
 // import Layout from "../Layout/Layout";
 
 import './App.scss'
+
+
 
 export default function App() {
   document.documentElement.style.setProperty("--bg-image", `url(${bgImage})`);
@@ -37,6 +40,8 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/admin/member" element={<AdminMember />} />
         <Route path="/admin/work" element={<AdminWork />} />
+        <Route path="/admin/work/addWork" element={<AddWork />} />
+     
         <Route path="/admin/comment" element={<AdminComment />} />
         <Route path="/admin/note" element={<AdminNote />} />
       </Routes>

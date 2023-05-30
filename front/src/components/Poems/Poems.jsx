@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import Poem from "../Poem/Poem";
 import Loading from "../Loading/Loading";
 import { ListGroupItem } from "react-bootstrap";
-import HomeButton from "../HomeButton/HomeButton";
-import LogoutButton from "../LogoutButton/LogoutButton";
+import HomeButton from "../Buttons/HomeButton/HomeButton";
+import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
 import './Poems.scss';
 
 export default function Poems() {

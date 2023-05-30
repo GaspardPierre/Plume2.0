@@ -12,7 +12,6 @@ import './MemberList.scss';
 export default function MemberList({onDeleteMember}) {
   const members = useSelector((state) => state.member.members);
   const [selectedMemberId, setSelectedMemberId] = useState(null);
-  console.log(`members: ${JSON.stringify(members)}`);
   const dispatch = useDispatch();
   const onRoleChange = useCallback((id, role) => {
     dispatch(updateMemberRole({ id, role }));

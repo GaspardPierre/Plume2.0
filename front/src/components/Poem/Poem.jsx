@@ -16,8 +16,8 @@ import {
 import { fetchAverage } from "../../reducers/average";
 import Comment from "../Comment/Comment";
 import CommentForm from "../CommentForm/CommentForm";
-import LogoutButton from "../LogoutButton/LogoutButton";
-import HomeButton from "../HomeButton/HomeButton";
+import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
+import HomeButton from "../Buttons/HomeButton/HomeButton";
 import "./Poem.scss";
 
 export default function Poem({}) {
