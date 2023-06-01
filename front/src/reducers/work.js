@@ -18,6 +18,11 @@ export const addWork = createAsyncThunk("work/addWork", async (work) => {
 
   return response.data;
 });
+//DELETE POEM ACTION
+export const deleteWork = createAsyncThunk("work/deleteWork", async ({id}) => {
+  const response = await api.delete(`/work/${parseInt(id)}`);
+  return id;
+});
 
 
 const workSlice = createSlice({
@@ -36,6 +41,11 @@ const workSlice = createSlice({
     setShowListWork: (state, action) => {
       state.showListWork = action.payload;
     },
+    setShowAddWork: (state, action) => {
+      state.showAddWork = action.payload;
+    },
+
+
   },
   extraReducers: (builder) => {
     builder
@@ -44,9 +54,7 @@ const workSlice = createSlice({
       })
       .addCase(fetchWorks.fulfilled, (state, action) => {
         state.status = "succeeded";
-        console.log("ACTION.PAYLOAD", action.payload);
         state.works = action.payload;
-        console.log('state.works:', state.works);
       })
       .addCase(fetchWorks.rejected, (state, action) => {
         state.status = "failed";
@@ -66,12 +74,29 @@ const workSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       }
+      )
+      // Handle delete poem actions
+      .addCase(deleteWork.pending, (state) => {
+        state.status = "loading";
+      }
+      )
+      .addCase(deleteWork.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        const id = action.payload;
+        state.works = state.works.filter((work) => work.id !== id);
+      }
+      )
+      .addCase(deleteWork.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      }
       );
+
 
 
       
 
   },
 });
-export const { setShowAdminWork, setShowListWork } = workSlice.actions;
+export const { setShowAdminWork, setShowListWork , setShowAddWork} = workSlice.actions;
 export default workSlice.reducer;

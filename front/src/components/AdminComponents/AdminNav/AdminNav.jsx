@@ -1,17 +1,17 @@
 import React , { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch , useSelector} from 'react-redux';
 
-import AdminWork from '../AdminWork/AdminWork';
-import { setShowAdminWork } from '../../reducers/work';
+import AdminWork from '../Work/AdminWork/AdminWork';
+import { setShowAdminWork } from '../../../reducers/work';
 
 export default function AdminNav() {
 const dispatch = useDispatch();
-const showListWork = useSelector((state) => state.work.showListWork);
+// const showListWork = useSelector((state) => state.work.showListWork);
 const showAdminWork = useSelector((state) => state.work.showAdminWork);
-const handleListWorkClick = () => {
-  dispatch(setShowListWork(true));
-};
+// const handleListWorkClick = () => {
+//   dispatch(setShowListWork(true));
+// };
 const handleAdminWorkClick = () => {
   dispatch(setShowAdminWork(true));
 };
@@ -31,8 +31,8 @@ const handleAdminWorkClick = () => {
         Notes
       </Link>
 
-      {showAdminWork && <AdminWork />} {/* show AdminWork if true */}
-      {showListWork && <ListWork />} {/* show  ListWork if true*/}
+      {showAdminWork && <AdminWork />} 
+     
     </div>
   );
 }

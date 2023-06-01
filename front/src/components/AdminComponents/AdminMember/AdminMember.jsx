@@ -2,9 +2,9 @@ import React, { useCallback, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
-import MemberList from "../MemberList/MemberList";
-import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
-import HomeButton from "../Buttons/HomeButton/HomeButton";
+import MemberList from "../../MemberList/MemberList";
+import LogoutButton from "../../Buttons/LogoutButton/LogoutButton";
+import HomeButton from "../../Buttons/HomeButton/HomeButton";
 import "./AdminMember.scss";
 
 export default function AdminMember() {

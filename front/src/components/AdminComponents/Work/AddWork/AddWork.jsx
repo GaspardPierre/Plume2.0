@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {set, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addWork } from "../../reducers/work";
-import ConfirmModal from "../ConfirmModal/ConfirmModal";
-import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
-import HomeButton from "../Buttons/HomeButton/HomeButton";
+import { addWork } from "../../../../reducers/work";
+import ConfirmModal from "../../../ConfirmModal/ConfirmModal";
+import LogoutButton from "../../../Buttons/LogoutButton/LogoutButton";
+import HomeButton from "../../../Buttons/HomeButton/HomeButton";
 
 
 export default function AddWork() {
@@ -23,14 +23,9 @@ export default function AddWork() {
 
   return (
     <>
-    <header className="d-flex justify-content-around mt-3 w80">
-        <HomeButton />
 
-        <LogoutButton />
-        </header>
-      <h1 className="text-center mb-8">Ajouter une œuvre</h1>
-      <div className="d-flex  align-items-start justify-content-center vh-50 ">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-50 ">
+      <div className="d-flex   align-items-center justify-content-center vh-50 mt-4 ">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-100 w-md-50 ">
           <div className="mb-3 ">
             <input
               name="title"
@@ -38,7 +33,7 @@ export default function AddWork() {
               id="title"
               {...register("title", { required: true })}
               className="form-control btn-custom"
-              placeholder="Entrez le titre de l'œuvre ici..."
+              placeholder="titre de l'œuvre..."
             />
             {/* You might want to add error handling like in the Signin component */}
           </div>
@@ -48,7 +43,7 @@ export default function AddWork() {
               id="author"
               {...register("author", { required: true })}
               className="form-control btn-custom"
-              placeholder="Entrez le nom de l'auteur"
+              placeholder="Auteur"
             />
             {/* You might want to add error handling like in the Signin component */}
           </div>
@@ -59,7 +54,7 @@ export default function AddWork() {
               id="content"
               {...register("content", { required: true })}
               className="form-control btn-custom h-100"
-              placeholder="Entrez le contenu de l'œuvre ici..."
+              placeholder="Contenu de l'œuvre..."
             />
             {/* You might want to add error handling like in the Signin component */}
           </div>

@@ -22,7 +22,7 @@ export default function RatingStars({ poemId }) {
   const userHasAlreadyVoted = averages.some(
     (avg) => avg.member_id === userId && avg.work_id === id
   );
-  console.log("userHasAlreadyVoted:", userHasAlreadyVoted);
+
   useEffect(() => {
     if (averages.length === 0) {
       dispatch(fetchAverage());

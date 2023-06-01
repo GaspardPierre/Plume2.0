@@ -2,18 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList } from '@fortawesome/free-solid-svg-icons';
+import './ListButton.scss';
 
 
-export default function ListButton() {
+export default function ListButton( {OnGetWorkList}) {
   return (
-    <Link to="/admin/work/listWork"
-    className="nav_link" >
+    <button onClick={OnGetWorkList}
+    className="nav_button" >
     <FontAwesomeIcon
      icon={faList} 
      color="rgb(224, 176, 72)" 
      size="2x"
       /> Liste des oeuvres
-    </Link>
+    </button>
   
   )
 }
