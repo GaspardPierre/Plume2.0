@@ -49,6 +49,7 @@ const workController = {
 
   async deleteWork(req, res) {
     const result = await workModel.delete(req.params.id);
+    console.log("result", result);
     res.json(result);
   },
 };
