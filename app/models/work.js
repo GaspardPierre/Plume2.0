@@ -57,7 +57,7 @@ async findById(id) {
     try {
         const work = await prisma.work.findUnique({
             where: {
-                id: id,
+                id: parseInt(id),
             },
         });
         return work;
@@ -74,7 +74,7 @@ async delete(id) {
     try {
        await prisma.work.delete({   
             where: {
-                id: id,
+                id:  parseInt(id),
             },
         });
     } catch (error) {

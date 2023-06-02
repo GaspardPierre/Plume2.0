@@ -32,9 +32,19 @@ const workController = {
     }
   },
   async getWork(req, res) {
-    const work = await workModel.findById(req.params.id);
-    return res.status(200).json(work);
+    try {
+      const work = await workModel.findById(req.params.id);
+      if (!work) {
+        return res.status(404).json({ message: 'Work not found' });
+      }
+      return res.status(200).json(work);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Server error' });
+    }
   },
+  
+
   async modifyWork(req, res) {
     const work = req.body;
     const workId = req.params.id;
@@ -48,9 +58,13 @@ const workController = {
   },
 
   async deleteWork(req, res) {
-    const result = await workModel.delete(req.params.id);
-    console.log("result", result);
-    res.json(result);
+ const workId = req.params.id;
+ console.log("word id :", workId);
+ const deleteWork = await workModel.delete(workId);
+ if(!deleteWork) {
+      return res.status(404).json('Cette oeuvre n\'existe pas')
+    }
+   return res.json({ message: "L'oeuvre a bien été supprimée" });
   },
 };
 module.exports = workController;
