@@ -19,12 +19,18 @@ import CommentForm from "../CommentForm/CommentForm";
 import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
 import HomeButton from "../Buttons/HomeButton/HomeButton";
 import "./Poem.scss";
+import { fetchWork } from "../../reducers/work";
 
 export default function Poem({}) {
   const navigate = useNavigate();
   const { id } = useParams();
+  const status = useSelector((state) => state.work.status);
   const poems = useSelector((state) => state.work.works);
-  const poem = poems.find((poem) => poem.id === parseInt(id));
+  const poem = useSelector((state) => state.work.currentWork);
+  console.log("***POEM***", poem)
+  if (status === "idle") {
+    return <div>loading...</div>;
+  }
   if (!poem) {
     return <div>Poème introuvable</div>;
   }
@@ -62,13 +68,14 @@ export default function Poem({}) {
 
   useEffect(() => {
     try {
+      dispatch(fetchWork(id));
       dispatch(fetchComments(id));
       dispatch(fetchAverage());
       setCommentDeleted(false);
     } catch (error) {
       console.log(error);
     }
-  }, [id, commentDeleted]);
+  }, [id, commentDeleted,dispatch]);
 
   return (
     <>

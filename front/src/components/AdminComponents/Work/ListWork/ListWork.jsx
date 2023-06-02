@@ -6,47 +6,54 @@ import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { fetchWorks, deleteWork } from "../../../../reducers/work";
 import "./ListWork.scss";
 
-
-export default function ListWork({  }) {
+export default function ListWork({}) {
   const works = useSelector((state) => state.work.works) || [];
   const workStatus = useSelector((state) => state.work.status);
   const dispatch = useDispatch();
+
   // handle fetch works
+  const [workDeleted, setWorkDeleted] = useState(false);
   useEffect(() => {
-    if (workStatus === "idle") {
-      dispatch(fetchWorks())
+    if (workStatus === "idle"|| workDeleted) {
+      dispatch(fetchWorks());
       setWorkDeleted(false);
     }
-  }, [workStatus, dispatch]);
+  }, [workStatus,workDeleted]);
 
   // handle delete work
-  const [workDeleted, setWorkDeleted] = useState(false);
+
   const onDeleteWork = useCallback(
     (id) => {
-    dispatch(deleteWork({ id }));
-    setWorkDeleted(true);
-  },
+      dispatch(deleteWork({ id: parseInt(id) }));
+
+      setWorkDeleted(true);
+    },
     [dispatch]
   );
   return (
     <div className="d-flex  align-items-center justify-content-center v-100 mt-5 ">
-
-
-   
       <ListGroup>
         {works.map((work) => (
-          <ListGroup.Item key={work.id}  className="d-flex flex-column align-items-start px-5 w-100 w-md-50 ">
-            <div>{work.title}  </div>
+          <ListGroup.Item
+            key={work.id}
+            className="d-flex flex-column align-items-start px-5 w-100 w-md-50 "
+          >
+            <div>{work.title} </div>
             <div>{work.author} </div>
             <button
-            className="btn-delete"
-            onClick={() => onDeleteWork(work.id)}>
-            <FontAwesomeIcon icon={faBan} color="rgb(224, 176, 72)" size="1x" /> Supprimer
-          </button>
+              className="btn-delete"
+              onClick={() => onDeleteWork(work.id)}
+            >
+              <FontAwesomeIcon
+                icon={faBan}
+                color="rgb(224, 176, 72)"
+                size="1x"
+              />{" "}
+              Supprimer
+            </button>
           </ListGroup.Item>
         ))}
       </ListGroup>
-     
     </div>
   );
 }

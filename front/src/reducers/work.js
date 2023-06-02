@@ -10,6 +10,12 @@ export const fetchWorks = createAsyncThunk("work/fetchWorks", async () => {
 
 });
 
+// FETCH SINGLE POEM ACTION
+export const fetchWork = createAsyncThunk("work/fetchWork", async (id) => {
+  const response = await api.get(`/work/${id}`);
+  return response.data;
+});
+
 // ADD POEM ACTION
 export const addWork = createAsyncThunk("work/addWork", async (work) => {
   console.log(`work: ${work}`);
@@ -20,7 +26,7 @@ export const addWork = createAsyncThunk("work/addWork", async (work) => {
 });
 //DELETE POEM ACTION
 export const deleteWork = createAsyncThunk("work/deleteWork", async ({id}) => {
-  const response = await api.delete(`/work/${parseInt(id)}`);
+  const response = await api.delete(`/work/${id}`);
   return id;
 });
 
@@ -29,6 +35,7 @@ const workSlice = createSlice({
   name: "work",
   initialState: {
     works: [],
+    currentWork: null,
     status: "idle",
     error: null,
     setShowAdminWork: false,
@@ -60,6 +67,19 @@ const workSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
+      // Handle fetch poem actions
+      .addCase(fetchWork.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchWork.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.currentWork = action.payload;
+      })
+      .addCase(fetchWork.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+
       // Handle add poem actions
       .addCase(addWork.pending, (state) => {
         state.status = "loading";

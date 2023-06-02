@@ -2,12 +2,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchWorks } from "../../reducers/work";
-
 import Grid from "../Grid/Grid";
-import { Link } from "react-router-dom";
-import Poem from "../Poem/Poem";
 import Loading from "../Loading/Loading";
-import { ListGroupItem } from "react-bootstrap";
 import HomeButton from "../Buttons/HomeButton/HomeButton";
 import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
 import './Poems.scss';
@@ -41,6 +37,7 @@ export default function Poems() {
     content = <Loading variant="warning" />;
     console.log(Loading);
   } else if (workStatus === "succeeded") {
+    console.log(poems, "poems");
     content = (
       <div className="d-flex  align-items-start justify-content-center vh-80">
         <div className="container-fluid-custom">
