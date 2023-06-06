@@ -32,8 +32,8 @@ model Work {
   member_id  Int
   member     Member   @relation(fields: [member_id], references: [id])
   labels     Label[]  @relation("WorkLabel")
-  notes      Note[]
-  comments   Comment[]
+  notes      Note[]   @relation("WorkToNote")
+  comments   Comment[] @relation("WorkToComment")
   create_at  DateTime @default(now())
   update_at  DateTime @default(now())
 }
@@ -46,16 +46,18 @@ model Label {
   update_at  DateTime @default(now())
 }
 
+
 model Note {
   id         Int      @id @default(autoincrement())
   average    Int
   member_id  Int
   member     Member   @relation(fields: [member_id], references: [id])
   work_id    Int
-  work       Work     @relation(fields: [work_id], references: [id])
+  work       Work     @relation("WorkToNote", fields: [work_id], references: [id], onDelete: Cascade)
   create_at  DateTime @default(now())
   update_at  DateTime @default(now())
 }
+
 
 model Comment {
   id         Int      @id @default(autoincrement())
@@ -63,5 +65,5 @@ model Comment {
   member_id  Int
   member     Member   @relation(fields: [member_id], references: [id])
   work_id    Int
-  work       Work     @relation(fields: [work_id], references: [id])
+  work       Work     @relation("WorkToComment", fields: [work_id], references: [id], onDelete: Cascade)
 }
