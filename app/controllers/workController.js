@@ -17,6 +17,7 @@ const workController = {
     }
     if (req.session.role === "admin" && req.session.user.id) {
       const newWork = {
+        
         content: content,
         author: author,
         title: title,
@@ -24,7 +25,7 @@ const workController = {
         member_id: req.session.user.id
       };
       const workDb = await workModel.insert(newWork);
-      res.status(200).json(newWork);
+      res.status(200).json(workDb);
     } else {
       res
         .status(401)
@@ -36,8 +37,10 @@ const workController = {
       const work = await workModel.findById(req.params.id);
       if (!work) {
         return res.status(404).json({ message: 'Work not found' });
-      }
+      } console.log(work);
       return res.status(200).json(work);
+     
+
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: 'Server error' });
