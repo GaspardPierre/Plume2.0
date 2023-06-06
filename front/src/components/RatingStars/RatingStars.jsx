@@ -18,10 +18,12 @@ export default function RatingStars({ poemId }) {
       ? Math.round((total / poemAverage.length) * 100) / 100
       : 0;
   const [rating, setRating] = useState(average);
+
   // Check if user has already voted
   const userHasAlreadyVoted = averages.some(
     (avg) => avg.member_id === userId && avg.work_id === id
   );
+  console.log("userHasAlreadyVoted", userHasAlreadyVoted)
 
   useEffect(() => {
     if (averages.length === 0) {
@@ -53,7 +55,7 @@ export default function RatingStars({ poemId }) {
         transition
         fillColor="orange"
         emptyColor="yellow"
-        edit={!userHasAlreadyVoted ? ratingChanged : null}
+        edit={!userHasAlreadyVoted}
       />
       <p>Note du poème : {average}</p>
     </div>

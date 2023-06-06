@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import RatingStars from "../RatingStars/RatingStars";
 
-export default function CommentForm({ poem, onAddComment })  {
+
+export default function CommentForm({ poem, onAddComment }) {
   const [comment, setComment] = useState("");
 
-console.log("'id du poem dans Comment frm :",poem.id);
+  console.log("id du poem dans Comment frm :", poem.id);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (comment.trim()) {
-      onAddComment( { comment : comment.trim(), poemId: poem.id});
+      onAddComment({ comment: comment.trim(), poemId: poem.id });
       setComment("");
     }
   };
@@ -33,12 +34,11 @@ console.log("'id du poem dans Comment frm :",poem.id);
             <Button variant="warning" type="submit">
               Poster le commentaire
             </Button>
+      
           </Form>
-          <RatingStars
-            poemId ={poem.id} 
-          />
+          <RatingStars poemId={poem.id} />
         </div>
       </Card.Body>
     </Card>
   );
-};
+}

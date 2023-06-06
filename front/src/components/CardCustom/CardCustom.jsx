@@ -9,7 +9,8 @@ export default function CardCustom({ title, excerpt, id, onCardClick}) {
   };
 
   return (
-    <Card className='card' >
+    <Card className='card'
+    key={id} >
      {/* <Card.Img variant="bottom" src={cardImage}/> */}
       <Card.Body>
         <Card.Title>{title}</Card.Title>

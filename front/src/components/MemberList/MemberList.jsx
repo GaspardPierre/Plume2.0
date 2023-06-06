@@ -23,7 +23,7 @@ export default function MemberList({onDeleteMember}) {
       {members && members.length 
         ? members.map((member) => (
             <ListGroup  as ="ul" key={member.id}>
-              <ListGroup.Item  className={`d-flex flex-column  justify-content-between ${member.id=== selectedMemberId ? 'active' : ''}`}> <div className='bold' >Pseudo :</div> {member.pseudo} <div className='bold'>Email :</div> {member.email} <div className='bold'>    
+              <ListGroup.Item  className={`d-flex  justify-content-between ${member.id=== selectedMemberId ? 'active' : ''}`}> <div className='bold' >Pseudo :</div> {member.pseudo} <div className='bold'>Email :</div> {member.email} <div className='bold'>    
        Rôle :</div> {member.role}   
        <div className='action-button'> 
        <MemberModal member={member} onRoleChange={onRoleChange} />

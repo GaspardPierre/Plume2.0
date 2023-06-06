@@ -8,7 +8,8 @@ import HomeButton from "../Buttons/HomeButton/HomeButton";
 import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
 import './Poems.scss';
 
-export default function Poems() {
+  export default function Poems() {
+    
   const dispatch = useDispatch();
   const poems = useSelector((state) => state.work.works);
   const workStatus = useSelector((state) => state.work.status);
@@ -23,7 +24,7 @@ export default function Poems() {
     if (workStatus === "idle") {
       dispatch(fetchWorks());
     }
-  }, [workStatus, dispatch]);
+  }, [workStatus, dispatch, poems]);
 
   const excerpt = function (str) {
     const summary = str.substring(0, 100) + "...";
@@ -40,8 +41,9 @@ export default function Poems() {
     console.log(poems, "poems");
     content = (
       <div className="d-flex  align-items-start justify-content-center vh-80">
-        <div className="container-fluid-custom">
+        <div className="container-fluid-custom" >
           <Grid
+            key={poems.id}
             poems={poems.map((poem) => ({
               ...poem,
               excerpt: excerpt(poem.content),

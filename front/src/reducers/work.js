@@ -10,17 +10,18 @@ export const fetchWorks = createAsyncThunk("work/fetchWorks", async () => {
 
 });
 
-// FETCH SINGLE POEM ACTION
-export const fetchWork = createAsyncThunk("work/fetchWork", async (id) => {
-  const response = await api.get(`/work/${id}`);
-  return response.data;
-});
+// // FETCH SINGLE POEM ACTION
+// export const fetchWork = createAsyncThunk("work/fetchWork", async (id) => {
+//   console.log(`id dans le Slice: ${id}`);
+//   const response = await api.get(`/work/${id}`);
+//   return response.data;
+// });
 
 // ADD POEM ACTION
 export const addWork = createAsyncThunk("work/addWork", async (work) => {
   console.log(`work: ${work}`);
   const response = await api.post("/work/addwork", work);
-  console.log(`response.data: ${response.data}`);
+  console.log(`response.data: ${JSON.stringify(response.data)}`);
 
   return response.data;
 });
@@ -35,7 +36,6 @@ const workSlice = createSlice({
   name: "work",
   initialState: {
     works: [],
-    currentWork: null,
     status: "idle",
     error: null,
     setShowAdminWork: false,
@@ -62,20 +62,9 @@ const workSlice = createSlice({
       .addCase(fetchWorks.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.works = action.payload;
+        
       })
       .addCase(fetchWorks.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      })
-      // Handle fetch poem actions
-      .addCase(fetchWork.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchWork.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.currentWork = action.payload;
-      })
-      .addCase(fetchWork.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })
@@ -88,6 +77,7 @@ const workSlice = createSlice({
       .addCase(addWork.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.works.push(action.payload);
+        console.log(`state.works: ${state.works}`);
       } 
       )
       .addCase(addWork.rejected, (state, action) => {

@@ -5,6 +5,7 @@
   background-repeat: no-repeat;
   // white-space: pre-line;
   border: 0;
+  min-width: 300px;
   font-family: "Dancing Script", cursive;
   box-shadow: 2px 2px 20px 0px #9c9090;
   height: 350px; // Add a fixed height for the cards
@@ -35,7 +36,7 @@
 }
 
 .btn-custom-card {
-  width: 40%;
+  width: 100%;
   padding: 0.3rem;
   font-size: 1rem;
   border-radius: 0.5rem;

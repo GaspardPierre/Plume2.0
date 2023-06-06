@@ -1,8 +1,19 @@
 $primary-color: #3f51b5;
 $secondary-color: #f50057;
 $background-color: #fafafa;
+/* dans votre fichier Poems.scss */
+.container-fluid-custom {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-.poem {
+// .container-fluid-custom > div {
+//   flex: 1 0 auto;
+//   max-width: 80%;
+// }
+
+
   .main-title {
     text-align: center;
     margin-top: 3rem;
@@ -19,10 +30,11 @@ $background-color: #fafafa;
   }
   .justify-content-center {
     display: flex;
-    flex-direction: column;
+   
     min-width: 60%;
     @media screen and (max-width: 768px) {
       min-width: 80%;
+      flex-direction: column;
     }
 
     .work-container {
@@ -63,4 +75,4 @@ $background-color: #fafafa;
       }
     }
   }
-}
+
