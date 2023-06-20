@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import store from "../../store/store";
 import ReactStars from "react-rating-stars-component";
 import { addAverage, fetchAverage } from "../../reducers/average";
 
@@ -8,6 +9,7 @@ export default function RatingStars({ poemId }) {
   const userId = useSelector((state) => state.member.id);
   const id = poemId;
   const averages = useSelector((state) => state.average.averages);
+ 
 
   // calc average
   const poemAverage = averages.filter((avg) => avg.work_id === parseInt(id));
@@ -39,7 +41,13 @@ export default function RatingStars({ poemId }) {
       work_id: id,
     };
     dispatch(addAverage(data)).then(() => {
-      dispatch(fetchAverage());
+      dispatch(fetchAverage()).then(() => {
+        const newAverage = store.getState().average.averages;
+        const newUserHasAlreadyVoted = newAverage.some(
+          (avg) => avg.member_id === userId && avg.work_id === id
+        );
+        console.log("newUserHasAlreadyVoted", newUserHasAlreadyVoted)
+      });
     });
   };
   return (
@@ -55,7 +63,7 @@ export default function RatingStars({ poemId }) {
         transition
         fillColor="orange"
         emptyColor="yellow"
-        edit={!userHasAlreadyVoted}
+        edit={!userHasAlreadyVoted ? true : false }
       />
       <p>Note du poème : {average}</p>
     </div>

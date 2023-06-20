@@ -71,6 +71,7 @@ margin: 1rem;
 }
 .ListGroup .Item:hover {
   background-color: blue($color: #2c95be);
+  width: 90%;
 }
 .btn-custom {
  
@@ -86,22 +87,22 @@ margin: 1rem;
   background-color: $primary-color;
   border-color: $primary-color;
   border-color: black;
-  border-radius: 0.5rem;
+  border-radius: 0.8rem;
   text-align: center;
   text-decoration: none;
-  color: black;
+  color:whitesmoke;
   opacity: 0.8;
 
   &:visited {
     text-decoration: none;
-    color: rgb(78, 77, 77);
+   
   }
   &:hover {
     cursor: pointer;
-    background-color: rgb(238, 175, 41);
+    background-color: #1F4E70;
   }
   &:focus {
-    background-color: rgb(238, 175, 41);
+ 
     border-color: black;
   }
 

@@ -114,7 +114,8 @@ export default function ContentHome({ role }) {
   }
 
   return (
-    <div className="col-12 col-lg-6 d-flex justify-content-center flex-wrap">
+    <div className="d-flex flex-column flex-md-row justify-content-center flex-wrap">
+
       {content}
     </div>
   );

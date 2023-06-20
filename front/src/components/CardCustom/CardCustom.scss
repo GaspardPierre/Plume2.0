@@ -5,6 +5,7 @@
   background-repeat: no-repeat;
   // white-space: pre-line;
   border: 0;
+  color: azure;
   min-width: 300px;
   font-family: "Dancing Script", cursive;
   box-shadow: 2px 2px 20px 0px #9c9090;
@@ -36,11 +37,12 @@
 }
 
 .btn-custom-card {
-  width: 100%;
+  width: 50%;
   padding: 0.3rem;
   font-size: 1rem;
   border-radius: 0.5rem;
   background-color: $primary-color;
   border-color: $primary-color;
+  color: whitesmoke;
   margin-top: auto; // Align the button to the bottom
 }

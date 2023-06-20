@@ -59,14 +59,12 @@ const averageSlice = createSlice({
       .addCase(addAverage.fulfilled, (state, action) => {
         state.status = "succeeded";
         console.log("ACTION.PAYLOAD", action.payload);
-        // Vérifier si le tableau est non vide et si le premier élément contient une propriété 'average'
-        if (action.payload.length > 0 && "average" in action.payload[0]) {
-          // Ajouter la nouvelle moyenne au tableau des moyennes
-          state.averages.push(action.payload[0]);
-          // Mettre à jour la moyenne pour l'œuvre spécifique
-          state.averageByPoem[action.payload[0].work_id] =
-            action.payload[0].average;
-        } else {
+        if ("average" in action.payload) {
+          state.averages.push(action.payload);
+          state.averageByPoem[action.payload.work_id] = action.payload.average;
+        }
+        
+      else {
           console.error("Payload incorrect:", action.payload);
         }
         console.log("state.average:", state.averageByPoem);

@@ -40,7 +40,7 @@ import './Poems.scss';
   } else if (workStatus === "succeeded") {
     console.log(poems, "poems");
     content = (
-      <div className="d-flex  align-items-start justify-content-center vh-80">
+      <div className="d-flex  align-items-center justify-content-center vh-80">
         <div className="container-fluid-custom" >
           <Grid
             key={poems.id}
