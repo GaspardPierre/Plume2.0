@@ -35,11 +35,13 @@ export default function RatingStars({ poemId }) {
 
   const ratingChanged = (newRating) => {
     setRating(newRating);
+    if (!userHasAlreadyVoted) {
     const data = {
       average: newRating,
       member_id: userId,
       work_id: id,
     };
+ 
     dispatch(addAverage(data)).then(() => {
       dispatch(fetchAverage()).then(() => {
         const newAverage = store.getState().average.averages;
@@ -48,8 +50,9 @@ export default function RatingStars({ poemId }) {
         );
         console.log("newUserHasAlreadyVoted", newUserHasAlreadyVoted)
       });
-    });
+    })
   };
+};
   return (
     <div>
       <ReactStars

@@ -1,0 +1,7 @@
+{
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react" // Ajoutez cette ligne pour activer la transformation du JSX
+    ]
+  }
+  
