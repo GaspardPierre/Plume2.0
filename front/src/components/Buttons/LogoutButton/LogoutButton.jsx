@@ -22,7 +22,7 @@ export default function LogoutButton() {
     onClick={handleLogout}>
     <FontAwesomeIcon
      icon={faPowerOff} 
-     color="rgb(224, 176, 72)" 
+     color="#376D92" 
      size="2x"
       /> Déconnexion
     </Link>

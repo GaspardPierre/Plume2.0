@@ -11,7 +11,7 @@ export default function ListButton( {OnGetWorkList}) {
     className="nav_button" >
     <FontAwesomeIcon
      icon={faList} 
-     color="rgb(224, 176, 72)" 
+     color="#376D92" 
      size="2x"
       /> Liste des oeuvres
     </button>

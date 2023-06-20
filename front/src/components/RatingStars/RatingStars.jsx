@@ -27,6 +27,18 @@ export default function RatingStars({ poemId }) {
   );
   console.log("userHasAlreadyVoted", userHasAlreadyVoted)
 
+  const [isHovered, setIsHovered] = useState(false);
+  const handleMouseEnter = () => {
+    if (!userHasAlreadyVoted) {
+      setIsHovered(true);
+    }
+  };
+  
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+  
+
   useEffect(() => {
     if (averages.length === 0) {
       dispatch(fetchAverage());
@@ -35,6 +47,7 @@ export default function RatingStars({ poemId }) {
 
   const ratingChanged = (newRating) => {
     setRating(newRating);
+    setIsHovered(false);
     if (!userHasAlreadyVoted) {
     const data = {
       average: newRating,
@@ -66,7 +79,9 @@ export default function RatingStars({ poemId }) {
         transition
         fillColor="orange"
         emptyColor="yellow"
-        edit={!userHasAlreadyVoted ? true : false }
+        edit={!userHasAlreadyVoted && !isHovered} 
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       />
       <p>Note du poème : {average}</p>
     </div>

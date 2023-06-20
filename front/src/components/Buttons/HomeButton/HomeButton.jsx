@@ -15,7 +15,7 @@ export default function HomeButton() {
 
     <FontAwesomeIcon
      icon={faHome} 
-     color="rgb(224, 176, 72)" 
+     color="#376D92" 
      size="2x"
       /> Accueil
     </Link>
