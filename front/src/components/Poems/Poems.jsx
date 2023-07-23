@@ -8,6 +8,8 @@ import HomeButton from "../Buttons/HomeButton/HomeButton";
 import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
 import './Poems.scss';
 
+// Main component for displaying all poems
+
   export default function Poems() {
     
   const dispatch = useDispatch();
@@ -20,16 +22,22 @@ import './Poems.scss';
     navigate("/");
 };
 
+
+  // Fetch all poems when component mounts
   useEffect(() => {
     if (workStatus === "idle") {
       dispatch(fetchWorks());
     }
   }, [workStatus, dispatch, poems]);
 
+   // Function to create an excerpt of a poem
+
   const excerpt = function (str) {
     const summary = str.substring(0, 100) + "...";
     return summary;
   };
+
+  // Function to handle clicking on a poem
   const handlePoemClick = (id) => {
     navigate(`/poem/${id}`);
   };
@@ -58,7 +66,7 @@ import './Poems.scss';
   }
   return (
     <>
-      <header className=" d-flex justify-content-around mt-3 w80">
+      <header className=" d-flex justify-content-around mt-3 w60">
     
         <HomeButton />
        < LogoutButton />

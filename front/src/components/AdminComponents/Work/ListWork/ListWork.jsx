@@ -1,12 +1,13 @@
 import React, { useEffect, useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, ListGroup } from "react-bootstrap";
+import {  ListGroup,Badge } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { fetchWorks, deleteWork } from "../../../../reducers/work";
 import "./ListWork.scss";
 
-export default function ListWork({}) {
+export default function ListWork({}) 
+{
   const works = useSelector((state) => state.work.works) || [];
   const workStatus = useSelector((state) => state.work.status);
   const dispatch = useDispatch();
@@ -32,13 +33,14 @@ export default function ListWork({}) {
   );
   return (
     <div className="d-flex  align-items-center justify-content-center v-100 mt-5 ">
-      <ListGroup>
+      <ListGroup variant="flush">
         {works.map((work) => (
           <ListGroup.Item
             key={work.id}
             className="d-flex flex-column align-items-start px-5 w-100 w-md-50 "
           >
             <div>{work.title} </div>
+            <Badge pill bg="secondary">Auteur</Badge>
             <div>{work.author} </div>
             <button
               className="btn-delete"

@@ -18,7 +18,10 @@ import Comment from "../Comment/Comment";
 import CommentForm from "../CommentForm/CommentForm";
 import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
 import HomeButton from "../Buttons/HomeButton/HomeButton";
+import { Card } from "react-bootstrap";
 import "./Poem.scss";
+
+// Main component for displaying a single poem
 
 export default function Poem({}) {
   const navigate = useNavigate();
@@ -43,6 +46,9 @@ export default function Poem({}) {
   const dispatch = useDispatch();
   const [showCommentForm, setShowCommentForm] = useState(false);
 
+
+  // Function to handle adding a comment
+
   const handleAddComment = useCallback(
     (comment) => {
       dispatch(addComment(comment));
@@ -50,7 +56,7 @@ export default function Poem({}) {
     [dispatch]
   );
 
-  // ...handleDeleteComment
+ // Function to handle deleting a comment
   const [commentDeleted, setCommentDeleted] = useState(false); // to force useEffect to reload comments
   const onDeleteComment = useCallback(
     (id) => {
@@ -59,6 +65,8 @@ export default function Poem({}) {
     },
     [dispatch]
   );
+
+  // Fetch comments and average rating when component mounts or a comment is deleted
 
   useEffect(() => {
     try {
@@ -72,11 +80,12 @@ export default function Poem({}) {
 
   return (
     <>
-      <header className="d-flex justify-content-around mt-3 w80">
+      <header className="d-flex justify-content-around mt-3 w60">
         <HomeButton />
 
         <LogoutButton />
         </header>
+        <Card>
         <div className="row">
           <h1 className="text-center mb-2">{poem.title}</h1>
         </div>
@@ -121,7 +130,10 @@ export default function Poem({}) {
             </Col>
           </Row>
         </Container>
+        
       </div>
+      </Card>
     </>
   );
+  
 }

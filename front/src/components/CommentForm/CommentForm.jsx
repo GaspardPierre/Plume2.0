@@ -30,11 +30,13 @@ export default function CommentForm({ poem, onAddComment }) {
                 placeholder="Ajoutez un commentaire public..."
               />
             </Form.Group>
-
-            <Button variant="warning" type="submit">
+<div className="d-flex justify-content-center mt-3">
+<Button variant="warning" type="submit">
               Poster le commentaire
             </Button>
       
+</div>
+       
           </Form>
           <RatingStars poemId={poem.id} />
         </div>

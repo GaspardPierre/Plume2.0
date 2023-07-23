@@ -9,7 +9,7 @@ export default function AddWorkButton( { OnShowAddWork }) {
     
     <FontAwesomeIcon
      icon={faPlus} 
-     color="rgb(224, 176, 72)" 
+     color="#376D92" 
      size="2x"
       /> Ajouter une oeuvre
     </button>

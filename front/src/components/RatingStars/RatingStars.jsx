@@ -83,7 +83,10 @@ export default function RatingStars({ poemId }) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />
+      <div className="d-flex justify-content-center">
       <p>Note du poème : {average}</p>
+      </div>
+   
     </div>
   );
 }
