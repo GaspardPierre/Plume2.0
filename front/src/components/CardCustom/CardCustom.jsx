@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import cardImg from '../../assets/fond_plume.png';
 import './CardCustom.scss';
 // import cardImage from'../../assets/bg.jpg';
 
@@ -12,6 +13,7 @@ export default function CardCustom({ title, excerpt, id, onCardClick}) {
     <Card className='card'
     key={id} >
      {/* <Card.Img variant="bottom" src={cardImage}/> */}
+     <Card.Img variant="top" src={cardImg} className='card-img'/>
       <Card.Body>
       <div className="d-flex flex-column justify-content-center">
         <Card.Title>{title}</Card.Title>

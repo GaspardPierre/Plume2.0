@@ -10,7 +10,15 @@
   font-family: "Dancing Script", cursive;
   box-shadow: 2px 2px 20px 0px #9c9090;
   height: 350px; // Add a fixed height for the cards
-}
+   .card-img{
+    height: 160px;
+    @media screen and (max-width: 1024px) {
+      height: 100px;
+     }
+  }
+
+   }
+ 
 
 .content-container {
   flex-grow: 1;
