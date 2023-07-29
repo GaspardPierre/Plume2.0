@@ -12,7 +12,30 @@ $background-color: #fafafa;
 //   flex: 1 0 auto;
 //   max-width: 80%;
 // }
-
+.card-container{
+  display: flex;
+  justify-content: center;
+}
+.main-card{
+  width: 60%;
+  margin:1.5rem;
+  padding: 1.5rem;
+}
+.work-container{
+  display : flex;
+  justify-content: center;
+}
+.poem-content{
+  width: 60%;
+  margin:1.5rem;
+  padding: 1.5rem;
+}
+@media screen and (max-width: 768px) {
+  .poem-content{
+    width: 100%;
+    margin: 0;
+    padding : 0;
+  }
 
   .main-title {
     text-align: center;
@@ -28,6 +51,7 @@ $background-color: #fafafa;
     align-items: center;
     flex-direction: column;
   }
+ 
   .justify-content-center {
     display: flex;
    
@@ -36,7 +60,7 @@ $background-color: #fafafa;
       min-width: 80%;
       flex-direction: column;
     }
-
+   
     .work-container {
       text-align: center;
       margin-bottom: 2rem;
@@ -75,4 +99,5 @@ $background-color: #fafafa;
       }
     }
   }
+}
 

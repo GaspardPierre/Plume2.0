@@ -21,7 +21,7 @@ a {
   margin-bottom: 1rem;
   padding: 1rem;
   padding: 0;
-  min-width: 300px;
+  // min-width: 300px;
   height: 30%;
   font-family: "Dancing Script", cursive;
 }
@@ -39,9 +39,7 @@ color: white;
 text-decoration: none;
 padding: 0.5rem;
 margin: 1rem;
-@media screen and (max-width: 768px) {
-  width: 2rem
-}
+
 
 }
 .btn-nav:hover{
@@ -74,15 +72,14 @@ margin: 1rem;
   width: 90%;
 }
 .btn-custom {
- 
+
   display: flex;
   justify-content: space-around;
   font-family: "Oswald", sans-serif;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  // width: 35%;
   font-size: 1.1em;
-  padding: 1rem;
+  padding: 1rem; 
   margin: 2rem;
   background-color: $primary-color;
   border-color: $primary-color;
@@ -90,28 +87,26 @@ margin: 1rem;
   border-radius: 0.8rem;
   text-align: center;
   text-decoration: none;
-  color:whitesmoke;
+  color: whitesmoke;
   opacity: 0.8;
 
   &:visited {
     text-decoration: none;
-   
   }
+
   &:hover {
     cursor: pointer;
     background-color: #1F4E70;
   }
+
   &:focus {
- 
     border-color: black;
   }
 
-  @media screen {
-    @media (max-width: 768px) {
-      width: 100%;
-      margin: 1rem;
-    }
+  @media screen and (max-width: 576px) {
+    width: 50% !important; 
   }
+
 }
 .error {
   color: rgb(228, 5, 5);

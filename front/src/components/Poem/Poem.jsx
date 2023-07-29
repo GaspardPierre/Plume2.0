@@ -85,7 +85,10 @@ export default function Poem({}) {
 
         <LogoutButton />
         </header>
-        <Card>
+        <div className="card-container">
+
+       
+        <Card className="main-card">
         <div className="row">
           <h1 className="text-center mb-2">{poem.title}</h1>
         </div>
@@ -133,6 +136,7 @@ export default function Poem({}) {
         
       </div>
       </Card>
+      </div>
     </>
   );
   

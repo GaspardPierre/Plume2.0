@@ -1,15 +1,20 @@
 import { defineConfig } from 'vite';
-import reactRefresh from '@vitejs/plugin-react-refresh';
 import sassPlugin from 'vite-plugin-sass';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [
-    reactRefresh(),
+   
     sassPlugin(),
+    react(),
   ],
   resolve: {
     alias: {
       $node: './node_modules',
     },
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
+  server: {
+    port: 5173,
   },
 });

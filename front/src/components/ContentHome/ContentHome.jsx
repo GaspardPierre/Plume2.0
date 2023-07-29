@@ -30,6 +30,7 @@ export default function ContentHome({ role }) {
   if (role === "admin") {
     content = (
       <>
+
         <Link to="/admin" className="btn-custom btn-icon">
           {" "}
           <FontAwesomeIcon icon={faUserPlus} color="white" size="2x" />
@@ -85,6 +86,7 @@ export default function ContentHome({ role }) {
   } else if (role === null) {
     content = (
       <>
+      
         <Link to="/login" className="btn-custom btn-icon">
           <FontAwesomeIcon icon={faSignInAlt} color="white" size="2x" />
           Connexion
