@@ -45,9 +45,14 @@ export default function Login() {
 
   return (
     <>
-      <h1 className="text-center mb-8">Connexion</h1>
+    
+
+  
+      <h1 className="text-center mb-5">Connexion</h1>
+   
       <div className="d-flex  align-items-center justify-content-center vh-80 ">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-50 ">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="w-100 mb-5 ">
           <div className="mb-3">
             <input
               name="email"
@@ -57,7 +62,7 @@ export default function Login() {
                 required: true,
                 pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
               })}
-              className="form-control btn-custom"
+              className="form-control "
               placeholder="Email"
               onChange={handleInputChange}
             />
@@ -78,7 +83,7 @@ export default function Login() {
                 minLength: 8,
                 pattern: /^(?=.*\d).{8,}$/,
               })}
-              className="form-control btn-custom"
+              className="form-control "
               placeholder="Mot de passe"
           
             />
@@ -108,7 +113,7 @@ export default function Login() {
                 validate: (value) =>
                   value === document.getElementById("password").value,
               })}
-              className="form-control btn-custom"
+              className="form-control "
               placeholder="Confirmation du mot de passe"
             
             />
@@ -125,11 +130,12 @@ export default function Login() {
             {errorMessage && <p className="error">{errorMessage}</p>}
           </div>
 
-          <button type="submit" className="btn-custom submit ">
+          <button type="submit" className="submit ">
             Envoyer
           </button>
         </form>
       </div>
+    
     </>
   );
 }
