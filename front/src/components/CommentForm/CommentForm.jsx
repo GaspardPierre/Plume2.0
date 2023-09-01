@@ -1,46 +1,50 @@
-import React, { useState } from "react";
-import { Form, Button, Card } from "react-bootstrap";
-import RatingStars from "../RatingStars/RatingStars";
-
+import React, { useState } from 'react';
+import { MDBInput, MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
+import RatingStars from '../RatingStars/RatingStars';
+import EmojiPicker from 'emoji-picker-react';
 
 export default function CommentForm({ poem, onAddComment }) {
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
 
-  console.log("id du poem dans Comment frm :", poem.id);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (comment.trim()) {
       onAddComment({ comment: comment.trim(), poemId: poem.id });
-      setComment("");
+      setComment('');
     }
   };
 
+  function onEmojiClick(e, emojiObject) {
+    console.log(emojiObject);
+    if (emojiObject.emoticon) {
+      setComment(comment + emojiObject.emoticon);
+    } else {
+      console.log("la propriété emoji n'existe pas !!");
+    }
+  }
+
   return (
-    <Card className="mt-3">
-      <Card.Body>
-        <div className="d-flex flex-column flex-md-row justify-content-between">
-          <Form onSubmit={handleSubmit} className="mb-3 mb-md-0">
-            <Form.Group>
-              <Form.Label>Votre commentaire</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder="Ajoutez un commentaire public..."
-              />
-            </Form.Group>
-<div className="d-flex justify-content-center mt-3">
-<Button variant="warning" type="submit">
+    <MDBCard className="mt-3">
+      <MDBCardBody>
+        <form onSubmit={handleSubmit}>
+          <MDBInput
+            label="Votre commentaire"
+            textarea
+            rows={3}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <div className="d-flex justify-content-center mt-3">
+            <button type="submit" className="btn btn-primary">
               Poster le commentaire
-            </Button>
-      
-</div>
-       
-          </Form>
-          <RatingStars poemId={poem.id} />
+            </button>
+          </div>
+        </form>
+        <RatingStars poemId={poem.id} />
+        <div className="d-flex justify-content-center mt-3">
+        <EmojiPicker onEmojiClick={onEmojiClick} />
         </div>
-      </Card.Body>
-    </Card>
+      </MDBCardBody>
+    </MDBCard>
   );
 }

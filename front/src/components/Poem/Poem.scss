@@ -17,7 +17,7 @@ $background-color: #fafafa;
   justify-content: center;
 }
 .main-card{
-  width: 60%;
+ 
   margin:1.5rem;
   padding: 1.5rem;
 }
@@ -26,20 +26,30 @@ $background-color: #fafafa;
   justify-content: center;
 }
 .poem-content{
-  width: 60%;
+  white-space: pre-wrap;
+  width: 80%;
   margin:1.5rem;
   padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 @media screen and (max-width: 768px) {
   .poem-content{
-    width: 100%;
-    margin: 0;
+    width: 60%;
+    margin: 4rem;
     padding : 0;
   }
 
   .main-title {
     text-align: center;
     margin-top: 3rem;
+  }
+  @media screen and (max-width: 768px) {
+    .main-title {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
   }
 
   .main-container {
@@ -53,9 +63,7 @@ $background-color: #fafafa;
   }
  
   .justify-content-center {
-    display: flex;
-   
-    min-width: 60%;
+  
     @media screen and (max-width: 768px) {
       min-width: 80%;
       flex-direction: column;

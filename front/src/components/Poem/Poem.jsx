@@ -18,7 +18,7 @@ import Comment from "../Comment/Comment";
 import CommentForm from "../CommentForm/CommentForm";
 import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
 import HomeButton from "../Buttons/HomeButton/HomeButton";
-import { Card } from "react-bootstrap";
+import { Card,Badge } from "react-bootstrap";
 import "./Poem.scss";
 
 // Main component for displaying a single poem
@@ -84,58 +84,64 @@ export default function Poem({}) {
         <HomeButton />
 
         <LogoutButton />
-        </header>
-        <div className="card-container">
+      </header>
+      <div className="card-container">
+        <Card
+          className="main-card w-50 justify-content-center flex-column w-sm-90"r
+              
+        >
+          <div className="row">
+            <h1 className="text-center mb-2">{poem.title}</h1>
+          </div>
 
-       
-        <Card className="main-card">
-        <div className="row">
-          <h1 className="text-center mb-2">{poem.title}</h1>
-        </div>
-    
-      <div className="poem">
-        <Container className="main-container">
-          <Row className="justify-content-center flex-column ">
-            <Col className="work-container">
-              <p className="poem-content">{poem.content}</p>
-              <p className="poem-author">{poem.author}</p>
-            </Col>
+          <div className="poem">
+            <Container className="main-container">
+              <Row className="justify-content-center flex-column ">
+                <Col className="work-container flex-column">
+                  <p className="poem-content">{poem.content}</p>
+                  <span className="poem-author d-flex justify-content-center">
+                    <h3>
+                      <Badge className="mt-2" pill bg="secondary">
+                        {poem.author}
+                      </Badge>
+                    </h3>
+                  </span>
+                </Col>
 
-            <Col className="comment-rating-container">
-              <CommentForm
-                onAddComment={handleAddComment}
-                poem={poem}
-                average={average}
-              />
-              <Button
-                onClick={() => setShowCommentForm(!showCommentForm)}
-                aria-controls="comment-fade-text"
-                aria-expanded={showCommentForm}
-                className="show-comments-btn"
-              >
-                Voir les commentaires
-              </Button>
-              <Fade in={showCommentForm}>
-                <div id="comment-fade-text">
-                  {comments.map((comment, index) => (
-                    <Comment
-                      comment={comment}
-                      onDeleteComment={onDeleteComment}
-                      pseudo={pseudo}
-                      userId={userId}
-                      key={comment.id}
-                    />
-                  ))}
-                </div>
-              </Fade>
+                <Col className="comment-rating-container">
+                  <CommentForm
+                    onAddComment={handleAddComment}
+                    poem={poem}
+                    average={average}
+                  />
+                  <Button
+                    onClick={() => setShowCommentForm(!showCommentForm)}
+                    aria-controls="comment-fade-text"r
+                    aria-expanded={showCommentForm}
+                    className="show-comments-btn"
+                  >
+                    Voir les commentaires
+                  </Button>
+                  <Fade in={showCommentForm}>
+                    <div id="comment-fade-text">
+                      {comments.map((comment, index) => (
+                        <Comment
+                          comment={comment}
+                          onDeleteComment={onDeleteComment}
+                          pseudo={pseudo}
+                          userId={userId}
+                          key={comment.id}
+                        />
+                      ))}
+                    </div>
+                  </Fade>
 
-              {/* Fonctionnalité de notation et commentaires */}
-            </Col>
-          </Row>
-        </Container>
-        
-      </div>
-      </Card>
+                  {/* Fonctionnalité de notation et commentaires */}
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </Card>
       </div>
     </>
   );

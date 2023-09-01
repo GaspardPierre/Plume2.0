@@ -40,8 +40,8 @@ export default function ListWork({})
             className="d-flex flex-column align-items-start px-5 w-100 w-md-50 "
           >
             <div>{work.title} </div>
-            <Badge pill bg="secondary">Auteur</Badge>
-            <div>{work.author} </div>
+            <Badge pill bg="secondary"> <div>{work.author} </div></Badge>
+           
             <button
               className="btn-delete"
               onClick={() => onDeleteWork(work.id)}
