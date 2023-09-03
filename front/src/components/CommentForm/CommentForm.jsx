@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { MDBInput, MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
 import RatingStars from '../RatingStars/RatingStars';
-import EmojiPicker from 'emoji-picker-react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export default function CommentForm({ poem, onAddComment }) {
   const [comment, setComment] = useState('');
+
+  // Remove html from the comments 
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,26 +19,19 @@ export default function CommentForm({ poem, onAddComment }) {
     }
   };
 
-  function onEmojiClick(e, emojiObject) {
-    console.log(emojiObject);
-    if (emojiObject.emoticon) {
-      setComment(comment + emojiObject.emoticon);
-    } else {
-      console.log("la propriété emoji n'existe pas !!");
-    }
-  }
+
 
   return (
     <MDBCard className="mt-3">
       <MDBCardBody>
         <form onSubmit={handleSubmit}>
-          <MDBInput
-            label="Votre commentaire"
-            textarea
-            rows={3}
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
+        <ReactQuill
+          label="Votre commentaire"
+         theme="snow"
+        value={comment}
+        onChange={(content) => setComment(content)}
+        />
+          
           <div className="d-flex justify-content-center mt-3">
             <button type="submit" className="btn btn-primary">
               Poster le commentaire
@@ -42,7 +40,7 @@ export default function CommentForm({ poem, onAddComment }) {
         </form>
         <RatingStars poemId={poem.id} />
         <div className="d-flex justify-content-center mt-3">
-        <EmojiPicker onEmojiClick={onEmojiClick} />
+    
         </div>
       </MDBCardBody>
     </MDBCard>

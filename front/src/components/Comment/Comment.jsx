@@ -2,12 +2,16 @@ import { MDBCard, MDBCardBody, MDBCardImage, MDBIcon } from 'mdb-react-ui-kit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEraser } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
+import DOMpurify from 'dompurify';
+
 
 
 
 export default function Comment({ comment, onDeleteComment, pseudo, userId }) {
   const role = useSelector((state) => state.member.role);
+  const purifyComment = DOMpurify.sanitize(comment.content)
   return (
+
    
     <MDBCard className="mb-4 w-100">
       <MDBCardBody>
@@ -32,7 +36,7 @@ export default function Comment({ comment, onDeleteComment, pseudo, userId }) {
             ) : null}
           </div>
         </div>
-        <p>{comment.content}</p>
+        <p dangerouslySetInnerHTML={{ __html: purifyComment }}></p>
       </MDBCardBody>
     </MDBCard>
   );
