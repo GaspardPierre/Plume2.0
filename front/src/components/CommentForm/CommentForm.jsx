@@ -30,6 +30,7 @@ export default function CommentForm({ poem, onAddComment }) {
          theme="snow"
         value={comment}
         onChange={(content) => setComment(content)}
+        className='w-100 w-md-75 w-lg-75'
         />
           
           <div className="d-flex justify-content-center mt-3">

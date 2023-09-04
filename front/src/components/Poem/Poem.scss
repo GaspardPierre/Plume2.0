@@ -108,4 +108,13 @@ $background-color: #fafafa;
     }
   }
 }
-
+@media (min-width: 992px) { // Pour les écrans lg et plus grands
+  .large-font {
+    font-size: 1.6rem; // Ajustez la taille selon vos besoins
+  }
+}
+@media (max-width: 767px) {
+  .mobile-font{
+    font-size: 1.5rem
+  }
+}

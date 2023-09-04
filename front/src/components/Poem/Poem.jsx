@@ -87,18 +87,19 @@ export default function Poem({}) {
       </header>
       <div className="card-container">
         <Card
-          className="main-card w-50 justify-content-center flex-column w-sm-90"r
+       className="main-card w-xs-100 w-md-75 w-lg-75 justify-content-center flex-column"
+
               
         >
-          <div className="row">
-            <h1 className="text-center mb-2">{poem.title}</h1>
+          <div className="row ">
+            <h1 className="text-center mb-2 mobile-font">{poem.title}</h1>
           </div>
 
           <div className="poem">
-            <Container className="main-container">
+            <Container className="main-container w-md-75">
               <Row className="justify-content-center flex-column ">
                 <Col className="work-container flex-column">
-                  <p className="poem-content">{poem.content}</p>
+                  <p className="poem-content w-100 w-md-75 m-0 m-md-auto large-font">{poem.content}</p>
                   <span className="poem-author d-flex justify-content-center">
                     <h3>
                       <Badge className="mt-2" pill bg="secondary">
