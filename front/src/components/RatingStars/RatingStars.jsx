@@ -9,7 +9,6 @@ export default function RatingStars({ poemId }) {
   const userId = useSelector((state) => state.member.id);
   const id = poemId;
   const averages = useSelector((state) => state.average.averages);
- 
 
   // calc average
   const poemAverage = averages.filter((avg) => avg.work_id === parseInt(id));
@@ -20,55 +19,66 @@ export default function RatingStars({ poemId }) {
       ? Math.round((total / poemAverage.length) * 100) / 100
       : 0;
   const [rating, setRating] = useState(average);
+  const [displayedAverage, setDisplayedAverage] = useState(average);
 
   // Check if user has already voted
   const userHasAlreadyVoted = averages.some(
     (avg) => avg.member_id === userId && avg.work_id === id
   );
-  console.log("userHasAlreadyVoted", userHasAlreadyVoted)
-
+// Handle hover on stars
   const [isHovered, setIsHovered] = useState(false);
   const handleMouseEnter = () => {
     if (!userHasAlreadyVoted) {
       setIsHovered(true);
     }
   };
-  
+
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
-  
-
+//  fetch averages 
   useEffect(() => {
     if (averages.length === 0) {
       dispatch(fetchAverage());
     }
   }, [dispatch, averages, userHasAlreadyVoted]);
+// display new average and update it
+  useEffect(() => {
+    const newAverage =
+      poemAverage.length > 0
+        ? Math.round((total / poemAverage.length) * 100) / 100
+        : 0;
+    setRating(newAverage);
+    setDisplayedAverage(newAverage);
+  }, [averages, id]);
 
   const ratingChanged = (newRating) => {
     setRating(newRating);
+    setDisplayedAverage(newRating);
     setIsHovered(false);
     if (!userHasAlreadyVoted) {
-    const data = {
-      average: newRating,
-      member_id: userId,
-      work_id: id,
-    };
- 
-    dispatch(addAverage(data)).then(() => {
-      dispatch(fetchAverage()).then(() => {
-        const newAverage = store.getState().average.averages;
-        const newUserHasAlreadyVoted = newAverage.some(
-          (avg) => avg.member_id === userId && avg.work_id === id
-        );
-        console.log("newUserHasAlreadyVoted", newUserHasAlreadyVoted)
+      const data = {
+        average: newRating,
+        member_id: userId,
+        work_id: id,
+      };
+
+      dispatch(addAverage(data)).then(() => {
+        dispatch(fetchAverage()).then(() => {
+          const newAverage = store.getState().average.averages;
+          const newUserHasAlreadyVoted = newAverage.some(
+            (avg) => avg.member_id === userId && avg.work_id === id
+          );
+          console.log("newUserHasAlreadyVoted", newUserHasAlreadyVoted);
+        });
       });
-    })
+    }
   };
-};
   return (
-    <div>
-      <ReactStars
+    <div className="flex-column ">
+    
+    <ReactStars
+        key={average} 
         count={5}
         value={average}
         isHalf={true}
@@ -79,12 +89,12 @@ export default function RatingStars({ poemId }) {
         transition
         fillColor="orange"
         emptyColor="yellow"
-        edit={!userHasAlreadyVoted && !isHovered} 
+        edit={!userHasAlreadyVoted && !isHovered}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />
-      <div className="d-flex justify-content-center">
-      <p>Note du poème : {average}</p>
+      <div >
+        <p>Note du poème : {average}</p>
       </div>
    
     </div>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { MDBInput, MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
-import RatingStars from '../RatingStars/RatingStars';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -39,7 +38,6 @@ export default function CommentForm({ poem, onAddComment }) {
             </button>
           </div>
         </form>
-        <RatingStars poemId={poem.id} />
         <div className="d-flex justify-content-center mt-3">
     
         </div>

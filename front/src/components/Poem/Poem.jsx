@@ -19,6 +19,7 @@ import CommentForm from "../CommentForm/CommentForm";
 import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
 import HomeButton from "../Buttons/HomeButton/HomeButton";
 import { Card,Badge } from "react-bootstrap";
+import RatingStars from "../RatingStars/RatingStars";
 import "./Poem.scss";
 
 // Main component for displaying a single poem
@@ -92,6 +93,8 @@ export default function Poem({}) {
               
         >
           <div className="row ">
+          <RatingStars poemId={poem.id} />
+          
             <h1 className="text-center mb-2 mobile-font">{poem.title}</h1>
           </div>
 
@@ -99,7 +102,7 @@ export default function Poem({}) {
             <Container className="main-container w-md-75">
               <Row className="justify-content-center flex-column ">
                 <Col className="work-container flex-column">
-                  <p className="poem-content w-100 w-md-75 m-0 m-md-auto large-font">{poem.content}</p>
+                  <p className="poem-content w-100 w-md-75 m-0 m-md-4 large-font">{poem.content}</p>
                   <span className="poem-author d-flex justify-content-center">
                     <h3>
                       <Badge className="mt-2" pill bg="secondary">
@@ -136,8 +139,6 @@ export default function Poem({}) {
                       ))}
                     </div>
                   </Fade>
-
-                  {/* Fonctionnalité de notation et commentaires */}
                 </Col>
               </Row>
             </Container>
