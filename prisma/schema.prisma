@@ -49,7 +49,7 @@ model Label {
 
 model Note {
   id         Int      @id @default(autoincrement())
-  average    Int
+  average    Float
   member_id  Int
   member     Member   @relation(fields: [member_id], references: [id])
   work_id    Int
@@ -66,4 +66,5 @@ model Comment {
   member     Member   @relation(fields: [member_id], references: [id])
   work_id    Int
   work       Work     @relation("WorkToComment", fields: [work_id], references: [id], onDelete: Cascade)
+  create_at  DateTime @default(now())
 }

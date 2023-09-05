@@ -36,6 +36,7 @@ const commentModel = {
               content: comment.content,
               member_id: comment.member_id,
               work_id: comment.work_id,
+              
             },
           });
           return newComment;
