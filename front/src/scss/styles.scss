@@ -22,9 +22,28 @@ a {
   padding: 1rem;
   padding: 0;
   // min-width: 300px;
-  height: 30%;
+
   font-family: "Dancing Script", cursive;
+ 
 }
+@media (min-width: 1200px) {
+  .w-80-lg {
+    width: 50% !important;
+    margin: 0 auto; 
+  
+  }
+}
+
+  @media (max-width:768px){
+    .main-card{
+
+    
+    margin: 1rem;
+  
+  }
+}
+  
+
 
 .btn-nav{
   width: 5%;

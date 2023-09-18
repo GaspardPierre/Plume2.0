@@ -1,6 +1,18 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: var(--bg-image);
+  background-size: 100% auto;
+  background-position: center;
+  background-repeat:repeat;
+  background-attachment: fixed;
 
+ 
+}
 
 
 :root {
@@ -8,19 +20,7 @@
   font-family:'Dancing Script', cursive;
   line-height: 1.5;
   font-weight: 400;
-  html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-image: var(--bg-image);
-    background-size: 100% auto;
-    background-position: center;
-    background-repeat:repeat;
-    background-attachment: fixed;
- 
-   
-  }
+  
   
 
   

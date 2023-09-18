@@ -1,30 +1,18 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import { Button } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Fade from "react-bootstrap/Fade";
-import {
-  fetchComments,
-  addComment,
-  deleteComment,
-} from "../../reducers/comment";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { Container, Button, Card, Badge, Row, Col, Fade } from "react-bootstrap";
+import {fetchComments,addComment,deleteComment,} from "../../reducers/comment";
 import { fetchAverage } from "../../reducers/average";
 import Comment from "../Comment/Comment";
 import CommentForm from "../CommentForm/CommentForm";
-import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
-import HomeButton from "../Buttons/HomeButton/HomeButton";
-import { Card,Badge } from "react-bootstrap";
 import RatingStars from "../RatingStars/RatingStars";
+import { useMemberState } from "../../hooks/customHooks";
+import Header from "../Layout/Header";
 import "./Poem.scss";
 
-// Main component for displaying a single poem
+export default function Poem({ }) {
 
-export default function Poem({}) {
   const navigate = useNavigate();
   const { id } = useParams();
   const poems = useSelector((state) => state.work.works);
@@ -34,21 +22,22 @@ export default function Poem({}) {
   }
   const averageByPoem = useSelector((state) => state.average.averageByPoem);
   const average = averageByPoem[poem.id];
-  const pseudo = useSelector((state) => state.member.pseudo);
-  const userId = useSelector((state) => state.member.id);
-  const role = useSelector((state) => state.member.role);
+  // MEMBER STATE
+  const { pseudo, userId, role } = useMemberState();
 
   if (!pseudo) {
     navigate("/login");
   }
-
   // COMMENT STATE
   const comments = useSelector((state) => state.comment.comments) || [];
   const dispatch = useDispatch();
   const [showCommentForm, setShowCommentForm] = useState(false);
 
 
-  // Function to handle adding a comment
+  const [error, setError] = useState(null);
+
+
+  //  adding a comment
 
   const handleAddComment = useCallback(
     (comment) => {
@@ -57,7 +46,7 @@ export default function Poem({}) {
     [dispatch]
   );
 
- // Function to handle deleting a comment
+  //deleting a comment
   const [commentDeleted, setCommentDeleted] = useState(false); // to force useEffect to reload comments
   const onDeleteComment = useCallback(
     (id) => {
@@ -76,33 +65,36 @@ export default function Poem({}) {
       setCommentDeleted(false);
     } catch (error) {
       console.log(error);
+      setError(error); 
     }
   }, [id, commentDeleted]);
 
   return (
     <>
-      <header className="d-flex justify-content-around mt-3 w60">
-        <HomeButton />
-
-        <LogoutButton />
-      </header>
-      <div className="card-container">
+      <Header />
+      <div className="card-container  justify-content-center flex-column ">
+      {error ? (
+        <div>Une erreur s'est produite : {error.message}</div>
+      ) : (
         <Card
-       className="main-card w-xs-100 w-md-75 w-lg-75 justify-content-center flex-column"
+          className="main-card w-xs-100 w-md-75 w-80-lg justify-content-center flex-column"
 
-              
         >
-          <div className="row ">
-          <RatingStars poemId={poem.id} />
           
+    
+            <div className="flex justify-content-around">
+            <RatingStars poemId={poem.id} />
+          
+           
+
             <h1 className="text-center mb-2 mobile-font">{poem.title}</h1>
           </div>
 
           <div className="poem">
-            <Container className="main-container w-md-75">
+            <Container className="main-container w-lg-100">
               <Row className="justify-content-center flex-column ">
                 <Col className="work-container flex-column">
-                  <p className="poem-content w-100 w-md-75 m-0 m-md-4 large-font">{poem.content}</p>
+                  <p className="poem-content  w-md-75 m-0 m-md-4 large-font">{poem.content}</p>
                   <span className="poem-author d-flex justify-content-center">
                     <h3>
                       <Badge className="mt-2" pill bg="secondary">
@@ -120,32 +112,36 @@ export default function Poem({}) {
                   />
                   <Button
                     onClick={() => setShowCommentForm(!showCommentForm)}
-                    aria-controls="comment-fade-text"r
+                    aria-controls="comment-fade-text" r
                     aria-expanded={showCommentForm}
                     className="show-comments-btn"
                   >
                     Voir les commentaires
                   </Button>
-                  <Fade in={showCommentForm}>
-                    <div id="comment-fade-text">
-                      {comments.map((comment, index) => (
-                        <Comment
-                          comment={comment}
-                          onDeleteComment={onDeleteComment}
-                          pseudo={pseudo}
-                          userId={userId}
-                          key={comment.id}
-                        />
-                      ))}
-                    </div>
-                  </Fade>
+
                 </Col>
               </Row>
             </Container>
           </div>
-        </Card>
+        </Card>)}
+        <div className="w-xs-100 w-md-75 w-80-lg">
+        <Fade in={showCommentForm}>
+          <div id="comment-fade-text">
+            {comments.map((comment, index) => (
+              <Comment
+                comment={comment}
+                onDeleteComment={onDeleteComment}
+                pseudo={pseudo}
+                userId={userId}
+                key={comment.id}
+              />
+            ))}
+          </div>
+        </Fade>
+        </div>
+       
       </div>
+
     </>
   );
-  
 }

@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { fetchWorks } from "../../reducers/work";
 import Grid from "../Grid/Grid";
 import Loading from "../Loading/Loading";
-import HomeButton from "../Buttons/HomeButton/HomeButton";
-import LogoutButton from "../Buttons/LogoutButton/LogoutButton";
+import Header from "../Layout/Header";
 import './Poems.scss';
+
 
 // Main component for displaying all poems
 
-  export default function Poems() {
-    
+export default function Poems() {
+
   const dispatch = useDispatch();
   const poems = useSelector((state) => state.work.works);
   const workStatus = useSelector((state) => state.work.status);
@@ -20,7 +20,7 @@ import './Poems.scss';
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
-};
+  };
 
 
   // Fetch all poems when component mounts
@@ -30,7 +30,7 @@ import './Poems.scss';
     }
   }, [workStatus, dispatch, poems]);
 
-   // Function to create an excerpt of a poem
+  // Function to create an excerpt of a poem
 
   const excerpt = function (str) {
     const summary = str.substring(0, 100) + "...";
@@ -48,7 +48,7 @@ import './Poems.scss';
   } else if (workStatus === "succeeded") {
     console.log(poems, "poems");
     content = (
-      <div className="d-flex  align-items-center justify-content-center vh-80 w-80 ">
+      <div className="d-flex  align-items-center justify-content-center vh-80 w-100 ">
         <div className="container-fluid-custom" >
           <Grid
             key={poems.id}
@@ -66,18 +66,12 @@ import './Poems.scss';
   }
   return (
     <>
-      <header className=" d-flex justify-content-around mt-3 w60">
-    
-        <HomeButton />
-       < LogoutButton />
-       </header>
-      
-      
-        <div className="row">
-          <h1 className="text-center mb-2">Poèmes</h1>
-         
-        </div>
-    
+      <Header />
+      <div className="row">
+        <h1 className="text-center mb-2">Poèmes</h1>
+
+      </div>
+
       {content}
     </>
   );
