@@ -21,11 +21,16 @@ export default function Home() {
       />
 
      
-        <header className="header-container container mb-8">
+        <header className="header-container container mb-4 sticky-top">
           <div className="row">
-            <h1 className="text-center mb-2">Plume 2.0</h1>
+            <h1 className="text-center">Plume 2.0</h1>
           </div>
+        
+        <div className="container">
+        <img src="https://mdbootstrap.com/img/new/slides/041.jpg" className="mw-100 rounded mb-2" alt="..." />
+        </div>
         </header>
+     
 
         <div className="home__main__container d-flex align-items-center">
           <div className="container-fluid">

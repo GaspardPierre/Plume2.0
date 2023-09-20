@@ -6,7 +6,7 @@ export default function Header() {
 
     return (
         <>
-          <header className="d-flex justify-content-around mt-3 ">
+          <header className="border-bottom border-2  d-flex justify-content-around mt-3 p-4 ">
             <HomeButton />
     
             <LogoutButton />

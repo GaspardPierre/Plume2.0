@@ -11,7 +11,7 @@ export default function HomeButton() {
   return (
     
     <Link to="/"
-    className="nav_link" >
+    className="nav_link  " style={{ cursor: 'pointer' }} >
 
     <FontAwesomeIcon
      icon={faHome} 

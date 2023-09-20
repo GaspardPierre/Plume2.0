@@ -18,7 +18,7 @@ export default function LogoutButton() {
   return (
     
     <Link to="/"
-    className="nav_link" 
+    className="nav_link " style={{ cursor: 'pointer' }} 
     onClick={handleLogout}>
     <FontAwesomeIcon
      icon={faPowerOff} 
