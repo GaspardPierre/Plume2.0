@@ -58,7 +58,7 @@ export default function Login() {
        
        <form onSubmit={handleSubmit(onSubmit)} className="w-100 text-center  ">
        
-        <div className="my-5 py-1">
+        <div className=" py-1">
             <input
               name="email"
               type="email"
@@ -108,33 +108,7 @@ export default function Login() {
             )}
           </div>
 
-          <div className="my-5 py-1">
-            <input
-              name="confirmpassword"
-              type="password"
-              id="confmdp"
-              {...register("password", {
-                required: true,
-                validate: (value) =>
-                  value === document.getElementById("password").value,
-              })}
-              className="form-control text-center mx-auto border-top-0 border-end-1 border-start-0 border-bottom-1 md-font line border-color"
-              placeholder="Confirmation du mot de passe"
-             
-            />
-             {errors.confmdp && errors.confmdp.type === "required" && (
-                <p className="error">
-                  La confirmation du mot de passe est requise.
-                </p>
-              )}
-              {errors.confmdp && errors.confmdp.type === "validate" && (
-                <p className="error">
-                  Les mots de passe doivent être identiques.
-                </p>
-              )}
-              {errorMessage && <p className="error">{errorMessage}</p>}
-           
-          </div>
+     
 
           <button type="submit" className="btn btn-submit rounded bg-third color-second font-custom ">
             Envoyer

@@ -24,7 +24,7 @@ export default function Title() {
                         if (path.startsWith('/poem/')) {
                             return 'Poème';
                         }
-                        return 'Autre';
+                        return 'Accueil';
                 }
         }
     

@@ -15,11 +15,13 @@
   
   .comment-bubble {
     position: relative;
-    background: #f9f9f9;
-    border-radius: 0.4em 0 0.4em 0;
+    background:white;
+    border-radius: 0.6em 0.6em 0.6em 0.6em;
     padding: 1em;
     margin: 1rem;
     box-shadow: 0 0 0.2em rgba(0, 0, 0, 0.1);
+    max-width: 70%;
+
 }
 
 .comment-bubble::before {

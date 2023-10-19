@@ -20,7 +20,6 @@ export default function CommentForm({ poem, onAddComment, comments }) {
       
         <h5 className="card-title text-center py-5   text-uppercase">Laisser un commentaire</h5>
        
-          <p className='text-center border-bottom border-2 pb-2 b mb-4 text-capitalize'> commentaires ({comments.length})</p>
      
           <textarea 
                 className="form-control  w-100 comment-input mx-auto m border-0 " 

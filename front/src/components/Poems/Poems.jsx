@@ -6,6 +6,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Loading from "../Loading/Loading";
 import carrouseBg from"../../assets/carrouselImg.jpg";
 import ReadMore from "../ReadMore/ReadMore";  
+import poemsBg from"../../assets/poems.png";
 import './Poems.scss';
 
 
@@ -50,7 +51,10 @@ export default function Poems() {
   } else if (workStatus === "succeeded") {
     content = (
       <> 
-    
+    <div className="container my-5 poems-container d-flex justify-content-center align-items-center"
+     style={{ backgroundImage: `url(${poemsBg})` }}>
+
+ 
       <div className="d-flex align-items-center justify-content-center carrousel-custom rounded  b-color ">
   
         <div className="" >
@@ -95,6 +99,7 @@ export default function Poems() {
          
         </div>
       
+      </div>
       </div>
       </>
     );

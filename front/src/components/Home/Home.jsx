@@ -54,7 +54,7 @@ export default function Home({  }) {
           <img src={banniere} alt='banniere' className='img-fluid roundy shadow-md ' />
           <div className=' section-poem position-absolute   bg-four rounded p-2'>
             <div className='first-poem-container mx-2 py-2 position-relative'>
-            <ReadMore />
+           
               <h2 className='first-poem text-custom font-custom font-color line mb-1   '>CREATION</h2>   
               <div className='third'>
 
@@ -63,6 +63,7 @@ export default function Home({  }) {
               <p className='text-custom font-custom font-color line'>Réponds la grandeur...</p>
               <p className='text-custom font-custom font-color line'>A tes pas, au souffle</p>
               <p className='text-custom font-custom font-color line mb-2'>Icandescence</p>
+              <ReadMore />
            <div className="w-50">
         
            </div>

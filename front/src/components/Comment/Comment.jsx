@@ -8,7 +8,7 @@ export default function Comment({ comment, onDeleteComment, pseudo, userId }) {
   const purifyComment = DOMpurify.sanitize(comment.content);
 
   return (
-    <div className='d-flex justify-content-start mobile comment-content '>
+    <div className='d-flex justify-content-start mobile comment-content  '>
       <div className="avatar-container ">
         <Avatar pseudo={pseudo} />
         <div className="pseudo-container ">
@@ -16,7 +16,7 @@ export default function Comment({ comment, onDeleteComment, pseudo, userId }) {
         </div>
   
       </div>
-      <div className="comment-bubble  ">
+      <div className="comment-bubble   ">
      
         <div className=''>{purifyComment}</div>
       </div>

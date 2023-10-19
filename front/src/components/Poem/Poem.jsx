@@ -49,26 +49,20 @@ export default function Poem() {
         [dispatch]
     );
 
-    const [commentDeleted, setCommentDeleted] = useState(false);
+ 
 
-    const onDeleteComment = useCallback(
-        (id) => {
-            dispatch(deleteComment({ id: parseInt(id) }));
-            setCommentDeleted(true);
-        },
-        [dispatch]
-    );
+
 
     useEffect(() => {
         try {
             dispatch(fetchComments(id));
             dispatch(fetchAverage());
-            setCommentDeleted(false);
+           
         } catch (error) {
-            console.log(error);
+        
             setError(error);
         }
-    }, [id, commentDeleted]);
+    }, [id]);
 
     return (
         <>
@@ -80,14 +74,14 @@ export default function Poem() {
                 >
                     <div className="row">
                         <div className="col-lg-6 col-md-12 mb-5 poem-section opacity-80">
-                            <div className="card h-100 poem-card border-0 bg-custom  ">
+                            <div className="card  poem-card border-0 bg-custom  ">
                             
                                 <div className="card-body">
                           
-                                    <div className="d-flex justify-content-between rating-container">
+                                    <div className="d-flex justify-content-between rating-container ">
                                     <RatingStars poemId={poem.id} />
                                     <div className=" ">
-                                    <h2 className="card-title text-center ">{poem.title}</h2>
+                                    <h2 className="card-title text-center display-6 mb-3 font-custom ">{poem.title}</h2>
                                     <h6 className=" text-center  text-muted author-name font-color py-1">{poem.author}</h6>
                                     </div>
 
@@ -101,15 +95,21 @@ export default function Poem() {
                                 </div>
                             </div>
                         </div>
+
+                        {/* COMMENT SECTION */}
                         <div className="col-lg-5 col-md-12 comments-section ">
                         <div className="card h-100 comments-card border-0 bg-custom ">
                         <div className="card-body">
+                            
+          <p className='text-center border-bottom border-2 pb-2 b mb-4 text-capitalize'> commentaires ({comments.length})</p>
+                            { role === "admin" && (
                         <CommentForm
                             onAddComment={handleAddComment}
                             poem={poem}
                             average={average}
                            comments={comments}
                         />
+                            )}
                 
       
                       <div className="d-flex my-3 ">
@@ -126,7 +126,6 @@ export default function Poem() {
                                 {comments.map((comment) => (
                                     <Comment
                                         comment={comment}
-                                        onDeleteComment={onDeleteComment}
                                         pseudo={pseudo}
                                         userId={userId}
                                         key={comment.id}
