@@ -47,18 +47,24 @@ const workController = {
     }
   },
   
-
   async modifyWork(req, res) {
+    console.log("IL Y A UNE REQUETE PATCH");
     const work = req.body;
     const workId = req.params.id;
-    const update = await workModel.findById(workId);
-    for (const key in work) {
-      update[key] = work[key];
-      console.log(update);
+    if (isNaN(workId)) {
+        return res.status(400).json({ message: 'Invalid ID' });
     }
-    const workDb = await workModel.update(update);
-    res.json(workDb);
-  },
+
+    try {
+        const updatedWork = await workModel.update(workId, work);
+        res.json(updatedWork);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+,
+
 
   async deleteWork(req, res) {
  const workId = req.params.id;

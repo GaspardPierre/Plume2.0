@@ -19,6 +19,7 @@ const memberModel = {
       return foundEmail;
     } catch (error) {
       console.log(error);
+      return { error: "Member not found"}
     }
   },
 
@@ -36,6 +37,7 @@ const memberModel = {
       return members;
     } catch (error) {
       console.log(error);
+      return { error: "Members not found"}
     }
     return null;
   },
@@ -53,6 +55,7 @@ const memberModel = {
       return newMember;
     } catch (error) {
       console.log(error);
+      return { error: "Member not created"}
     }
   },
   async findById(id) {
@@ -66,6 +69,7 @@ const memberModel = {
       return member;
     } catch (error) {
       console.log(error);
+      return { error: "Member not found"}
     }
   },
   async update(member) {
@@ -84,6 +88,7 @@ const memberModel = {
       return updatedMember;
     } catch (error) {
       console.log(error);
+      return { error: "Member not updated"}
     }
 
     return null;
@@ -97,6 +102,7 @@ const memberModel = {
       });
     } catch (err) {
       console.log(err);
+      return { error: "Member not deleted"}
     }
   },
 };
