@@ -52,8 +52,9 @@ const workModel = {
     
 },
 
+
 async findById(id) {
-    let work;
+  
     try {
         const work = await prisma.work.findUnique({
             where: {
@@ -64,10 +65,29 @@ async findById(id) {
         
     } catch (error) {
         console.log(error);
+        throw error; 
         
     }
     
 },
+
+async update(id, updatedWork) {
+    if (!id || Object.keys(updatedWork).length === 0) {
+        throw new Error('Invalid parameters');
+    }
+
+    try {
+        const updatedWorkDb = await prisma.work.update({
+            where: { id: parseInt(id) },
+            data: updatedWork,
+        });
+        return updatedWorkDb;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+,
 
 async delete(id) {
 
