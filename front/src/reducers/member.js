@@ -1,38 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../api";
 
-// GET ALL MEMBERS ACTION
-export const getAllMembers = createAsyncThunk(
-  "member/getAllMembers",
-  async () => {
-    const response = await api.get("/member");
-    return response.data;
-  }
-);
+
 
 // REGISTER ACTION
-export const addMember = createAsyncThunk("member/addMember", async (data) => {
+export const addMember = createAsyncThunk("member/addMember", async (data ) => {
   const response = await api.post("/member/addMember", data);
   return response.data;
 });
-// DELETE ACTION
-export const deleteMember = createAsyncThunk(
-  "member/deleteMember",
-  async (id) => {
-    const response = await api.delete(`/member/${id}`);
-    console.log(id);
-    return id;
-  }
-);
-//  UPDATE  ROLE ACTION
-export const updateMemberRole = createAsyncThunk(
-  "member/updateMemberRole",
-  async ({id,role}) => {
-    console.log(`id: ${id}`);
-    const response = await api.patch(`/member/${parseInt(id)}`, role);
-    return response.data;
-  }
-);
+
 
 
 
@@ -61,6 +37,9 @@ export const logout = createAsyncThunk("logout", async () => {
   return null;
 });
 
+
+
+
 const memberSlice = createSlice({
   name: "member",
   initialState: {
@@ -68,22 +47,17 @@ const memberSlice = createSlice({
     error: null,
     role: null,
   },
+  reducers: {
+// TOOGLE ROLE ACTION
+    toggleRole : (state) => {
+      state.role = state.role === 'admin' ? 'visiteur' : 'admin';
+    },
+  },
 
   extraReducers: (builder) => {
     builder
 
-      // Handle get all members actions
-      .addCase(getAllMembers.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(getAllMembers.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.members = action.payload;
-      })
-      .addCase(getAllMembers.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      })
+
       // Handle register actions
       .addCase(addMember.pending, (state) => {
         state.status = "loading";
@@ -116,43 +90,12 @@ const memberSlice = createSlice({
         state.pseudo = null;
         state.id = null;
       })
-      // Handle delete actions
-       .addCase(deleteMember.pending, (state) => {  
-        state.status = "loading";
-      })
-      .addCase(deleteMember.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.members = state.members.filter(
-          (member) => member.id !== action.payload.id
-        );
-      })
-      .addCase(deleteMember.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-
-      })
-      // Handle update role actions
-       .addCase(updateMemberRole.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(updateMemberRole.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.members = state.members.map((member) => {
-          if (member.id === action.payload.id) {
-            return action.payload;
-          }
-          return member;
-        });
-      })
-      
-  
-      .addCase(updateMemberRole.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      });
-  
-    }
+    
+    
+  },  
 });
+export const { toggleRole } = memberSlice.actions;
+
 
 
       

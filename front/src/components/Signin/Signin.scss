@@ -1,128 +1,13 @@
-// @import '../../scss/variables.scss';
+form-md{
 
-
-// $form-width: 500px;
-$form-max-width: 60%;
-$form-max-width-mobile: 80%;
-$form-background: rgb(250, 212, 128);
-// $form-padding: 10px 15px;
-// $form-input-radius: 4px;
-// $form-input-border: 1px solid white;
-// $form-input-font-size: 14px;
-// $form-label-color: white;
-// $form-button-background: #ec5990;
-// $form-button-color: white;
-// $form-button-text-transform: uppercase;
-// $form-button-border: none;
-// $form-button-margin-top: 40px;
-// $form-button-padding: 20px;
-// $form-button-font-size: 16px;
-// $form-button-font-weight: 100;
-// $form-button-letter-spacing: 10px;
-// $form-button-hover-background: #bf1650;
-// $form-button-active-transition: 0.3s all;
-// $form-button-active-transform: translateY(3px);
-// $form-button-active-border: 1px solid transparent;
-// $form-button-active-opacity: 0.8;
-// $form-button-disabled-opacity: 0.4;
-.d-flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
- 
+  @media screen and (max-width: 992px) {
+    width: 100%;
     
   }
-  
-.header-container{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
 }
-
-
-form {
-  max-width: $form-max-width;
-
-.submit{
+.small{
+  @media screen and (max-width: 992px) {
     width: 100%;
-}
+    
   }
-
-
-
-
-.form {
-  background: $form-background;
-//   max-width: $form-max-width;
-//   margin: 0 auto;
-.form-control{
-font-family: 'Oswald', sans-serif;
 }
-}
-// p {
-//   color: #bf1650;
-//   &::before {
-//     display: inline;
-//     content: "⚠ ";
-//   }
-// }
-
-// input {
-//   display: block;
-//   box-sizing: border-box;
-//   width: 100%;
-//   border-radius: $form-input-radius;
-//   border: $form-input-border;
-//   padding: $form-padding;
-//   margin-bottom: 10px;
-//   font-size: $form-input-font-size;
-// }
-
-//  .btn-custom[type="submit"]{
-//     max-width: $form-max-width;
-//     @media screen {
-//       @media (max-width: 768px) {
-//         max-width: $form-max-width-mobile;
-//       }
-//     }
-
-//  }
-// input[type="submit"] {
-//   background: $form-button-background;
-//   color: $form-button-color;
-//   text-transform: $form-button-text-transform;
-//   border: $form-button-border;
-//   margin-top: $form-button-margin-top;
-//   padding: $form-button-padding;
-//   font-size: $form-button-font-size;
-//   font-weight: $form-button-font-weight;
-//   letter-spacing: $form-button-letter-spacing;
-//   &:hover {
-//     background: $form-button-hover-background;
-//   }
-//   &:active,
-//   &:active {
-//     transition: $form-button-active-transition;
-//     transform: $form-button-active-transform;
-//     border: $form-button-active-border;
-//     opacity: $form-button-active-opacity;
-//   }
-// }
-
-// input:disabled {
-//   opacity: $form-button-disabled-opacity;
-// }
-
-// button[type="button"] {
-//   display: block;
-//   appearance: none;
-//   color: white;
-//   border: none;
-//   text-transform: uppercase;
-//   padding: 10px 20px;
-//   border-radius: 1rem;
-// }
-
-// hr {
-//   margin-top: 30
-// }

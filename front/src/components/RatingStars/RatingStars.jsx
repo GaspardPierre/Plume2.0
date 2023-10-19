@@ -8,6 +8,7 @@ export default function RatingStars({ poemId }) {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.member.id);
   const id = poemId;
+
   const averages = useSelector((state) => state.average.averages);
 
   // calc average
@@ -18,6 +19,7 @@ export default function RatingStars({ poemId }) {
     poemAverage.length > 0
       ? Math.round((total / poemAverage.length) * 100) / 100
       : 0;
+ 
   const [rating, setRating] = useState(average);
   const [displayedAverage, setDisplayedAverage] = useState(average);
 
@@ -75,7 +77,7 @@ export default function RatingStars({ poemId }) {
     }
   };
   return (
-    <div className="flex-column ">
+    <div className="flex-column  ">
     
     <ReactStars
         key={average} 
@@ -94,7 +96,7 @@ export default function RatingStars({ poemId }) {
         onMouseLeave={handleMouseLeave}
       />
       <div >
-        <p>Note du poème : {average}</p>
+        <p className="text-muted">Note  : {average}</p>
       </div>
    
     </div>

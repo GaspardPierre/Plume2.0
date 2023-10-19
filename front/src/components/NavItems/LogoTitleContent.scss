@@ -1,0 +1,12 @@
+.logo-container{
+    width:30%;
+    @media screen and (min-width: 992px) {
+        width: 18%;
+        
+    }
+}
+.logo{
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+}

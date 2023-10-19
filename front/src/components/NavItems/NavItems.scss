@@ -1,0 +1,10 @@
+.border-small{
+    border: none;
+}
+
+.nav-items {
+    width: 100%;
+    @media (max-width: 991px) {
+      display: none;
+    }
+  }

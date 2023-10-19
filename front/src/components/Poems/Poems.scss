@@ -1,0 +1,111 @@
+.carrousel-custom{
+    width: 50%;
+    border-bottom: 4px solid #000;
+    @media screen and (max-width: 992px) {
+        width: 100%;
+        height:80%;
+
+    }
+}
+
+
+  .center-caption {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @media screen and (max-width: 768px) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+        
+    }
+  
+    .excerpt-section {
+   
+        display: flex;
+    flex-direction: column;
+    justify-content: center;  // Centrer verticalement
+    align-items: center; 
+    margin-bottom: 4rem;
+    width: 100%;
+    height: 100%;
+     
+  
+    // Center the content
+        z-index: 1000;  
+    
+        h3, p {
+            display: block;  
+        }
+    
+        .poem-excerpt {
+            display: block;  
+        }
+        
+        @media screen and (max-width :576px) {
+            margin-top: 0;
+         
+            .poem-excerpt {
+                display: none; 
+            }
+        }
+     
+    }
+   
+      
+
+
+  .font-excerpt-md{
+    @media screen and (max-width: 992px) {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.5rem;
+    }
+   
+  }
+  .font-title-md{
+    @media screen and (max-width: 992px) {
+        font-size: 1.6rem !important;
+        margin:0;
+    }
+    
+  }
+.read-more-section{
+   width: 100%; 
+    position: absolute;
+    top: 0;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    @media screen and (max-width: 768px) {
+        top: 80%;
+        left: 90%;
+        transform: translate(-50%, -50%);
+    }
+    
+}
+.title-md{
+    margin-top: 2rem;
+    @media screen and (max-width: 992px) {
+        font-size: 2.65rem !important;
+        margin-bottom: 2rem!important;
+        font-weight: 700!important;
+    }
+        
+    }
+    .carrousel-image {
+        @media screen and (max-width: 768px) {
+            min-height: 500px;
+        }
+      
+      }
+      .poems-container{
+        background-size: cover;  
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  padding: 2rem;
+  min-height: 66vh;
+  backdrop-filter: blur(5px); 
+
+      }

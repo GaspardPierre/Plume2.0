@@ -1,47 +1,36 @@
 import React, { useState } from 'react';
-import { MDBInput, MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import './CommentForm.scss';
+import logo from'../../assets/logo.png';
 
-export default function CommentForm({ poem, onAddComment }) {
-  const [comment, setComment] = useState('');
+export default function CommentForm({ poem, onAddComment, comments }) {
+    const [comment, setComment] = useState('');
 
-  // Remove html from the comments 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (comment.trim()) {
+            onAddComment({ comment: comment.trim(), poemId: poem.id });
+            setComment('');
+        }
+    };
+   
 
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (comment.trim()) {
-      onAddComment({ comment: comment.trim(), poemId: poem.id });
-      setComment('');
-    }
-  };
-
-
-
-  return (
-    <MDBCard className="mt-3">
-      <MDBCardBody>
-        <form onSubmit={handleSubmit}>
-        <ReactQuill
-          label="Votre commentaire"
-         theme="snow"
-        value={comment}
-        onChange={(content) => setComment(content)}
-        className='w-100 w-md-75 w-lg-75'
-        />
+    return (
+        <> 
+      
+        <h5 className="card-title text-center py-5   text-uppercase">Laisser un commentaire</h5>
+       
+          <p className='text-center border-bottom border-2 pb-2 b mb-4 text-capitalize'> commentaires ({comments.length})</p>
+     
+          <textarea 
+                className="form-control  w-100 comment-input mx-auto m border-0 " 
+                value={comment} 
+                onChange={(e) => setComment(e.target.value)} 
+                placeholder="Votre commentaire..."
+            ></textarea>
+            <button className="btn btn-poem text-capitalize my-2" onClick={handleSubmit}> poster</button>
+        
           
-          <div className="d-flex justify-content-center mt-3">
-            <button type="submit" className="btn btn-primary">
-              Poster le commentaire
-            </button>
-          </div>
-        </form>
-        <div className="d-flex justify-content-center mt-3">
-    
-        </div>
-      </MDBCardBody>
-    </MDBCard>
-  );
+        </>
+    );
 }

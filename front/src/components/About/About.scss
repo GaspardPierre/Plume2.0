@@ -1,3 +1,16 @@
-.custom {
-    background-image: url('../../assets/fond_plume.png');
+.rounded-corners{
+    border-radius: 15px;
+
 }
+
+.shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .bio-text {
+    line-height: 1.6;
+    text-align: justify;
+  }
+  .citation{
+    white-space: pre-wrap;
+  }

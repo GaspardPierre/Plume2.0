@@ -1,17 +1,14 @@
-
-
-.content {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 100vh;
-  background-size: 100% auto;
-  background-position: center;
-  background-repeat: repeat;
-  background-attachment: fixed;
-  margin: 0;
-  padding: 0;
-  @media screen and (max-width: 1024x) {
-    background-repeat: no-repeat;
+.d-flex.flex-column {
+    min-height: 64vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+   
   }
-
-}
+  .sticky-top {
+    z-index: 1000; // Utilisez une valeur élevée pour vous assurer qu'il est au-dessus des autres éléments
+    background-color:#fcf9f9; // Ou toute autre couleur opaque
+  }
+  .custom{
+    height: 100%;
+  }

@@ -3,6 +3,7 @@ import { set, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../reducers/member";
+
 import "./Login.scss";
 
 
@@ -27,11 +28,14 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       const response = await dispatch(login(data));
-      console.log(`response.payload.role: ${JSON.stringify(response.payload)}`);
 
-      // Vérifier si le rôle existe
+
+      // Vérify if the user is admin or not
       if (response.payload && response.payload.role) {
-        navigate("/");
+        // if (response.payload.role === "admin") {
+ 
+          navigate("/");
+        // }
       } else {
         setErrorMessage("Erreur d'email ou de mot de passe");
         reset();
@@ -48,12 +52,13 @@ export default function Login() {
     
 
   
-      <h1 className="text-center mb-5">Connexion</h1>
-   
-      <div className="d-flex  align-items-center justify-content-center vh-80 ">
+     
 
-        <form onSubmit={handleSubmit(onSubmit)} className="w-100 mb-5 ">
-          <div className="mb-3">
+      <div className="d-flex  align-items-center w-100  ">
+       
+       <form onSubmit={handleSubmit(onSubmit)} className="w-100 text-center  ">
+       
+        <div className="my-5 py-1">
             <input
               name="email"
               type="email"
@@ -62,7 +67,7 @@ export default function Login() {
                 required: true,
                 pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
               })}
-              className="form-control "
+              className="form-control text-center mx-auto border-top-0 border-end-0 border-start-0 border-bottom-1 md-font line "
               placeholder="Email"
               onChange={handleInputChange}
             />
@@ -73,7 +78,7 @@ export default function Login() {
             )}
           </div>
 
-          <div className="mb-3 ">
+          <div className="my-5 ">
             <input
               name="password"
               type="password"
@@ -83,7 +88,7 @@ export default function Login() {
                 minLength: 8,
                 pattern: /^(?=.*\d).{8,}$/,
               })}
-              className="form-control "
+              className="form-control text-center mx-auto border-top-0 border-end-0 border-start-0 border-bottom-1 md-font line "
               placeholder="Mot de passe"
           
             />
@@ -103,7 +108,7 @@ export default function Login() {
             )}
           </div>
 
-          <div className="mb-3">
+          <div className="my-5 py-1">
             <input
               name="confirmpassword"
               type="password"
@@ -113,24 +118,25 @@ export default function Login() {
                 validate: (value) =>
                   value === document.getElementById("password").value,
               })}
-              className="form-control "
+              className="form-control text-center mx-auto border-top-0 border-end-1 border-start-0 border-bottom-1 md-font line border-color"
               placeholder="Confirmation du mot de passe"
-            
+             
             />
-            {errors.confmdp && errors.confmdp.type === "required" && (
-              <p className="error">
-                La confirmation du mot de passe est requise.
-              </p>
-            )}
-            {errors.confmdp && errors.confmdp.type === "validate" && (
-              <p className="error">
-                Les mots de passe doivent être identiques.
-              </p>
-            )}
-            {errorMessage && <p className="error">{errorMessage}</p>}
+             {errors.confmdp && errors.confmdp.type === "required" && (
+                <p className="error">
+                  La confirmation du mot de passe est requise.
+                </p>
+              )}
+              {errors.confmdp && errors.confmdp.type === "validate" && (
+                <p className="error">
+                  Les mots de passe doivent être identiques.
+                </p>
+              )}
+              {errorMessage && <p className="error">{errorMessage}</p>}
+           
           </div>
 
-          <button type="submit" className="submit ">
+          <button type="submit" className="btn btn-submit rounded bg-third color-second font-custom ">
             Envoyer
           </button>
         </form>

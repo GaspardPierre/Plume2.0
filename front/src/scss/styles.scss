@@ -5,44 +5,9 @@ a {
   text-decoration: none;
   color: #333333;
 }
-.container-fluid-custom {
-  display: flex;
-  align-items: center;
-  width: 60%;
-  padding: 1.5rem;
-}
-
-.text-center {
-  margin-top: 2.5rem;
-}
 
 
-.card {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  padding: 0;
-  // min-width: 300px;
 
-  font-family: "Dancing Script", cursive;
- 
-}
-@media (min-width: 1200px) {
-  .w-80-lg {
-    width: 50% !important;
-    margin: 0 auto; 
-  
-  }
-}
-
-  @media (max-width:768px){
-    .main-card{
-
-    
-    margin: 1rem;
-  
-  }
-}
-  
 
 
 .btn-nav{
@@ -84,52 +49,195 @@ margin: 1rem;
   background-color: $primary-hoover;
   border-color: $primary-hoover;
 }
-.ListGroup .Item:hover {
-  background-color: blue($color: #2c95be);
-  width: 90%;
-}
-.btn-custom {
 
-  display: flex;
-  justify-content: space-around;
-  font-family: "Oswald", sans-serif;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-size: 1.1em;
-  padding: 1rem; 
-  margin: 2rem;
-  background-color: $primary-color;
-  border-color: $primary-color;
-  border-color: black;
-  border-radius: 0.8rem;
-  text-align: center;
-  text-decoration: none;
-  color: whitesmoke;
-  opacity: 0.8;
 
-  &:visited {
-    text-decoration: none;
-  }
 
-  &:hover {
-    cursor: pointer;
-    background-color: #1F4E70;
-  }
-
-  &:focus {
-    border-color: black;
-  }
-
-  @media screen and (max-width: 576px) {
-    width: 50% !important; 
-  }
-
-}
+ 
 .error {
   color: rgb(228, 5, 5);
 }
-.text-center {
-  font-size: 3rem;
-  font-family: "Dancing Script", cursive;
+.text-custom {
+  text-align: left !important;        
+ 
+}
+.font-nav{
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem !important;
+  @media (min-width: 768px) and (max-width: 1044px) {
+    font-size: 0.8rem !important;
+    
+  }
+    
+  }
+  .font-custom {
+    font-family: 'Inter', sans-serif;
+
+  }
+
+
+.color-four{
+  color: $bg-four !important;
 }
 
+
+.bg-custom {
+  background-color: $custom-color !important;
+}
+.bg-custom-second{
+  background-color: $bg-second !important;
+
+}
+.color-second{
+  color : $bg-second !important;
+}
+.third{
+  
+  border-top: 0.2rem solid $bg-third !important;
+  color: $bg-third !important;
+  width: 8%;
+  margin-left: 5rem;
+  @media screen and (max-width: 575px) {
+    width: 10%;
+    margin-left: 4rem;
+  }
+  @media screen and (max-width: 992px) {
+    width: 10%;
+    margin-left: 4rem;
+  }
+    
+  }
+.form-control{
+  width: 50% !important;
+  @media screen and (max-width: 992px) {
+    font-size: $font-md !important;
+    width: 100% !important;
+   
+  }
+  &:focus {
+    border-color: $bg-third !important;
+    border : none !important;
+
+
+}
+}
+
+  
+  .btn-submit{
+    width: 25%;
+    @media screen and (max-width: 992px) {
+      width: 75%;
+    }
+      
+    }
+
+  
+ 
+.bg-custom{
+  background-color: $bg-first!important;
+}
+.bg-third{
+  background-color: $bg-third !important;
+}
+.bg-four{
+  background-color: $bg-four !important;
+}
+.second{
+  color : $bg-second !important;
+}
+.nav-item-hover {
+  
+  padding: 0.3rem;
+ transition : background-color 0.4s ease-in-out;
+ border-radius: 0.5rem 0 0 0.5rem;
+
+  &:hover {
+    background-color: $hover-third !important;
+    cursor: pointer;
+    box-shadow: 0 0 0.5rem 0.2rem $hover-third;
+    border-radius: 0.5rem 0 0 0.5rem;
+    padding: 0.3rem;
+   
+   
+  }
+ 
+};
+
+.cursor-link{
+  cursor: pointer;
+  text-decoration: none;
+}
+  
+.ms{
+  margin: $margin-small !important;
+}
+.roundy{
+  border-radius: $border-roundy !important;
+}
+.font-color {
+  color: $bg-second !important;
+}
+.font-read{
+  color : $bg-third !important;
+}
+bg-four{
+  background-color: $bg-four !important;
+}
+.line
+{
+  line-height: $line !important;
+  letter-spacing: 0.1rem !important;
+}
+.offcanvas{
+  width:50% !important;
+  opacity: 0.9;
+  height: 100%;
+ 
+}
+.form-control{
+
+ 
+ 
+  @media screen and (max-width: 992px) {
+    width: 100% !important;
+    margin: 0  !important;  
+ 
+  }
+    
+  }
+.carousel-control-prev-icon{
+  z-index: 2000;
+}
+.carousel-control-prev{
+  z-index: 2000;
+}
+.carousel-indicators{
+  z-index:2000
+}
+
+.card{
+width: 80%;
+  margin:0 auto;
+@media screen and (max-width: 1024px) {
+  width: 100%;
+  margin:0 auto;
+}
+  
+}
+
+// Class added to the badge component ecrase the bootstrap class
+
+.badge.bg-primary {
+  background-color: $bg-four !important;
+padding: 0.3rem;
+}
+
+.b-color{
+  border-color: $custom-color !important;
+}
+color-third{
+  color: $bg-third !important;
+}
+.card{
+  border: none !important;
+box-shadow: none;
+}

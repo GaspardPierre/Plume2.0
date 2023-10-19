@@ -6,6 +6,7 @@ import { addMember } from "../../reducers/member";
 import "./Signin.scss";
 
 
+
 export default function Signin() {
   const {
     register,
@@ -38,34 +39,37 @@ export default function Signin() {
   
 
   return (
+    
     <>
-      <h1 className="text-center mb-8">Inscription</h1>
-      <div className="d-flex  align-items-start justify-content-center vh-50 ">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-50 ">
-          <div className="mb-3 ">
+   
+     
+      <div className="d-flex  align-items-center justify-content-center   w-100 ">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-100 text-center  ">
+  
+          <div className="my-5 py-1 ">
             <input
             
               name="pseudo"
               type="text"
               id="pseudo"
               {...register("pseudo", { required: true })}
-              className="form-control btn-custom"
+              className="form-control  text-center mx-auto border-top-0 border-end-1 border-start-0 border-bottom-1 md-font line"
               placeholder="Pseudo"
               onChange={handleInputChange}
             />
             {errors.pseudo && <p className="error">Le pseudo est requis.</p>}
           </div>
 
-          <div className="mb-3">
+          <div className="my-5 py-1">
             <input
               name="email"
               type="email"
               id="email"
               {...register("email", {
                 required: true,
-                pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,// Regex for email
               })}
-              className="form-control btn-custom"
+              className="form-control text-center mx-auto border-top-0 border-end-1 border-start-0 border-bottom-1 line"
               placeholder="Email"
               onChange={handleInputChange}
             />
@@ -76,7 +80,7 @@ export default function Signin() {
             )}
           </div>
 
-          <div className="mb-3 ">
+          <div className="my-5 py-1 ">
             <input
               name="password"
               type="password"
@@ -86,7 +90,7 @@ export default function Signin() {
                 minLength: 8,
                 pattern: /^(?=.*\d).{8,}$/,
               })}
-              className="form-control btn-custom"
+              className=" form-control  text-center mx-auto border-top-0 border-end-1 border-start-0 border-bottom-1 line  "
               placeholder="Mot de passe"
            
             />
@@ -105,7 +109,7 @@ export default function Signin() {
               </p>
             )}
           </div>
-          <div className="mb-3">
+          <div className="my-5 py-1">
             <input
               name="confirmpassword"
               type="password"
@@ -115,7 +119,7 @@ export default function Signin() {
                 validate: (value) =>
                   value === document.getElementById("password").value,
               })}
-              className="form-control btn-custom"
+              className="form-control  text-center mx-auto border-top-0 border-end-1 border-start-0 border-bottom-1 line"
               placeholder="Confirmation du mot de passe"
             />
             {errors.confmdp && errors.confmdp.type === "required" && (
@@ -130,7 +134,7 @@ export default function Signin() {
             )}
           </div>
 
-          <button type="submit" className="btn-custom submit ">
+          <button type="submit" className="btn btn-submit rounded mt-3 bg-third color-second font-custom ">
             Envoyer
           </button>
         </form>

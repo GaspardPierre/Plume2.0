@@ -1,92 +1,108 @@
-$primary-color: #3f51b5;
-$secondary-color: #f50057;
-$background-color: #fafafa;
-
-.container-fluid-custom {
+.row {
   display: flex;
-  justify-content: center;
+ flex-direction: row; // Empêche les éléments de passer à la ligne
+}
+.poem-container {
+
+  background-size: cover;  
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  padding: 2rem;
+  min-height: 66vh;
+  backdrop-filter: blur(50px); 
 }
 
-.card-container {
-  display: flex;
-  justify-content: center;
+.poem-section { 
+  
+
+  
+
+  backdrop-filter: blur(5px);
+
+}
+.poem-card, .comments-card {
+  border: none;/* ajout de la bordure */
+  border-radius: 15px;
+  
+ 
 }
 
-.main-card {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  padding-left: 1rem;
+.card-title {
+  position: relative;
+  &:after {
+ 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+   border-bottom: 1px solid #6182BC; ;
+}
 }
 
-.work-container {
-  display: flex;
-  justify-content: center;
+.author-name {
+  font-style: italic;
+  color:#fcf9f9;
+  
 }
 
 .poem-content {
+  font-family: 'Georgia', serif;
+  line-height: 1.6;
+  font-size: 1.2rem;
+  color: #3e2723;
   white-space: pre-wrap;
-  width: 80%;
-  margin: 1.5rem;
-  padding: 1.5rem;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
 }
 
-@media screen and (max-width: 768px) {
-  .poem-content {
-    width: 60%;
-    margin: 4rem;
-    padding: 0;
+.comments-section {
+  
+  padding: 2rem;
+  width:100%;
+  backdrop-filter: blur(50px);
+  background-color: #B39A79;
+  border-radius: 15px;
+  opacity: 0.6;
+ 
+
+ 
+
+
+  @media screen and (max-width: 992px) {
+    border-left: none;
+    border-top:  1px solid black; 
   }
-
-  .main-title {
-    text-align: center;
-    margin-top: 3rem;
+    
   }
+ .comments-container{
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
 
-  .main-container {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+ }
 
-
-
-  .work-container {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  .poem-content {
-    text-align: center;
-    font-family: "Dancing Script", cursive;
-    font-size: 1.2rem;
-  }
-
-  .comment-container {
-    flex-grow: 2;
-    width: 100%;
-    background-color: #dcdde1;
-  }
-
-  .comment-rating-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.btn_custom{
+  background-color: #f2f2f2;
+  color: #333;
+  
+  color: white;
+  border: none;
+  border-radius: 10px;
+  transition: 0.3s;
+  padding: 0.5rem 1rem;
+  box-shadow: 1px 1px 5px rgba(97, 130, 188, 0.05);
 }
 
-@media (min-width: 992px) {
-  .large-font {
-    font-size: 1.6rem;
-  }
+.error-div{
+  min-height: 71vh;
 }
 
-@media (max-width: 767px) {
-  .mobile-font {
-    font-size: 1.5rem;
-  }
+.large-icon {
+  font-size: 2em !important;
+  color: #6182BC;
 }
+
+.rating-container{
+  @media screen and (max-width: 576px) {
+flex-direction: column;
+  }
+    
+  }

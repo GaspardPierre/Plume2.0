@@ -1,31 +1,87 @@
-.header-container {
-  align-items: center;
-  padding: 0.5rem 2rem;
-  margin-bottom: 3rem;
-  @media (max-width: 767px) {
-    padding: 0.5rem 1rem;
-    margin-bottom: 2rem;
+.banniere-container{
+  width: 100%;
+  min-height: 675.36px;
+  @media screen and (max-width: 768px) {
+    min-height: 600px;
   }
-}
-.title-logo_container {
-  display: flex;
-  justify-content: center;
-}
-
-.logo {
-  display: flex;
-  justify-content: flex-start;
-  width: 30%;
-  color: black;
-  .plume {
-    width: 100%;
-  }
-}
-
-.btn-custom {
-  width: 30%;
- 
     
   }
 
 
+
+.separator-content{
+  display: flex;
+  align-items: end;
+  height: 50vh;
+  width: 25%;
+  @media screen and (max-width: 992px) {
+      display: none;
+     }
+ 
+
+}
+.separator-container{
+  height:100%;
+ 
+  width: 20%;
+  
+
+ border-radius: 0 1.5rem 1.5rem 0;
+ @media screen and (max-width: 992px) {
+  display: none;
+ }
+
+
+
+}
+
+
+.img-container{
+   //
+  width: 80%;
+  margin:0.5rem 2rem 0.5rem 0.5rem;
+ 
+
+ 
+  height: 50vh;
+  img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border: 1px solid #ccc;
+      
+    }
+
+}
+.section-poem{
+  top: 0;
+  height: 100%;
+  left: 48%;
+  margin-left: 2rem;
+  width: 50%;
+  @media screen and (max-width: 992px) {
+      top : 50%;
+      left: 0%;
+      height: 50%;
+      width: 100%;
+      margin-left:0;
+      font-size: 0.8rem;
+  }
+  @media screen and (max-width: 575px) {
+      font-size: 0.7rem;
+ 
+     
+  }
+
+}
+.first-poem {
+  font-size: 20px;
+  font-weight: bold;
+  @media screen and (max-width: 992px) {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 1rem;
+  }
+      
+  }
+  

@@ -1,0 +1,22 @@
+
+.w-head-desktop{
+    
+    height: 12vh;
+     width:100%;
+     @media screen and (max-width: 992px) {
+         height: 12vh;
+     
+       }
+       
+     }
+
+     .top-header{
+        width: 80%;
+        @media screen and (max-width: 992px) {
+            width: 100%;
+            
+          }
+          margin: 0 0.5rem 0 0.5rem;
+            
+        }
+     
