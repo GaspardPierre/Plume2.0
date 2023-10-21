@@ -48,6 +48,26 @@ const labelController = {
 
         res.json(labelDb);
     },
+    async addLabelToWork(req, res) {
+        const workId = req.params.workId;
+        const labelId = req.body.labelId;
+      
+        try {
+          const work = await prisma.work.update({
+            where: { id: workId },
+            data: {
+              labels: {
+                connect: { id: labelId }
+              }
+            }
+          });
+          res.status(200).json(work);
+        } catch (error) {
+          console.log(error);
+          res.status(500).json("Erreur lors de l'ajout du label au work");
+        }
+      },
+      
     async deleteLabel(req,res){
 
         const result = await labelModel.delete(req.params.id);
