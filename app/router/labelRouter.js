@@ -6,6 +6,7 @@ const security = require('../service/security');
 
 router.get('/', labelController.getAllLabels);
 router.post('/addLabel', security.checkAdmin ,labelController.addLabel);
+router.post('/addLabelToWork/:workId', security.checkAdmin, labelController.addLabelToWork);
 router.get('/:id', labelController.getLabel);
 router.patch('/:id', security.checkAdmin, labelController.modifyLabel);
 
