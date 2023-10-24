@@ -34,6 +34,7 @@ model Work {
   labels     Label[]  @relation("WorkLabel")
   notes      Note[]   @relation("WorkToNote")
   comments   Comment[] @relation("WorkToComment")
+   workLabels WorkLabel[]
   create_at  DateTime @default(now())
   update_at  DateTime @default(now())
 }
@@ -42,10 +43,19 @@ model Label {
   id         Int      @id @default(autoincrement())
   tag        String
   works      Work[]   @relation("WorkLabel")
+   workLabels WorkLabel[]
   create_at  DateTime @default(now())
   update_at  DateTime @default(now())
 }
 
+model WorkLabel {
+  workId  Int
+  labelId Int
+  work    Work   @relation(fields: [workId], references: [id])
+  label   Label  @relation(fields: [labelId], references: [id])
+
+  @@id([workId, labelId])
+}
 
 model Note {
   id         Int      @id @default(autoincrement())

@@ -74,6 +74,8 @@ const security = require('../service/security.js');
 router.get('/', workController.getAllWorks);
 
 router.get('/:id', workController.getWork);
+router.get('/byLabel/:labelId', workController.getWorksByLabel);
+
 
 router.post('/addWork', security.checkAdmin, workController.addWork);
 

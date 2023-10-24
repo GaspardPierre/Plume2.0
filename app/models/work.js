@@ -17,6 +17,23 @@ const workModel = {
             
         }
     },
+    async findByLabelId(labelId) {
+        try {
+          const works = await prisma.work.findMany({
+            where: {
+              labels: {
+                some: {
+                  id: parseInt(labelId, 10)
+                }
+              }
+            }
+          });
+          return works;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    ,  
 
     async findAll() {
         try {
@@ -40,6 +57,9 @@ const workModel = {
                     author : work.author,
                     title: work.title,
                     member_id: work.member_id,
+                    labels: {
+                        set: labelIds.map(id => ({ id }))
+                    }
                 },
             });
             return newWork;
@@ -71,7 +91,7 @@ async findById(id) {
     
 },
 
-async update(id, updatedWork) {
+async update(id, updatedWork, labelIds) {
     if (!id || Object.keys(updatedWork).length === 0) {
         throw new Error('Invalid parameters');
     }
@@ -79,15 +99,19 @@ async update(id, updatedWork) {
     try {
         const updatedWorkDb = await prisma.work.update({
             where: { id: parseInt(id) },
-            data: updatedWork,
+            data: {
+                ...updatedWork,
+                labels: {
+                    set: labelIds.map(id => ({ id }))
+                }
+            },
         });
         return updatedWorkDb;
     } catch (error) {
         console.log(error);
         throw error;
     }
-}
-,
+},
 
 async delete(id) {
 

@@ -11,11 +11,13 @@ const labelModel = {
       console.log(error);
     }
   },
+  
 
   async insert(label) {
     try {
       const newLabel = await prisma.label.create({
         data: {
+          id: label.id,
           tag: label.tag,
         },
       });
