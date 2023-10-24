@@ -1,15 +1,30 @@
-import React from 'react';
-import { List, Datagrid, TextField, EditButton, DeleteButton, Edit, SimpleForm, TextInput, NumberInput, Create , required } from 'react-admin';
+import React , {useEffect}from 'react';
+import {  SelectArrayInput,Filter, List, Datagrid, TextField, EditButton, DeleteButton, Edit, SimpleForm, TextInput, NumberInput, Create , required } from 'react-admin';
 import TextareaAutosize from 'react-textarea-autosize';
-// WorkList Component
 
+
+
+//function to validate the input : number
+const validateNumber = value => {
+    const pattern = /^[0-9]+$/;
+    if (!pattern.test(value)) {
+        return 'Le tag doit être un nombre';
+    }
+    return undefined;
+};
+
+// WorkList Component
+const WorkFilter = (props) => (
+    <Filter {...props}>
+        <TextInput label="Entrez un numéro de catégories" source="labelId"  validate={validateNumber} />
+    </Filter>
+);
 
 export const WorkList = (props) => {
 
-    console.log("WorkList est monté", props);
 
     return (
-        <List {...props}>
+        <List {...props} filters={<WorkFilter />}>
             <Datagrid>
                 <TextField source='id' />
                 <TextField source='title' />
@@ -22,7 +37,11 @@ export const WorkList = (props) => {
 
 // WorkEdit Component
 export const WorkEdit = (props) => {
-    console.log(props)
+
+    useEffect(() => {
+        console.log("Props actuelles :", props);
+      }, [props]);
+  
     return (
         <Edit title='Edit Work' {...props}>
             <SimpleForm>
@@ -30,6 +49,16 @@ export const WorkEdit = (props) => {
                 <TextInput source='title' validate={[required]} />
                 <TextInput source='author' validate={[required]} />
                 <TextInput source='content' validate={[required]} />
+                <div className="col-md-6">
+                            <SelectArrayInput label="Labels" source="labelIds" choices={[
+                                { id: '1', name: 'Nature' },
+                                { id: '2', name: 'Romantique' },
+                                { id: '3', name: 'Engagés' },
+                                { id: '4', name: 'Dieu' },
+                                { id: '5', name: 'Dialogues Poétiques' },
+                           
+                            ]} />
+                        </div>
         
             </SimpleForm>
         </Edit>
@@ -58,6 +87,16 @@ export const WorkCreate = (props) => {
                     <div className="row">
                         <div className="col-md-6">
                             <NumberInput source='member_id' validate={[required()]}  className="form-control" />
+                        </div>
+                        <div className="col-md-6">
+                            <SelectArrayInput label="Labels" source="labelIds" choices={[
+                                { id: '1', name: 'Nature' },
+                                { id: '2', name: 'Romantique' },
+                                { id: '3', name: 'Engagés' },
+                                { id: '4', name: 'Dieu' },
+                                { id: '5', name: 'Dialogues Poétiques' },
+                                // Add more choices here
+                            ]} />
                         </div>
                     </div>
                 </div>

@@ -141,6 +141,9 @@ margin: 1rem;
 .bg-four{
   background-color: $bg-four !important;
 }
+.bg-structure{
+  background-color: $bg-five;
+}
 .second{
   color : $bg-second !important;
 }
@@ -174,7 +177,7 @@ margin: 1rem;
   border-radius: $border-roundy !important;
 }
 .font-color {
-  color: $bg-second !important;
+  color: $custom-color !important;
 }
 .font-read{
   color : $bg-third !important;

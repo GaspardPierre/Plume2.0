@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <>
-      <div className="d-flex justify-content-end sticky-top pb-2">
+      <div className="d-flex justify-content-end sticky-top pb-2 structure">
         <Header />
       </div>
       <div className="d-flex flex-column  bg-custom-second custom align-items-center">

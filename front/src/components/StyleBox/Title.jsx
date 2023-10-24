@@ -35,7 +35,7 @@ export default function Title() {
 
 
 <h1
- className=' font-title text-center font-custom fw-bold mt-1 color-four line border-title' >
+ className=' display-4é font-title text-center font-custom fw-bold mt-1 color-four line border-title' >
     {title}</h1>
  
 

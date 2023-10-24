@@ -9,11 +9,17 @@ const dataProvider = {
     try {
         if (resource === 'comment' && params.filter && params.filter.workId) {
             response = await api.get(`/${resource}/${params.filter.workId}`);
+        } 
+        else if (resource === 'work') {
+            if (params.filter && params.filter.labelId) {
+                response = await api.get(`/work/byLabel/${params.filter.labelId}`);
+            } else {
+                response = await api.get(`/${resource}`);
+            }
         } else {
             response = await api.get(`/${resource}`);
         }
         console.log("Data from API:", response.data); 
-     
         return { data: response.data, total: response.data.length };
     } catch (error) {
         console.error(`Erreur lors de la récupération des ${resource}:`, error);

@@ -8,23 +8,23 @@ export default function NavItems() {
     <>
       <Nav className="nav-items" activeKey="/home">
         <Nav.Item className='border-end nav-item-hover'>
-          <Link to="/signin" className='font-nav second cursor-link nav-link'>
-            <i className="fas fa-user-plus"></i> S'inscrire
+          <Link to="/signin" className='font-nav text-uppercase  second cursor-link nav-link'>
+            <i className="fas fa-user-plus mx-3"></i> S'inscrire
           </Link>
         </Nav.Item>
         <Nav.Item className='border-end nav-item-hover'>
-          <Link to="/login" className='font-nav second cursor-link nav-link'>
-            <i className="fas fa-sign-in-alt"></i> Se connecter
+          <Link to="/login" className='font-nav second text-uppercase  cursor-link nav-link'>
+            <i className="fas fa-sign-in-alt mx-3"></i> Se connecter
           </Link>
         </Nav.Item>
         <Nav.Item className='border-end nav-item-hover'>
-          <Link to="/about" className='font-nav second cursor-link nav-link'>
-            <i className="fas fa-info-circle"></i> A propos
+          <Link to="/about" className='font-nav second text-uppercase  cursor-link nav-link'>
+            <i className="fas fa-info-circle mx-3"></i> A propos
           </Link>
         </Nav.Item>
         <Nav.Item className='nav-item-hover'>
-          <Link to="/poems" className='font-nav second cursor-link nav-link'>
-            <i className="fas fa-feather-alt"></i> Poèmes
+          <Link to="/poems" className='font-nav second text-uppercase cursor-link nav-link'>
+            <i className="fas fa-feather-alt mx-3"></i> Poèmes
           </Link>
         </Nav.Item>
       </Nav>

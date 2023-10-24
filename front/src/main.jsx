@@ -16,6 +16,7 @@ import authProvider from './provider/authProvider';
 import { WorkList, WorkEdit, WorkCreate } from './Admin/Works/Work';
 import { CommentList, CommentEdit } from './Admin/Comments/Comment';
 import { MemberList, MemberEdit, MemberCreate } from './Admin/Members/Member';
+import { LabelList, LabelEdit, LabelCreate } from './Admin/Labels/Label';
 import './index.scss';
 
 
@@ -51,6 +52,7 @@ const AppLogic = () => {
             <Resource name="work" list={WorkList} edit={WorkEdit} create={WorkCreate} />
             <Resource name="comment" list={CommentList} edit={CommentEdit} />
             <Resource name="member" list={MemberList} edit={MemberEdit} create={MemberCreate} />
+            <Resource name="label" list={LabelList} edit={LabelEdit} create={LabelCreate} />
           </Admin>) :
           (
             <App />

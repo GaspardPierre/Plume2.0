@@ -25,6 +25,9 @@ const Dashboard = () => {
       <Link to="member"></Link>
       <Link to="member/create"></Link>
       <Link to="member/edit"></Link>
+      <Link to="label"></Link>
+      <Link to="label/create"></Link>
+      <Link to="label/edit"></Link>
    
     </div>
   );
