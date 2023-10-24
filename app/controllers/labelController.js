@@ -7,25 +7,26 @@ const labelController = {
         res.json(labels);
     },
     async addLabel(req,res){
+      try {
        
-       
-            const { content, media_id } = req.body;
+            const { tag} = req.body;
             console.log(req.body);
-            const label = await labelModel.findByContent(content);
-        console.log("Is findByContent problem ? ");
-            if(label) {
-                return res.status(401).json("Ce label est déjà présente en bdd");
-            // Code to add card to database using the destructured variables
           
-            //return res.status(500).json;
-            }
+    const existingLabel = await labelModel.findByTag(tag);
+    if (existingLabel) {
+      return res.status(401).json("Ce label est déjà présent en bdd");
+    }
         const newLabel = {
-            content : content,
-            media_id : media_id
+         
+           tag: tag,
             }
     //Finalement on l'envoi en base de données
     const labelDb = await labelModel.insert(newLabel);
     res.status(200).json(labelDb);
+  } catch (error) {
+    console.log("Erreur lors de l'ajout du label:", error);
+    res.status(500).json({ error: "Erreur interne du serveur" });
+  }
          
     
     },

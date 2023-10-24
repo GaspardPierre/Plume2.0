@@ -7,9 +7,23 @@ const workController = {
     console.log(req.session);
     return res.status(200).json(works);
   },
+  async getWorksByLabel(req, res) {
+    try {
+      const labelId = req.params.labelId;
+      const works = await workModel.findByLabelId(labelId);
+      if (!works || works.length === 0) {
+        return res.status(404).json({ message: 'No works found for this label' });
+      }
+      return res.status(200).json(works);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Server error' });
+    }
+  },
+  
   async addWork(req, res) {
-    const {title, author, content, note, member_id } = req.body;
-    console.log(req.body);
+    const {title, author, content, note, member_id, labelIds } = req.body;
+    console.log(labelIds);
     const work = await workModel.findByTitle(title);
     if (work) {
         console.log('Work trouvé par le titre:', work);
@@ -22,7 +36,10 @@ const workController = {
         author: author,
         title: title,
         note: note || undefined,
-        member_id: req.session.user.id
+        member_id: req.session.user.id,
+        labels: {
+          connect: labelIds.map(id => ({ id : parseInt(id,10) }))
+        }
       };
       const workDb = await workModel.insert(newWork);
       res.status(200).json(workDb);
@@ -48,22 +65,30 @@ const workController = {
   },
   
   async modifyWork(req, res) {
-    console.log("IL Y A UNE REQUETE PATCH");
+
     const work = req.body;
     const workId = req.params.id;
+    const { labelIds } = req.body; 
     if (isNaN(workId)) {
-        return res.status(400).json({ message: 'Invalid ID' });
+      return res.status(400).json({ message: 'Invalid ID' });
     }
-
+  
     try {
-        const updatedWork = await workModel.update(workId, work);
-        res.json(updatedWork);
+ 
+      const updatedWork = await workModel.update(workId, {
+        ...work,
+        labels: {
+          set: labelIds.map(id => ({ id })) // The 'set' operator in Prisma is used to set a new relation by replacing the old one.
+          // 'labelIds.map(id => ({ id }))' transforms an array of label IDs into an array of objects.
+        }
+      });
+      res.json(updatedWork);
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'Server error' });
+      console.log(error);
+      res.status(500).json({ message: 'Server error' });
     }
-}
-,
+  },
+  
 
 
   async deleteWork(req, res) {
