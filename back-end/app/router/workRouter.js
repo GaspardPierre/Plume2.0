@@ -76,10 +76,11 @@ router.get('/', workController.getAllWorks);
 router.get('/:id', workController.getWork);
 router.get('/byLabel/:labelId', workController.getWorksByLabel);
 
+router.patch('/:id', security.checkAdmin, workController.modifyWork);
 
 router.post('/addWork', security.checkAdmin, workController.addWork);
 
-router.patch('/:id', security.checkAdmin, workController.modifyWork);
+
 
 router.delete('/:id', security.checkAdmin, workController.deleteWork);
 

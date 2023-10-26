@@ -91,8 +91,11 @@ async findById(id) {
     
 },
 
-async update(id, updatedWork, labelIds) {
-    if (!id || Object.keys(updatedWork).length === 0) {
+async update(id, updatedWork ) {
+    const { labelIds, ...restOfUpdatedWork } = updatedWork; // Extract labelIds and the rest of updatedWork
+ 
+  
+    if (!id || Object.keys(restOfUpdatedWork).length === 0) {
         throw new Error('Invalid parameters');
     }
 
@@ -100,15 +103,17 @@ async update(id, updatedWork, labelIds) {
         const updatedWorkDb = await prisma.work.update({
             where: { id: parseInt(id) },
             data: {
-                ...updatedWork,
+                ...restOfUpdatedWork,
                 labels: {
-                    set: labelIds.map(id => ({ id }))
+                    set: labelIds ? labelIds.map(id => ({ id })) :[]
                 }
             },
         });
         return updatedWorkDb;
     } catch (error) {
         console.log(error);
+       
+
         throw error;
     }
 },

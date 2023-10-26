@@ -23,7 +23,7 @@ const workController = {
   
   async addWork(req, res) {
     const {title, author, content, note, member_id, labelIds } = req.body;
-    console.log(labelIds);
+    console.log("LABELSID",labelIds);
     const work = await workModel.findByTitle(title);
     if (work) {
         console.log('Work trouvé par le titre:', work);
@@ -69,6 +69,7 @@ const workController = {
     const work = req.body;
     const workId = req.params.id;
     const { labelIds } = req.body; 
+    console.log(req.body, labelIds,"Les works et les labels****")
     if (isNaN(workId)) {
       return res.status(400).json({ message: 'Invalid ID' });
     }

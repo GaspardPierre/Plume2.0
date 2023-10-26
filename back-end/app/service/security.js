@@ -3,6 +3,7 @@
 
 const security = {
     checkAdmin(req, res, next) {
+      console.log('REQ.SESSION',req.session);
         console.log('REQ.SESSION.USER.ROLE ',req.session.role);
     //   Si l'utilisateur n'et pas connecté => 401
         if (!req.session.user) {
