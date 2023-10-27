@@ -1,62 +1,25 @@
-import React, { useState, useEffect ,useMemo} from 'react'
-import './StyleBox.scss'
-import Footer from './Footer'
-import Title from './Title'
-import './Footer.scss'
+import React, { useState, useEffect, useMemo } from "react";
+import "./StyleBox.scss";
+import Footer from "./Footer";
 
-
-
-
-
+import "./Footer.scss";
+import Title from "./Title";
 
 export default function StyleBox({ children }) {
-
-
-
-
-
   return (
-    <> 
-
-
+    <>
+      <div className="d-flex flex-column  align-items-center w-100 ">
    
-<Title />
-
-
-<div className='d-flex flex-column  align-items-center w-100 '>
-
-
-          
-       
-       
-        <div className='main-section d-flex w-75  align-items-center my-3 '>
-       
-      
-           {children}
-
-       
+          <Title />
    
-    
-    
+
+        <div className="main-section d-flex w-75  align-items-center my-3 ">
+          {children}
         </div>
-
-        </div>
-        <div className=' w-100 m-0 f'>
-<Footer 
-    />  
-</div>
-      
-  
-
-   
-    
-   
-   
-      
-
-
-
+      </div>
+      <div className=" w-100 m-0 f">
+        <Footer />
+      </div>
     </>
-
-  )
+  );
 }

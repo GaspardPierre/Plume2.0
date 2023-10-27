@@ -11,6 +11,7 @@
           border-bottom: 1px solid #6182BC;
           &:hover {
             background-color: #fcf9f9;
+            cursor:pointer;
        
           }
         }
@@ -24,9 +25,13 @@ li.active{
    
       .categorie-container{
         list-style: none;
-        color :#4C4C4C
+        color :#4C4C4C;
+ 
+
+       
       }
       .categories-title{
+      
         @media screen and (max-width: 778px) {
       
           display: none;

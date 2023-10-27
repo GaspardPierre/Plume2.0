@@ -32,12 +32,17 @@ export default function Title() {
     const title = currentTitle(path);
 
   return (
+<div className='title-container'>
 
 
 <h1
- className=' display-4é font-title text-center font-custom fw-bold mt-1 color-four line border-title' >
+ className=' display-5 font-title text-center font-custom fw-bold mt-1 color-four line border-title' >
     {title}</h1>
+    </div>
  
+
+
+
 
 
        

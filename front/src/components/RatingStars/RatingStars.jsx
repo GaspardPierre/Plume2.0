@@ -1,14 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import store from "../../store/store";
 import ReactStars from "react-rating-stars-component";
 import { addAverage, fetchAverage } from "../../reducers/average";
+import { useMemberState } from "../../hooks/customHooks";
+
+import './RatingStars.scss';
 
 export default function RatingStars({ poemId }) {
+
+
+// WARNING MESSAGE
+  const [show, setShow] = useState(false); 
+  const target = useRef(null); 
+  const ratingChanged = (newRating) => {
+    if (role === null) {  
+      setShow(true);  
+      return;
+    }
+
+  //STORE
+
+  const role = useMemberState();
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.member.id);
   const id = poemId;
-
   const averages = useSelector((state) => state.average.averages);
 
   // calc average
@@ -77,7 +93,9 @@ export default function RatingStars({ poemId }) {
     }
   };
   return (
-    <div className="flex-column  ">
+    <div className="flex-column  stars-container ">
+         <div ref={target} onMouseEnter={() => setShow(false)} onMouseLeave={() => setShow(false)}>
+      
     
     <ReactStars
         key={average} 
@@ -91,14 +109,16 @@ export default function RatingStars({ poemId }) {
         transition
         fillColor="orange"
         emptyColor="yellow"
-        edit={!userHasAlreadyVoted && !isHovered}
+        edit={!userHasAlreadyVoted && !isHovered && role!==null}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />
+      </div>
       <div >
         <p className="text-muted">Note  : {average}</p>
       </div>
-   
+
     </div>
   );
+}
 }

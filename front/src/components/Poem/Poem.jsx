@@ -22,7 +22,7 @@ export default function Poem() {
     const poem = poems.find((p) => p.id === parseInt(id));
 
     if (!poem) {
-        return <div className="error-div">Poème introuvable</div>;
+        return <div className="error-div">Une erreur est survenue , merci de vous reconnecter</div>;
     }
 
     const averageByPoem = useSelector((state) => state.average.averageByPoem);
@@ -102,7 +102,7 @@ export default function Poem() {
                         <div className="card-body">
                             
           <p className='text-center border-bottom border-2 pb-2 b mb-4 text-capitalize'> commentaires ({comments.length})</p>
-                            { role === "admin" && (
+                            { role === "visiteur" && (
                         <CommentForm
                             onAddComment={handleAddComment}
                             poem={poem}

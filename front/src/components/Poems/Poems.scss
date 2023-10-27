@@ -11,6 +11,13 @@
     min-height: 45vh;
     backdrop-filter: blur(5px);
     background-image: linear-gradient(to right, #F0E4E4, #6182BC);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  
+    @media screen and (max-width: 778px) {
+      flex-direction: column;
+    }
 
 
 
@@ -49,10 +56,6 @@
 
 }
 
-.label-container {
-
-    top: 0;
-}
 
   }
   
@@ -60,7 +63,7 @@
 
 
   .label-container, .poem-list-container {
-    width: 60%; // Ajustez cette valeur en fonction de vos besoins
+    width: 48%; // Ajustez cette valeur en fonction de vos besoins
     display: flex;
     justify-content: center;
   
@@ -89,8 +92,12 @@
       padding: 10px;
  
       transition: background-color 0.4s ease, padding 0.3s ease, filter 0.3s ease;
+      :hover{
+        cursor:pointer;
+       }
       @media screen and (max-width: 778px) {
        padding:5px;
+     
       }
       span{
         border-bottom: 1px solid #6182BC;

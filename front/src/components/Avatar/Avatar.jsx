@@ -4,11 +4,7 @@ import './Avatar.scss'
 
 export default function Avatar({ pseudo }) {
   const [bgColor, setBgColor] = useState('#6182BC');
-  useEffect(() => {
-    setBgColor(stringToColor(pseudo)); // Mettre à jour la couleur lorsque le composant est monté
-  }, [pseudo]);
-
-
+ 
   //Function to hash a pseudo
 
   const stringToColor = (str) => {
@@ -20,6 +16,12 @@ export default function Avatar({ pseudo }) {
     const index = Math.abs(hash) % colorKeys.length; // get a value between 0 and colorKeys.length
     return cssColors[colorKeys[index]];
   };
+  useEffect(() => {
+    setBgColor(stringToColor(pseudo)); // Mettre à jour la couleur lorsque le composant est monté
+  }, [pseudo]);
+
+
+
 
   const cssColors = {
     aqua: "#00FFFF",

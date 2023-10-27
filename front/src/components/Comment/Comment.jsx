@@ -12,7 +12,7 @@ export default function Comment({ comment, onDeleteComment, pseudo, userId }) {
       <div className="avatar-container ">
         <Avatar pseudo={pseudo} />
         <div className="pseudo-container ">
-        <p className="small mb-0 ms-2 fw-bold">{pseudo}</p>
+        <p className="small-font mb-0 ms-2 fw-bold">{pseudo}</p>
         </div>
   
       </div>

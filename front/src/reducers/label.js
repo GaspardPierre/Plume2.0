@@ -35,10 +35,12 @@ const labelSlice = createSlice({
         builder
             .addCase(fetchLabels.pending, (state) => {
                 state.status = "loading";
+                state.error = null; 
             })
             .addCase(fetchLabels.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 state.labels = action.payload;
+                state.error = null; 
             })
             .addCase(fetchLabels.rejected, (state, action) => {
                 state.status = "failed";
@@ -47,10 +49,12 @@ const labelSlice = createSlice({
         builder
             .addCase(fetchWorksByLabel.pending, (state) => {
                 state.status = "loading";
+                state.error = null; 
             })
             .addCase(fetchWorksByLabel.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 state.works = action.payload;
+                state.error = null; 
             })
             .addCase(fetchWorksByLabel.rejected, (state, action) => {
                 state.status = "failed";

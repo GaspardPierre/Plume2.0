@@ -34,7 +34,8 @@ export const login = createAsyncThunk(
 );
 // LOGOUT ACTION
 export const logout = createAsyncThunk("logout", async () => {
-  return null;
+  const response = await api.post("/login/logout");
+  return response.data
 });
 
 

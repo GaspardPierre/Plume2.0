@@ -23,7 +23,7 @@ export default function Poems() {
   const [selectedWork, setSelectedWork] = useState(null);
 
   //PAGINATION
-  const poemsPerPage = 10;
+  const poemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
 
   const lastPoemIndex = currentPage * poemsPerPage;
@@ -63,14 +63,16 @@ export default function Poems() {
     content = (
       <>
       
-      <div className="container poems-container">
+      <div className="container poems-container ">
         <div className="label-container ">
           <LabelFilter setSelectedWork={setSelectedWork} />
          
         </div>
 <div className="poem-list ">
 {selectedWork && selectedWork.map((work) => (
-  <div className="poem-title" key={work.id}>
+  <div className="poem-title" 
+  key={work.id}
+  onClick={()=>handlePoemClick(work.id)}>
 <span>
 {work.title}
 </span>
@@ -88,7 +90,7 @@ export default function Poems() {
   return (
     <>
       <div
-        className="container d-flex poems-container"
+        className="container poems-container"
       >
         {content}
       </div>

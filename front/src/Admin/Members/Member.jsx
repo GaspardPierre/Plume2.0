@@ -1,4 +1,4 @@
-// Admin/Members/Member.jsx
+
 import { List, Datagrid, TextField, EditButton, DeleteButton,SimpleForm,Create, TextInput, Edit } from 'react-admin';
 // MemberList Component
 export const MemberList = (props) => {

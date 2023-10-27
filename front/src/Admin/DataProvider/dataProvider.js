@@ -47,8 +47,9 @@ const dataProvider = {
   },
   update: async (resource, params) => {
     try {
+      console.log(params.data, "***LES LABELS***")
       const response = await api.patch(`/${resource}/${params.id}`, params.data);
-      console.log( "PARAMS.ID", params.id)
+      
 
       return { data: response.data };
     } catch (error) {

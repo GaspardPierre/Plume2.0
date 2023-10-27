@@ -11,6 +11,7 @@ import Poems from '../Poems/Poems';
 import Poem from '../Poem/Poem';
 import About from '../About/About';
 import "./App.scss";
+import Title from "../StyleBox/Title";
 
 
 export default function App() {
@@ -31,10 +32,11 @@ export default function App() {
       <div className="d-flex justify-content-end sticky-top pb-2 structure">
         <Header />
       </div>
+
       <div className="d-flex flex-column  bg-custom-second custom align-items-center">
         <StyleBox >
         <Routes>
-          <Route path="/" element={<Home />} exact />
+          <Route path="/" element={<Home />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/login" element={<Login />} />
           <Route path="/poems" element={<Poems />} />

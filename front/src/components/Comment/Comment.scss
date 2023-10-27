@@ -44,10 +44,11 @@
   margin-right: 10px;
 }
 .pseudo-container{
-  width: 50px;
+  width: 60px;
   height:40px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 .mobile{
   @media screen and (max-width: 576px) {
@@ -56,3 +57,6 @@
    }
 
   }
+.small-font{
+  font-size: 0.56rem;
+}
