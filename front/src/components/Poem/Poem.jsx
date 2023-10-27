@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchComments, addComment, deleteComment } from "../../reducers/comment";
@@ -30,9 +31,7 @@ export default function Poem() {
 
     const { pseudo, userId, role } = useMemberState();
 
-    if (!pseudo) {
-        navigate("/login");
-    }
+
 
     const comments = useSelector((state) => state.comment.comments) || [];
     const dispatch = useDispatch();
@@ -63,6 +62,17 @@ export default function Poem() {
             setError(error);
         }
     }, [id]);
+    if (!pseudo) {
+      
+        return (
+            <div className="error-div">
+                <p>Vous devez être connectés pour voir les poèmes!!</p>
+                <Link to="/">
+                    <i className="fa fa-home"></i> Accueil
+                </Link>
+            </div>
+        );
+    } else { 
 
     return (
         <>
@@ -144,4 +154,5 @@ export default function Poem() {
             )}
         </>
     );
+}
 }
