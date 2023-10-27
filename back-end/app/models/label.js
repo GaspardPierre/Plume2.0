@@ -27,6 +27,21 @@ const labelModel = {
     }
   },
 
+  async createWorkLabel(workId, labelId) {
+    try {
+      const workLabel = await prisma._workLabel.create({
+        data: {
+          workId: workId,
+          labelId: labelId,
+        },
+      });
+      return workLabel;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+
   async findById(id) {
     try {
       const label = await prisma.label.findUnique({
@@ -68,6 +83,7 @@ const labelModel = {
       console.log(error);
     }
   },
+  
 
   async delete(id) {
     try {

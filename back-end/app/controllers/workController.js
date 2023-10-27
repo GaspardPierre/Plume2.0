@@ -1,5 +1,9 @@
 const { workModel } = require("../models");
+const { labelModel} = require ("../models")
 const path = require("path");
+
+
+
 
 const workController = {
   async getAllWorks(req, res) {
@@ -24,31 +28,51 @@ const workController = {
   async addWork(req, res) {
     const {title, author, content, note, member_id, labelIds } = req.body;
     console.log("LABELSID",labelIds);
+
+
     const work = await workModel.findByTitle(title);
     if (work) {
         console.log('Work trouvé par le titre:', work);
       return res.status(409).json("Ce titre est déjà présent en BDD");
     }
     if (req.session.role === "admin" && req.session.user.id) {
-      const newWork = {
+      const newWorkData = {
         
         content: content,
         author: author,
         title: title,
         note: note || undefined,
         member_id: req.session.user.id,
-        labels: {
-          connect: labelIds.map(id => ({ id : parseInt(id,10) }))
-        }
       };
-      const workDb = await workModel.insert(newWork);
-      res.status(200).json(workDb);
-    } else {
-      res
-        .status(401)
-        .json({ message: "Vous devez être admin pour ajouter une oeuvre" });
+      try {
+        const newWork = await workModel.insert(newWorkData)
+
+        const labelConnections = await Promise.all(
+          labelIds.map(labelId =>
+            labelModel.createWorkLabel(newWork.id, parseInt(labelId,10))
+             
+          )
+        );
+      
+        //Combined work with label's relations
+      const responseObj = {
+        ...newWork,
+        labels: labelConnections,
+      };
+
+      res.status(200).json(responseObj);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Server error' });
     }
-  },
+  } else {
+    res
+      .status(401)
+      .json({ message: "Vous devez être admin pour ajouter une oeuvre" });
+  }
+},
+     
+   
   async getWork(req, res) {
     try {
       const work = await workModel.findById(req.params.id);

@@ -14,6 +14,9 @@ const noteModel = {
 
   async insert(note) {
     try {
+      if (!note.member_id) {
+        throw new Error('Un utilisateur non connecté ne peut pas voter');
+      }
       const newNote = await prisma.note.create({
         data: {
           average: note.average,

@@ -1,138 +1,112 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 const workModel = {
-
-    async findByTitle(title) {
-        try {
-            const foundTitle = await prisma.work.findFirst({
-                where: {
-                    title
-                },
-            });
-            return foundTitle;
-            
-        } catch (error) {
-            console.log(error);
-            
-        }
-    },
-    async findByLabelId(labelId) {
-        try {
-          const works = await prisma.work.findMany({
-            where: {
-              labels: {
-                some: {
-                  id: parseInt(labelId, 10)
-                }
-              }
-            }
-          });
-          return works;
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    ,  
-
-    async findAll() {
-        try {
-            const works = await prisma.work.findMany();
-            return works;
-            
-      
-            
-        } catch (error) {   
-            console.log(error);
-            
-        }
-        return null;
-    },
-
-    async insert (work) {
-        try {
-            const newWork = await prisma.work.create({
-                data: {
-                    content: work.content,
-                    author : work.author,
-                    title: work.title,
-                    member_id: work.member_id,
-                    labels: {
-                        set: labelIds.map(id => ({ id }))
-                    }
-                },
-            });
-            return newWork;
-            
-            
-        } catch (error) {
-            console.log(error);
-            
-        }
-    
-},
-
-
-async findById(id) {
-  
+  async findByTitle(title) {
     try {
-        const work = await prisma.work.findUnique({
-            where: {
-                id: parseInt(id),
-            },
-        });
-        return work;
-        
+      const foundTitle = await prisma.work.findFirst({
+        where: {
+          title,
+        },
+      });
+      return foundTitle;
     } catch (error) {
-        console.log(error);
-        throw error; 
-        
+      console.log(error);
     }
-    
-},
+  },
+  async findByLabelId(labelId) {
+    try {
+      const works = await prisma.work.findMany({
+        where: {
+          labels: {
+            some: {
+              id: parseInt(labelId, 10),
+            },
+          },
+        },
+      });
+      return works;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  async findAll() {
+    try {
+      const works = await prisma.work.findMany();
+      return works;
+    } catch (error) {
+      console.log(error);
+    }
+    return null;
+  },
 
-async update(id, updatedWork ) {
+  async insert(work) {
+    try {
+      const newWork = await prisma.work.create({
+        data: {
+          content: work.content,
+          author: work.author,
+          title: work.title,
+          member_id: work.member_id,
+         
+        },
+      });
+      return newWork;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  async findById(id) {
+    try {
+      const work = await prisma.work.findUnique({
+        where: {
+          id: parseInt(id),
+        },
+      });
+      return work;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  },
+
+  async update(id, updatedWork) {
     const { labelIds, ...restOfUpdatedWork } = updatedWork; // Extract labelIds and the rest of updatedWork
- 
-  
+
     if (!id || Object.keys(restOfUpdatedWork).length === 0) {
-        throw new Error('Invalid parameters');
+      throw new Error("Invalid parameters");
     }
 
     try {
-        const updatedWorkDb = await prisma.work.update({
-            where: { id: parseInt(id) },
-            data: {
-                ...restOfUpdatedWork,
-                labels: {
-                    set: labelIds ? labelIds.map(id => ({ id })) :[]
-                }
-            },
-        });
-        return updatedWorkDb;
+      const updatedWorkDb = await prisma.work.update({
+        where: { id: parseInt(id) },
+        data: {
+          ...restOfUpdatedWork,
+          labels: {
+            set: labelIds ? labelIds.map((id) => ({ id })) : [],
+          },
+        },
+      });
+      return updatedWorkDb;
     } catch (error) {
-        console.log(error);
-       
+      console.log(error);
 
-        throw error;
+      throw error;
     }
-},
+  },
 
-async delete(id) {
-
+  async delete(id) {
     try {
-       await prisma.work.delete({   
-            where: {
-                id:  parseInt(id),
-            },
-        });
+      await prisma.work.delete({
+        where: {
+          id: parseInt(id),
+        },
+      });
     } catch (error) {
-        console.log(error);
-        
+      console.log(error);
     }
-}
-
+  },
 };
 
-module.exports =workModel;
-
+module.exports = workModel;
