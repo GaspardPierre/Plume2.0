@@ -18,9 +18,15 @@ export default function Poem() {
 
     const navigate = useNavigate();
     const { id } = useParams();
+    const label = useSelector((state) => state.label.labels);
+    const labelId = useSelector((state) => state.label.labelId);
+   
+
+
 
     const poems = useSelector((state) => state.work.works);
     const poem = poems.find((p) => p.id === parseInt(id));
+  
 
     if (!poem) {
         return <div className="error-div">Une erreur est survenue , merci de vous reconnecter</div>;
@@ -91,7 +97,7 @@ export default function Poem() {
                                     <div className="d-flex justify-content-between rating-container ">
                                     <RatingStars poemId={poem.id} />
                                     <div className=" ">
-                                    <h2 className="card-title text-center display-6 mb-3 font-custom ">{poem.title}</h2>
+                                    <h2 className="card-title text-center mb-3 font-custom ">{poem.title}</h2>
                                     <h6 className=" text-center  text-muted author-name font-color py-1">{poem.author}</h6>
                                     </div>
 
@@ -108,7 +114,7 @@ export default function Poem() {
 
                         {/* COMMENT SECTION */}
                         <div className="col-lg-5 col-md-12 comments-section ">
-                        <div className="card h-100 comments-card border-0 bg-custom ">
+                        <div className="card comments-card border-0 bg-custom ">
                         <div className="card-body">
                             
           <p className='text-center border-bottom border-2 pb-2 b mb-4 text-capitalize'> commentaires ({comments.length})</p>

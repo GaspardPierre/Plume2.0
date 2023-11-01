@@ -38,8 +38,7 @@ const workSlice = createSlice({
     works: [],
     status: "idle",
     error: null,
-    setShowAdminWork: false,
-    showListWork: false,
+    
   },
   reducers: {
     setShowAdminWork: (state, action) => {

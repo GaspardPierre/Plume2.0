@@ -22,12 +22,12 @@ export default function NavItems() {
       {isLogged !== null ? (
         <Nav className="nav-items" activeKey="/home">
           <Nav.Item className={`nav-item-hover ${isActive('/') ? 'active-tab' : ''}`}>
-            <Link to="#" className='font-nav text-uppercase second cursor-link nav-link'
+            <Link to="#" className=' border-end font-nav text-uppercase second cursor-link nav-link'
             onClick={ handleLogout }>
               <i className="fas fa-sign-out-alt mx-3"></i> Déconnection
             </Link>
           </Nav.Item>
-          <Nav.Item className={`nav-item-hover ${isActive('/about') ? 'active-tab' : ''}`}>
+          <Nav.Item className={`nav-item-hover border-end ${isActive('/about') ? 'active-tab' : ''}`}>
             <Link to="/about" className='font-nav second text-uppercase cursor-link nav-link'>
               <i className="fas fa-info-circle mx-3"></i> À propos
             </Link>

@@ -10,14 +10,6 @@ import './RatingStars.scss';
 export default function RatingStars({ poemId }) {
 
 
-// WARNING MESSAGE
-  const [show, setShow] = useState(false); 
-  const target = useRef(null); 
-  const ratingChanged = (newRating) => {
-    if (role === null) {  
-      setShow(true);  
-      return;
-    }
 
   //STORE
 
@@ -94,7 +86,7 @@ export default function RatingStars({ poemId }) {
   };
   return (
     <div className="flex-column  stars-container ">
-         <div ref={target} onMouseEnter={() => setShow(false)} onMouseLeave={() => setShow(false)}>
+      
       
     
     <ReactStars
@@ -113,12 +105,13 @@ export default function RatingStars({ poemId }) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />
-      </div>
+      
       <div >
         <p className="text-muted">Note  : {average}</p>
       </div>
+      </div>
 
-    </div>
+  
   );
 }
-}
+

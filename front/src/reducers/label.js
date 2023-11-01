@@ -26,10 +26,15 @@ const labelSlice = createSlice({
     name: "label",
     initialState: {
         labels: [],
+        labelId: null,
         works: [], 
         status: "idle",
         error: null,
    
+    },
+    reducers : {
+        setLabelId : (state, action ) => {
+            state.labelId = action.payload;      }
     },
     extraReducers: (builder) => {
         builder
@@ -67,3 +72,4 @@ const labelSlice = createSlice({
 });
 
 export default labelSlice.reducer;
+export const { setLabelId } = labelSlice.actions;

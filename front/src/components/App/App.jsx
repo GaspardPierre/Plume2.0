@@ -28,12 +28,14 @@ export default function App() {
   // }, [isAdmin]);
 
   return (
-    <>
+    <><div className="content">
+
+    
       <div className="d-flex justify-content-end sticky-top pb-2 structure">
         <Header />
       </div>
 
-      <div className="d-flex flex-column  bg-custom-second custom align-items-center">
+      <div className="d-flex flex-column  bg-custom-second border-start border-end custom align-items-center">
         <StyleBox >
         <Routes>
           <Route path="/" element={<Home />} />
@@ -44,6 +46,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
         </Routes>
         </StyleBox>
+      </div>
       </div>
     </>
   );

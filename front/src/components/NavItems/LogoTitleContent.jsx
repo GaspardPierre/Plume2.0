@@ -14,7 +14,7 @@ export default function LogoTitleContent() {
      className='logo' />
 
 
-  <div className=''>
+  <div className='title'>
   Plume 2.0
   </div>
   </div>

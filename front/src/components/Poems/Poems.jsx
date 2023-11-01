@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import work, { fetchWorks } from "../../reducers/work";
+import {  fetchWorksByLabel} from "../../reducers/label";
 import Loading from "../Loading/Loading";
 import LabelFilter from "../LabelFilter/LabelFilter";
 import ReactPaginate from 'react-paginate';
@@ -14,6 +15,13 @@ import './Poems.scss';
 
 
 export default function Poems() {
+
+  //lABELS
+
+const labels= useSelector((state) => state.label.labels);
+
+
+
   //WORKS
   const dispatch = useDispatch();
   const poems = useSelector((state) => state.work.works);
@@ -22,14 +30,13 @@ export default function Poems() {
   const navigate = useNavigate();
   const [selectedWork, setSelectedWork] = useState(null);
 
+
   //PAGINATION
   const poemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
-
   const lastPoemIndex = currentPage * poemsPerPage;
   const firstPoemIndex = lastPoemIndex - poemsPerPage;
   const currentPoems = poems.slice(firstPoemIndex, lastPoemIndex);
-
   const handlePageClick = (data) => {
       setCurrentPage(data.selected + 1);
   };
@@ -65,7 +72,8 @@ export default function Poems() {
       
       <div className="container poems-container ">
         <div className="label-container ">
-          <LabelFilter setSelectedWork={setSelectedWork} />
+          <LabelFilter setSelectedWork={setSelectedWork} 
+        />
          
         </div>
 <div className="poem-list ">
