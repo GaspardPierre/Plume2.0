@@ -48,6 +48,7 @@ export default function LabelFilter({ setSelectedWork }) {
             key={label.id}
             onClick={() => handleLabelClick(label.id)}
             className={labelId === label.id ? "active" : ""}
+          
           >
             {label.tag}
           </li>

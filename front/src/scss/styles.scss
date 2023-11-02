@@ -1,56 +1,12 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 @import 'variables';
-a {
-  all: initial;
-  text-decoration: none;
-  color: #333333;
+
+
+
+
+li:focus {
+  outline: none;
 }
-
-
-
-
-
-.btn-nav{
-  width: 5%;
-padding: 0.3rem;
-font-size: 1rem;
-border-radius: 0.5rem;
-background-color: $primary-color;
-border-color: $primary-color;
-margin-top: auto; 
-text-align: center;
-color: white;
-text-decoration: none;
-padding: 0.5rem;
-margin: 1rem;
-
-
-}
-.submit{
-  background-color: $primary-color;
-}
-.btn-nav:hover{
-  background-color: $primary-hoover;
-  border-color: $primary-hoover;
-}
-
-
-.delete-comment {
-  background-color: $primary-color;
-  border-color: $primary-color;
-}
-.btn-primary {
-  background-color: $primary-color;
-  border-color: $primary-color;
-  color: black; /* Changez cela en fonction de la couleur de texte que vous voulez */
-}
-
-.btn-primary:hover {
-  background-color: $primary-hoover;
-  border-color: $primary-hoover;
-}
-
-
 
  
 .error {
@@ -227,12 +183,6 @@ width: 80%;
   
 }
 
-// Class added to the badge component ecrase the bootstrap class
-
-.badge.bg-primary {
-  background-color: $bg-four !important;
-padding: 0.3rem;
-}
 
 .b-color{
   border-color: $custom-color !important;

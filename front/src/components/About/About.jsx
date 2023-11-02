@@ -1,5 +1,5 @@
 import React from 'react'
-import auteur from '../../assets/pierre.jpg'
+import auteur from '../../assets/mat.png'
 
 export default function About() {
   return (
@@ -19,7 +19,7 @@ export default function About() {
             <p className='citation fst-italic'>Je laisse l'oiseau se poser"</p>
             <footer className="blockquote-footer">Matthieu Mouquet</footer>
           </blockquote>
-  <p className="lead lead bio-text">Votre texte ici.</p>
+  <p className="lead lead bio-text">Matthieu, jeune poète de 18 ans a écrit ces nombreux poèmes en même pas un an et six mois !.</p>
     </div>
   </div>
       
