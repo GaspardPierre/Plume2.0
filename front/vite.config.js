@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import sassPlugin from 'vite-plugin-sass';
 import vitePluginReact from '@vitejs/plugin-react';
 
 export default defineConfig({
