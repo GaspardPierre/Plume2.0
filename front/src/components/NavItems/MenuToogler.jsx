@@ -1,13 +1,48 @@
 import React, {useState} from 'react'
 import { Link } from "react-router-dom";
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { useSelector, useDispatch} from 'react-redux';
+import { logout } from '../../reducers/member'
 import './MenuToogler.scss'
 
 export default function MenuToogler() {
-
+  const isLogged = useSelector((state) => state.member.role);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout ())
+    navigate('/')
+  }
+console.log(isLogged, "EST LOGUE OU PAS ?")
   return (
 
   <>
+     {isLogged !== null ? (
+       <Offcanvas show={showMenu}
+       onHide={handleClose}
+       className="">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+        <Link
+          to="#"
+          onClick={ handleLogout}
+        ><i className="fas fa-sign-out-alt mx-3"></i>
+          Déconnection
+        </Link>
+        <Link>
+          A propos
+        </Link>
+        <Link
+          to="/poems"
+        >
+          Poèmes
+        </Link>
+        </Offcanvas.Body>
+     
+      </Offcanvas>
+     ) : (
           <Offcanvas show={showMenu}
                      onHide={handleClose}
                      className="">
@@ -17,21 +52,25 @@ export default function MenuToogler() {
                       <Offcanvas.Body>
                       <Link
                         to="/signin"
+                        className='p-3'
                       >
                         S'inscrire
                       </Link>
                       <Link
                         to="/login"
+                        className='p-3'
                       >
                         Se connecter
                       </Link>
                       <Link
                         to="/about"
+                        className='p-3'
                       >
                         A propos
                       </Link>
                       <Link
                         to="/poems"
+                        className='p-3'
                       >
                         Poèmes
                       </Link>
@@ -39,7 +78,7 @@ export default function MenuToogler() {
                    
                     </Offcanvas>
 
-
+     )}
 </>
-  )
+  );
 }
