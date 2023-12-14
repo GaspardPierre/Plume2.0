@@ -46,7 +46,7 @@ const labelModel = {
     try {
       const label = await prisma.label.findUnique({
         where: {
-          id: id,
+          id: parseInt(id, 10) ,
         },
       });
       return label;
@@ -65,6 +65,7 @@ const labelModel = {
       return label;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   },
 
@@ -87,13 +88,15 @@ const labelModel = {
 
   async delete(id) {
     try {
-      await prisma.label.delete({
+      const deletedLabel = await prisma.label.delete({
         where: {
-          id: id,
+          id: parseInt(id, 10) ,
         },
       });
+      return deletedLabel;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   },
 };

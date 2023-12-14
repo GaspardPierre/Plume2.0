@@ -98,15 +98,15 @@ const workModel = {
 
   async delete(id) {
     try {
-      await prisma.work.delete({
+       const deletedWork = await prisma.work.delete({
         where: {
           id: parseInt(id),
         },
       });
+      return deletedWork;
     } catch (error) {
       console.log(error);
     }
   },
 };
-
 module.exports = workModel;

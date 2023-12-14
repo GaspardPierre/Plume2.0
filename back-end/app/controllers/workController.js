@@ -45,14 +45,15 @@ const workController = {
         member_id: req.session.user.id,
       };
       try {
-        const newWork = await workModel.insert(newWorkData)
-
-        const labelConnections = await Promise.all(
-          labelIds.map(labelId =>
-            labelModel.createWorkLabel(newWork.id, parseInt(labelId,10))
-             
-          )
-        );
+        const newWork = await workModel.insert(newWorkData);
+let labelConnections;
+        if (Array.isArray(labelIds) && labelIds.length) {
+           labelConnections = await Promise.all(
+              labelIds.map(labelId =>
+                  labelModel.createWorkLabel(newWork.id, parseInt(labelId, 10))
+              )
+          );
+      }
       
         //Combined work with label's relations
       const responseObj = {

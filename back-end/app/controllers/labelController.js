@@ -16,8 +16,7 @@ const labelController = {
     if (existingLabel) {
       return res.status(401).json("Ce label est déjà présent en bdd");
     }
-        const newLabel = {
-         
+        const newLabel = {    
            tag: tag,
             }
     //Finalement on l'envoi en base de données
@@ -69,12 +68,29 @@ const labelController = {
         }
       },
       
-    async deleteLabel(req,res){
+async deleteLabel(req, res) {
+  try {
+    const labelId = req.params.id; // Obtenir l'ID du label à partir des paramètres de la requête
+    const result = await labelModel.delete(labelId); // Supprimer le label en utilisant l'ID
 
-        const result = await labelModel.delete(req.params.id);
-
-        res.json(result);
+    if (result) { 
+      res.status(200).json({
+        message: "Label supprimé avec succès",
+        result: result
+      });
+    } else { // Si aucun label n'a été supprimé (par exemple, si l'ID n'existe pas)
+      res.status(404).json({
+        message: "Label non trouvé ou déjà supprimé"
+      });
     }
+  } catch (error) { // En cas d'erreur dans le processus de suppression
+    console.error(error); // Log de l'erreur
+    res.status(500).json({ // Retour d'une réponse d'erreur
+      message: "Erreur lors de la suppression du label",
+      error: error
+    });
+  }
+}
 };
 
 module.exports = labelController;

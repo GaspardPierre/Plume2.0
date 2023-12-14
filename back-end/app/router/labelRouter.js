@@ -13,5 +13,6 @@ router.post(
   labelController.addLabelToWork
 );
 router.patch("/:id", security.checkAdmin, labelController.modifyLabel);
+router.delete("/:id", security.checkAdmin, labelController.deleteLabel);
 
 module.exports = router;
