@@ -57,7 +57,7 @@ const labelModel = {
 
   async findByTag(tag) {
     try {
-      const label = await prisma.label.findUnique({
+      const label = await prisma.label.findFirst({
         where: {
           tag: tag,
         },
@@ -81,7 +81,8 @@ const labelModel = {
       });
       return updatedLabel;
     } catch (error) {
-      console.log(error);
+      console.error('Erreur lors de la mise à jour du label:', error);
+    throw error;
     }
   },
   

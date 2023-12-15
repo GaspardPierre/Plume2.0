@@ -35,19 +35,46 @@ const labelController = {
 
         return res.status(200).json(label);
     },
-    async modifyLabel(req,res){
-        const label = req.body; // les modifications apportées à login
-        label.id = req.params.id;
-        const update = await labelModel.findById(req.params.id);
-        for(const key in req.body){
-            update[key]= req.body[key]
-            console.log(update);
-        }
-
-        const labelDb = await labelModel.update(label);
-
-        res.json(labelDb);
-    },
+    async modifyLabel(req, res){
+      try {
+          const labelData = req.body; 
+          const labelId = req.params.id;
+          const update = await labelModel.findById(labelId);
+  
+          // Vérification que le label existe
+          if (!update) {
+              return res.status(404).json({ error: "Label non trouvé" });
+          }
+  
+          // Mise à jour du label
+          for(const key in labelData){
+              update[key] = labelData[key];
+              console.log(`Mise à jour ${key}:`, update[key]);
+          }
+  
+          // Log avant la mise à jour
+          console.log('Label avant la mise à jour en BDD:', update);
+  
+          // Envoi de la mise à jour à la base de données
+          const labelDb = await labelModel.update(update);
+          
+          // Vérifier si labelDb n'est pas undefined
+          if (!labelDb) {
+              console.error('Aucune réponse de la fonction update du modèle label');
+              return res.status(500).json({ error: 'Erreur lors de la mise à jour du label' });
+          }
+  
+          // Log après la mise à jour
+          console.log('Label mis à jour avec succès:', labelDb);
+  
+          // Envoi de la réponse
+          res.json(labelDb);
+      } catch (error) {
+          console.error("Erreur lors de la mise à jour du label:", error);
+          res.status(500).json({ error: "Erreur interne du serveur" });
+      }
+  },
+  
     async addLabelToWork(req, res) {
         const workId = req.params.workId;
         const labelId = req.body.labelId;
