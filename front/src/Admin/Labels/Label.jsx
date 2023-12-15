@@ -23,6 +23,7 @@ export const LabelEdit = (props) => {
     console.log(props)
     return (
         <Edit title='Edit Label' {...props}>
+            {console.log(props,"PROPS")}
             <SimpleForm>
                 <TextInput disabled source='id' />
                 <TextInput source='tag' validate={[required]} />

@@ -23,7 +23,7 @@ export default function Header() {
     <>
     {isLogged !== null ? (
        <div className=' d-flex  align-items-start top-header justify-content-end   '>
-       <header className='d-flex w-head-desktop bg-third  shadow-md px-3  sticky-top '>
+       <header className='d-flex w-head-desktop bg-gradient-left-right  shadow-md px-3  sticky-top '>
  
          <nav>
            <div>

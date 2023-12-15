@@ -58,14 +58,17 @@ const dataProvider = {
     }
   },
   delete: async (resource, params) => {
+    console.log(`Tentative de suppression de la ressource '${resource}' avec l'ID`, params.id);
     try {
       const response = await api.delete(`/${resource}/${params.id}`);
+      console.log(`Réponse après suppression de la ressource '${resource}' avec l'ID ${params.id}:`, response);
       return { data: response.data };
     } catch (error) {
-      console.error(`Erreur lors de la suppression d'un ${resource}:`, error);
+      console.error(`Erreur lors de la suppression de la ressource '${resource}' avec l'ID ${params.id}:`, error);
       throw error;
     }
   },
+  
 };
 
 export default dataProvider;
