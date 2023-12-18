@@ -73,7 +73,7 @@ const labelModel = {
     try {
       const updatedLabel = await prisma.label.update({
         where: {
-          id: label.id,
+          id: parseInt(label.id),
         },
         data: {
           tag: label.tag,

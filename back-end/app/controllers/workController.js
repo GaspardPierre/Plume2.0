@@ -100,14 +100,21 @@ let labelConnections;
     }
   
     try {
+      const updateData = {
+        ...work
+      };
+      if (Array.isArray(labelIds)) {
+        updateData.labels = {
+          set: labelIds.map(id => ({ id }))
+        // The 'set' operator in Prisma is used to set a new relation by replacing the old one.
+        // 'labelIds.map(id => ({ id }))' transforms an array of label IDs into an array of objects.
+      
+    };
+      };
  
-      const updatedWork = await workModel.update(workId, {
-        ...work,
-        labels: {
-          set: labelIds.map(id => ({ id })) // The 'set' operator in Prisma is used to set a new relation by replacing the old one.
-          // 'labelIds.map(id => ({ id }))' transforms an array of label IDs into an array of objects.
-        }
-      });
+      const updatedWork = await workModel.update(workId, updateData);
+
+     
       res.json(updatedWork);
     } catch (error) {
       console.log(error);
