@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { RichTextInput } from 'ra-input-rich-text';
 import {
   SelectArrayInput,
   Filter,
@@ -14,6 +15,7 @@ import {
   Create,
   required,
   AutocompleteArrayInput,
+
 } from "react-admin";
 import useLabels from "../../hooks/useLabels"
 
@@ -105,7 +107,7 @@ export const WorkCreate = (props) => {
           </div>
           <div className="row">
             <div className="col-12">
-              <TextInput
+              <RichTextInput
                 source="content"
                 validate={[required()]}
                 className="form-control rounded"

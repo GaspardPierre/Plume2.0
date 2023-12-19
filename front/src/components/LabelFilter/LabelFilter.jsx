@@ -5,10 +5,9 @@ import { fetchLabels, fetchWorksByLabel } from "../../reducers/label";
 import "./LabelFilter.scss";
 import { set } from "react-hook-form";
 
-export default function LabelFilter({ setSelectedWork }) {
+export default function LabelFilter({ setSelectedWork,labelError }) {
   //ERRORS
 
-  const labelError = useSelector((state) => state.label.error);
 
   // LABELS
   const dispatch = useDispatch();
@@ -25,7 +24,12 @@ export default function LabelFilter({ setSelectedWork }) {
    
     setLabelId(id);
     dispatch(fetchWorksByLabel(id)).then(() => {
+      if (works.length > 0) {
       setSelectedWork(works);
+    }
+    else {
+      setSelectedWork([]);
+    }
     });
   }
   
@@ -54,7 +58,7 @@ export default function LabelFilter({ setSelectedWork }) {
           </li>
         ))}
       </ul>
-      {labelError && <div className="small"> Pas encore de Poèmes</div>}
+    
     </div>
   );
 }

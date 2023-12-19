@@ -19,6 +19,7 @@ export default function Poems() {
   //lABELS
 
 const labels= useSelector((state) => state.label.labels);
+const labelError = useSelector((state) => state.label.error);
 
 
 
@@ -36,10 +37,7 @@ const labels= useSelector((state) => state.label.labels);
   const [currentPage, setCurrentPage] = useState(1);
   const lastPoemIndex = currentPage * poemsPerPage;
   const firstPoemIndex = lastPoemIndex - poemsPerPage;
-  const currentPoems = poems.slice(firstPoemIndex, lastPoemIndex);
-  const handlePageClick = (data) => {
-      setCurrentPage(data.selected + 1);
-  };
+ 
 
 
 
@@ -72,26 +70,27 @@ const labels= useSelector((state) => state.label.labels);
       
       <div className="container poems-container ">
         <div className="label-container ">
-          <LabelFilter setSelectedWork={setSelectedWork} 
-        />
-         
+          <LabelFilter setSelectedWork={setSelectedWork} />
+          
         </div>
-<div className="poem-list ">
-{selectedWork && selectedWork.map((work) => (
-  <div className="poem-title" 
-  key={work.id}
-  onClick={()=>handlePoemClick(work.id)}>
-<span>
-{work.title}
-</span>
-
+        <div className="poem-list">
+  {selectedWork 
+    && selectedWork.length >0 ? selectedWork.map((work) => (
+        <div className="poem-title" key={work.id} onClick={() => handlePoemClick(work.id)}>
+          <span>{work.title}</span>
+        </div>
+      ))
+    :  <div className="poem-title">Pas encore de Poèmes!</div>
+  }
 </div>
-))}
+
          
         </div>
-        </div>
-      </>
+        </>
     );
+       
+    
+    
   } else if (workStatus === "failed") {
     content = <div>Erreur : {error}</div>;
   }
@@ -102,19 +101,6 @@ const labels= useSelector((state) => state.label.labels);
       >
         {content}
       </div>
-      <ReactPaginate
-      className="pagination "
-                    previousLabel={'précédent'}
-                    nextLabel={'suivant'}
-                    breakLabel={'...'}
-                    breakClassName={'break-me'}
-                    pageCount={Math.ceil(poems.length / poemsPerPage)}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageClick}
-                    containerClassName={'pagination'}
-                    activeClassName={'active'}
-                />
 
 
 
@@ -122,3 +108,4 @@ const labels= useSelector((state) => state.label.labels);
     </>
   );
 }
+
