@@ -13,6 +13,7 @@ import {
   NumberInput,
   Create,
   required,
+  AutocompleteArrayInput,
 } from "react-admin";
 import useLabels from "../../hooks/useLabels"
 
@@ -45,7 +46,12 @@ export const WorkList = (props) => {
         <EditButton basePath="/work" />
         <DeleteButton basePath="/work" />
       </Datagrid>
-    </Liexport const WorkEdit = (props) => {
+    </List>
+  );
+};
+
+// WorkEdit Component
+export const WorkEdit = (props) => {
 const labels = useLabels();
 
 
@@ -61,16 +67,18 @@ const labels = useLabels();
           validate={[required()]}
           className="form-control"
         />
-        <SelectArrayInput label="Ajouter un label" source="labelIds" choices={labels} />
+        < AutocompleteArrayInput 
+        label="Ajouter un label"
+         source="labelIds"
+          choices={labels}
+          optionText="name"
+          optionValue="id"
+          translateChoice={false}
+          fullWidth />
       </SimpleForm>
     </Edit>
   );
-};st>
-  );
 };
-
-// WorkEdit Component
-
 
 // WorkCreate Component
 export const WorkCreate = (props) => {
