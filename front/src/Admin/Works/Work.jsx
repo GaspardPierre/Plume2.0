@@ -45,12 +45,7 @@ export const WorkList = (props) => {
         <EditButton basePath="/work" />
         <DeleteButton basePath="/work" />
       </Datagrid>
-    </List>
-  );
-};
-
-// WorkEdit Component
-export const WorkEdit = (props) => {
+    </Liexport const WorkEdit = (props) => {
 const labels = useLabels();
 
 
@@ -70,7 +65,12 @@ const labels = useLabels();
       </SimpleForm>
     </Edit>
   );
+};st>
+  );
 };
+
+// WorkEdit Component
+
 
 // WorkCreate Component
 export const WorkCreate = (props) => {

@@ -26,7 +26,7 @@ export const LabelEdit = (props) => {
             {console.log(props,"PROPS")}
             <SimpleForm>
                 <TextInput disabled source='id' />
-                <TextInput source='tag' validate={[required]} />
+                <TextInput source='tag' validate={[required()]}  />
 
         
             </SimpleForm>
