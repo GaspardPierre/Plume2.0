@@ -16,7 +16,11 @@ import './Poems.scss';
 
 export default function Poems() {
   //REF FIRST WORK TITLE
-  const firstWorkTitleRef = useRef(null);
+  const poemsContainerRef = useRef(null);
+  // FUNCTION TO SCROLL TO PoemContainer
+  const scrollToPoemsContainer = () => {
+    poemsContainerRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
   //lABELS
 
@@ -70,16 +74,18 @@ const labelError = useSelector((state) => state.label.error);
     content = (
       <>
       
-      <div className="container poems-container ">
+      <div className="container poems-container "
+      ref={poemsContainerRef}>
         <div className="label-container ">
           <LabelFilter setSelectedWork={setSelectedWork}
-          firstWorkTitleRef={firstWorkTitleRef}  />
+          scrollToPoemsContainer={scrollToPoemsContainer} 
+          />
           
         </div>
         <div className="poem-list">
   {selectedWork 
-    && selectedWork.length >0 ? selectedWork.map((work,index) => (
-        <div className="poem-title" key={work.id} onClick={() => handlePoemClick(work.id)} ref={index ===0 ? firstWorkTitleRef : null}>
+    && selectedWork.length >0 ? selectedWork.map((work) => (
+        <div className="poem-title" key={work.id} onClick={() => handlePoemClick(work.id)} >
           <span>{work.title}</span>
         </div>
       ))

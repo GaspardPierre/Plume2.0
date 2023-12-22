@@ -5,7 +5,7 @@ import { fetchLabels, fetchWorksByLabel } from "../../reducers/label";
 import "./LabelFilter.scss";
 import { set } from "react-hook-form";
 
-export default function LabelFilter({ setSelectedWork,labelError , firstWorkTitleRef}) {
+export default function LabelFilter({ setSelectedWork,scrollToPoemsContainer}) {
   //ERRORS
 
 
@@ -34,9 +34,7 @@ export default function LabelFilter({ setSelectedWork,labelError , firstWorkTitl
     }
 
     });
-    if (firstWorkTitleRef.current) {
-      firstWorkTitleRef.current.focus();
-  }
+    scrollToPoemsContainer();
 
   }
   
