@@ -94,7 +94,7 @@ export default function Header() {
 
                   <Offcanvas show={showMenu}
                     onHide={handleClose}
-                    className="bg-four ">
+                    className="bg-burger ">
                     <Offcanvas.Header closeButton
                     className='bg-burger'>
                       <Offcanvas.Title className='custom-menu title second  bg-burger line'>Menu</Offcanvas.Title>

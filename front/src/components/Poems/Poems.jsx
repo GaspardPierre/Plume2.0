@@ -75,7 +75,7 @@ const labelError = useSelector((state) => state.label.error);
       <>
       
       <div className="container poems-container "
-      ref={poemsContainerRef}>
+    >
         <div className="label-container ">
           <LabelFilter setSelectedWork={setSelectedWork}
           scrollToPoemsContainer={scrollToPoemsContainer} 
