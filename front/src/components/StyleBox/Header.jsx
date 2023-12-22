@@ -87,7 +87,7 @@ export default function Header() {
               <div className='nav-items-container d-flex  justify-content-between '>
                 <LogoTitleContent />
                 {/* Button  pour afficher le menu sur mobile */}
-                <button onClick={handleShow} className="btn btn-primary d-lg-none bg-third mx-4 ">  <i className="fas fa-bars"></i></button>
+                <button onClick={handleShow} className="btn btn-primary d-lg-none bg-gradient-left-right mx-4 ">  <i className="fas fa-bars"></i></button>
                 {/* Menu pour les mobiles */}
                 <div className=''>
 
