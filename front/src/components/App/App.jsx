@@ -12,6 +12,7 @@ import Poem from '../Poem/Poem';
 import About from '../About/About';
 import "./App.scss";
 import Title from "../StyleBox/Title";
+import Footer from "../StyleBox/Footer";
 
 
 export default function App() {
@@ -28,7 +29,8 @@ export default function App() {
   // }, [isAdmin]);
 
   return (
-    <><div className="content">
+    <div className="main-container"> 
+    <div className="content">
 
     
       <div className="d-flex justify-content-end sticky-top pb-2 structure">
@@ -48,6 +50,10 @@ export default function App() {
         </StyleBox>
       </div>
       </div>
-    </>
+        <div className=" w-100 m-0 f">
+        <Footer />
+      </div>
+      </div>
+      
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import work, { fetchWorks } from "../../reducers/work";
@@ -15,6 +15,8 @@ import './Poems.scss';
 
 
 export default function Poems() {
+  //REF FIRST WORK TITLE
+  const firstWorkTitleRef = useRef(null);
 
   //lABELS
 
@@ -70,13 +72,14 @@ const labelError = useSelector((state) => state.label.error);
       
       <div className="container poems-container ">
         <div className="label-container ">
-          <LabelFilter setSelectedWork={setSelectedWork} />
+          <LabelFilter setSelectedWork={setSelectedWork}
+          firstWorkTitleRef={firstWorkTitleRef}  />
           
         </div>
         <div className="poem-list">
   {selectedWork 
-    && selectedWork.length >0 ? selectedWork.map((work) => (
-        <div className="poem-title" key={work.id} onClick={() => handlePoemClick(work.id)}>
+    && selectedWork.length >0 ? selectedWork.map((work,index) => (
+        <div className="poem-title" key={work.id} onClick={() => handlePoemClick(work.id)} ref={index ===0 ? firstWorkTitleRef : null}>
           <span>{work.title}</span>
         </div>
       ))

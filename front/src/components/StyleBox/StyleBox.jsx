@@ -17,9 +17,7 @@ export default function StyleBox({ children }) {
           {children}
         </div>
       </div>
-      <div className=" w-100 m-0 f">
-        <Footer />
-      </div>
+    
     </>
   );
 }

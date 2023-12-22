@@ -18,6 +18,7 @@ import {
 
 } from "react-admin";
 import useLabels from "../../hooks/useLabels"
+import "./Work.scss";
 
 //function to validate the input : number
 const validateNumber = (value) => {
@@ -87,17 +88,17 @@ export const WorkCreate = (props) => {
   const labels = useLabels();
   return (
     <Create title="Create a Work" {...props}>
-      <SimpleForm >
-        <div className="container">
+      <SimpleForm  >
+      
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-12">
               <TextInput
                 source="title"
                 validate={[required()]}
                 className="form-control"
               />
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <TextInput
                 source="author"
                 validate={[required()]}
@@ -106,11 +107,11 @@ export const WorkCreate = (props) => {
             </div>
           </div>
           <div className="row">
-            <div className="col-12">
+            <div className="col-md-12">
               <RichTextInput
                 source="content"
                 validate={[required()]}
-                className="form-control rounded"
+                className="form-control rounded rich-text-input-responsive"
                 multiline
                 fullWidth
               />
@@ -133,7 +134,7 @@ export const WorkCreate = (props) => {
               />
             </div>
           </div>
-        </div>
+       
       </SimpleForm>
     </Create>
   );

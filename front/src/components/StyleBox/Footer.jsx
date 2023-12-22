@@ -10,10 +10,10 @@ import './Footer.scss'
 
 export default function Footer() {
   return (
-    <div className='bg-four w-100 h-100 py-5 m-0  shadow-md h-100'>
+    <div className='bg-four w-100  m-0  shadow-md '>
          <div className='d-flex justify-content-around second mb- py-0 '>
-            <span>
-                Plume 2.0 2023
+            <span className='font-custom py-5'>
+            Pierre Dillard © 2023
                 </span>
                 <span>
                 <FontAwesomeIcon icon={faEnvelopeOpen}

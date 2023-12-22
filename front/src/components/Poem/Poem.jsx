@@ -10,6 +10,7 @@ import RatingStars from "../RatingStars/RatingStars";
 import { useMemberState } from "../../hooks/customHooks";
 import Share from "../Share/Share";
 import poemBg from'../../assets/poem.png';  
+import DOMPurify from 'dompurify';
 
 
 import "./Poem.scss";
@@ -104,7 +105,8 @@ export default function Poem() {
                                     </div>
                                 
 
-                                    <p className="card-text poem-content">{poem.content}</p>
+                                    <p className="card-text poem-content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(poem.content) }}></p>
+
                                     <div className="d-flex justify-content-center">
                                     <Share poemId={poem.id} />
                                     </div>

@@ -5,7 +5,7 @@ import { fetchLabels, fetchWorksByLabel } from "../../reducers/label";
 import "./LabelFilter.scss";
 import { set } from "react-hook-form";
 
-export default function LabelFilter({ setSelectedWork,labelError }) {
+export default function LabelFilter({ setSelectedWork,labelError , firstWorkTitleRef}) {
   //ERRORS
 
 
@@ -20,6 +20,8 @@ export default function LabelFilter({ setSelectedWork,labelError }) {
   const works = useSelector((state) => state.label.works);
   const [labelId, setLabelId] = useState(null);
 
+  // SELECTION OF LABEL + FOCUS
+
   const handleLabelClick = (id) => {
    
     setLabelId(id);
@@ -30,7 +32,12 @@ export default function LabelFilter({ setSelectedWork,labelError }) {
     else {
       setSelectedWork([]);
     }
+
     });
+    if (firstWorkTitleRef.current) {
+      firstWorkTitleRef.current.focus();
+  }
+
   }
   
 //UseEffect

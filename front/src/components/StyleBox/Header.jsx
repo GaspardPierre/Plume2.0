@@ -32,27 +32,27 @@ export default function Header() {
                <div className='nav-items-container d-flex  justify-content-between '>
                  <LogoTitleContent />
                  {/* Button  pour afficher le menu sur mobile */}
-                 <button onClick={handleShow} className="btn btn-primary d-lg-none bg-third mx-4 ">  <i className="fas fa-bars"></i></button>
+                 <button onClick={handleShow} className="btn btn-primary d-lg-none bg-gradient-left-right  mx-4 ">  <i className="fas fa-bars"></i></button>
                  {/* Menu pour les mobiles */}
                  <div className=''>
  
  
                    <Offcanvas show={showMenu}
                      onHide={handleClose}
-                     className="bg-four ">
-                     <Offcanvas.Header closeButton>
-                       <Offcanvas.Title className='custom-menu title second  line'>Menu</Offcanvas.Title>
+                     className="bg-burger ">
+                     <Offcanvas.Header closeButton className='bg-burger'>
+                       <Offcanvas.Title className='custom-menu title second  line bg-burger'>Menu</Offcanvas.Title>
                      </Offcanvas.Header>
-                     <Offcanvas.Body className='d-flex flex-column align-items-start justify-content-start  '>
-                       <Link className='custom-menu second cursor-link line p-3'
+                     <Offcanvas.Body className='d-flex flex-column align-items-start justify-content-start bg-burger  '>
+                       <Link className='custom-menu second cursor-link line py-3'
                         onClick={ handleLogout }
                        to="#">
                          <i className="fas fa-user-plus"></i> Déconnection
                        </Link>
-                       <Link className='custom-menu second cursor-link line p-3' to="/about">
+                       <Link className='custom-menu second cursor-link line py-3' to="/about">
                          <i className="fas fa-info-circle"></i> A propos
                        </Link>
-                       <Link className='custom-menu second cursor-link line p-3' to="/poems">
+                       <Link className='custom-menu second cursor-link line py-3' to="/poems">
                          <i className="fas fa-feather-alt"></i> Poèmes
                        </Link>
                      </Offcanvas.Body>
