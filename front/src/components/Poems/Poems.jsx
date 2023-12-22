@@ -82,7 +82,8 @@ const labelError = useSelector((state) => state.label.error);
           />
           
         </div>
-        <div className="poem-list">
+        <div className="poem-list"
+        ref={poemsContainerRef}>
   {selectedWork 
     && selectedWork.length >0 ? selectedWork.map((work) => (
         <div className="poem-title" key={work.id} onClick={() => handlePoemClick(work.id)} >

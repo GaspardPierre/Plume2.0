@@ -95,10 +95,11 @@ export default function Header() {
                   <Offcanvas show={showMenu}
                     onHide={handleClose}
                     className="bg-four ">
-                    <Offcanvas.Header closeButton>
-                      <Offcanvas.Title className='custom-menu title second  line'>Menu</Offcanvas.Title>
+                    <Offcanvas.Header closeButton
+                    className='bg-burger'>
+                      <Offcanvas.Title className='custom-menu title second  bg-burger line'>Menu</Offcanvas.Title>
                     </Offcanvas.Header>
-                    <Offcanvas.Body className='d-flex flex-column align-items-start justify-content-start  '>
+                    <Offcanvas.Body className='d-flex flex-column align-items-start justify-content-start bg-burger  '>
                       <Link className='custom-menu second cursor-link line p-3' to="/signin">
                         <i className="fas fa-user-plus"></i> S'inscrire
                       </Link>
