@@ -46,6 +46,7 @@ const workModel = {
         data: {
           content: work.content,
           author: work.author,
+          urlImage: work.urlImage || null,
           title: work.title,
           member_id: work.member_id,
          
@@ -83,6 +84,7 @@ const workModel = {
         where: { id: parseInt(id) },
         data: {
           ...restOfUpdatedWork,
+          urlImage: urlImage || null,
           labels: {
             set: labelIds ? labelIds.map((id) => ({ id })) : [],
           },

@@ -28,6 +28,7 @@ model Work {
   id         Int      @id @default(autoincrement())
   content    String
   author     String
+  urlImage   String?
   title      String 
   member_id  Int
   member     Member   @relation(fields: [member_id], references: [id])

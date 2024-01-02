@@ -16,7 +16,7 @@ const workController = {
       const labelId = req.params.labelId;
       const works = await workModel.findByLabelId(labelId);
       if (!works || works.length === 0) {
-        return res.status(404).json({ message: 'No works found for this label' });
+        return res.status(200).json({ message: 'No works found for this label' });
       }
       return res.status(200).json(works);
     } catch (error) {
@@ -26,7 +26,7 @@ const workController = {
   },
   
   async addWork(req, res) {
-    const {title, author, content, note, member_id, labelIds } = req.body;
+    const {title, author, content, note, member_id, labelIds, urlImage } = req.body;
     console.log("LABELSID",labelIds);
 
 
@@ -40,6 +40,7 @@ const workController = {
         
         content: content,
         author: author,
+        urlImage: urlImage || null,
         title: title,
         note: note || undefined,
         member_id: req.session.user.id,
