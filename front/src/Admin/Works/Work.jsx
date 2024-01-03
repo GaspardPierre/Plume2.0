@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RichTextInput } from 'ra-input-rich-text';
+import { RichTextInput } from "ra-input-rich-text";
 import {
   SelectArrayInput,
   Filter,
@@ -15,9 +15,10 @@ import {
   Create,
   required,
   AutocompleteArrayInput,
-
+  FileInput,
+  ImageField,
 } from "react-admin";
-import useLabels from "../../hooks/useLabels"
+import useLabels from "../../hooks/useLabels";
 import "./Work.scss";
 
 //function to validate the input : number
@@ -55,8 +56,7 @@ export const WorkList = (props) => {
 
 // WorkEdit Component
 export const WorkEdit = (props) => {
-const labels = useLabels();
-
+  const labels = useLabels();
 
   return (
     <Edit title="Edit Work" {...props}>
@@ -70,14 +70,15 @@ const labels = useLabels();
           validate={[required()]}
           className="form-control"
         />
-        < AutocompleteArrayInput 
-        label="Ajouter un label"
-         source="labelIds"
+        <AutocompleteArrayInput
+          label="Ajouter un label"
+          source="labelIds"
           choices={labels}
           optionText="name"
           optionValue="id"
           translateChoice={false}
-          fullWidth />
+          fullWidth
+        />
       </SimpleForm>
     </Edit>
   );
@@ -88,53 +89,60 @@ export const WorkCreate = (props) => {
   const labels = useLabels();
   return (
     <Create title="Create a Work" {...props}>
-      <SimpleForm  >
-      
-          <div className="row">
-            <div className="col-md-12">
-              <TextInput
-                source="title"
-                validate={[required()]}
-                className="form-control"
-              />
-            </div>
-            <div className="col-md-12">
-              <TextInput
-                source="author"
-                validate={[required()]}
-                className="form-control"
-              />
-            </div>
+      <SimpleForm>
+        <div className="row">
+          <div className="col-md-12">
+            <TextInput
+              source="title"
+              validate={[required()]}
+              className="form-control"
+              fullWidth
+            />
           </div>
-          <div className="row">
-            <div className="col-md-12">
-              <RichTextInput
-                source="content"
-                validate={[required()]}
-                className="form-control rounded rich-text-input-responsive"
-                multiline
-                fullWidth
-              />
-            </div>
+          <div className="col-md-12">
+            <TextInput
+              source="author"
+              validate={[required()]}
+              className="form-control"
+            />
           </div>
-          <div className="row">
-           
-            <div className="col-md-6">
-              <SelectArrayInput
-                label="Labels"
-                source="labelIds"
-                choices={labels}
-              />
-            </div>
-            <div className="col-md-6">
-              <NumberInput
-                source="member_id"
-                validate={[required()]}
-                className="form-control"
-              />
-            </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <RichTextInput
+              source="content"
+              validate={[required()]}
+              className="form-control rounded rich-text-input-responsive"
+              multiline
+              fullWidth
+            />
           </div>
-       
+        </div>
+        <div className="row">
+          <FileInput
+            source="pictures"
+            label="Images"
+            accept="image/*"
+            multiple={true}
+          >
+            <ImageField source="src" title="title" />
+          </FileInput>
+
+          <div className="col-md-6">
+            <SelectArrayInput
+              label="Labels"
+              source="labelIds"
+              choices={labels}
+            />
+          </div>
+          <div className="col-md-6">
+            <NumberInput
+              source="member_id"
+              validate={[required()]}
+              className="form-control"
+            />
+          </div>
+        </div>
       </SimpleForm>
     </Create>
   );
