@@ -28,6 +28,7 @@ app.use(session({
 }));
 
 app.use(express.static('public'));
+app.use('/uploads', express.static('uploads')); 
 app.use(morgan('dev'));
 
 const corsOptions = {

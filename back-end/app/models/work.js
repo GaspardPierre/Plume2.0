@@ -51,7 +51,9 @@ const workModel = {
           member_id: work.member_id,
          
         },
+       
       });
+     
       return newWork;
     } catch (error) {
       console.log(error);

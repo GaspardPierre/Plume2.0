@@ -1,11 +1,16 @@
 const { workModel } = require("../models");
 const { labelModel} = require ("../models")
-const path = require("path");
+
+const multer = require('multer');
+const upload =  require('../../uploader/uploader')
+
 
 
 
 
 const workController = {
+
+
   async getAllWorks(req, res) {
     const works = await workModel.findAll();
     console.log(req.session);
@@ -25,55 +30,61 @@ const workController = {
     }
   },
   
+
   async addWork(req, res) {
-    const {title, author, content, note, member_id, labelIds, urlImage } = req.body;
-    console.log("LABELSID",labelIds);
+    console.log("req.file :", req.file);
+    console.log("req.body :", req.body);
 
+    try {
+        const { title, author, content, note, member_id, labelIds } = req.body;
 
-    const work = await workModel.findByTitle(title);
-    if (work) {
-        console.log('Work trouvé par le titre:', work);
-      return res.status(409).json("Ce titre est déjà présent en BDD");
-    }
-    if (req.session.role === "admin" && req.session.user.id) {
-      const newWorkData = {
-        
-        content: content,
-        author: author,
-        urlImage: urlImage || null,
-        title: title,
-        note: note || undefined,
-        member_id: req.session.user.id,
-      };
-      try {
-        const newWork = await workModel.insert(newWorkData);
-let labelConnections;
-        if (Array.isArray(labelIds) && labelIds.length) {
-           labelConnections = await Promise.all(
-              labelIds.map(labelId =>
-                  labelModel.createWorkLabel(newWork.id, parseInt(labelId, 10))
-              )
-          );
-      }
       
-        //Combined work with label's relations
-      const responseObj = {
-        ...newWork,
-        labels: labelConnections,
-      };
+        if (!(req.session.role === "admin" && req.session.user.id)) {
+            return res.status(401).json({ message: "Vous devez être admin pour ajouter une œuvre" });
+        }
 
-      res.status(200).json(responseObj);
+        // Verification
+        const existingWork = await workModel.findByTitle(title);
+        if (existingWork) {
+            return res.status(409).json({ message: "Ce titre est déjà présent en BDD" });
+        }
+
+        // Construire l'URL de l'image
+        const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}` : null;
+
+        // Préparer les données pour le nouveau travail
+        const newWorkData = {
+            title,
+            author,
+            content,
+            note,
+            member_id: req.session.user.id,
+            urlImage: imageUrl
+        };
+
+        // add Work
+        const newWork = await workModel.insert(newWorkData);
+
+        // Handling labels
+        let labelConnections = [];
+        if (Array.isArray(labelIds) && labelIds.length) {
+            labelConnections = await Promise.all(
+                labelIds.map(labelId => labelModel.createWorkLabel(newWork.id, parseInt(labelId, 10)))
+            );
+        }
+
+        // Construire et envoyer la réponse
+        const responseObj = {
+            ...newWork,
+            labels: labelConnections,
+        };
+        res.status(200).json(responseObj);
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: 'Server error' });
+        console.error("Erreur dans addWork :", error);
+        res.status(500).json({ message: 'Erreur serveur', error: error.message });
     }
-  } else {
-    res
-      .status(401)
-      .json({ message: "Vous devez être admin pour ajouter une oeuvre" });
-  }
 },
-     
+
    
   async getWork(req, res) {
     try {
@@ -135,4 +146,9 @@ let labelConnections;
    return res.json({ message: "L'oeuvre a bien été supprimée" });
   },
 };
+
+
+
+
+
 module.exports = workController;

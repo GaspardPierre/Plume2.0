@@ -2,6 +2,10 @@ const express = require('express');
 const {workController} = require('../controllers/index.js');
 const router = express.Router();
 const security = require('../service/security.js');
+const upload = require ('../../uploader/uploader.js')
+const multer = require('multer')
+
+
 
 //Toutes les url commencent par oeuvres //
 
@@ -78,7 +82,12 @@ router.get('/byLabel/:labelId', workController.getWorksByLabel);
 
 router.patch('/:id', security.checkAdmin, workController.modifyWork);
 
-router.post('/addWork', security.checkAdmin, workController.addWork);
+router.post('/addWork', (req, res, next) => {
+    console.log("Requête reçue :", req.method, req.url);
+    console.log("Headers :", req.headers);
+    console.log("Body :", req.body);
+    next();
+}, security.checkAdmin, upload.single('picture'), workController.addWork);
 
 
 
