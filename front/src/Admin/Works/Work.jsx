@@ -110,6 +110,7 @@ export const WorkCreate = (props) => {
         <div className="row">
           <div className="col-md-12">
             <RichTextInput
+            label="Contenu du poème"
               source="content"
               validate={[required()]}
               className="form-control rounded rich-text-input-responsive"
@@ -120,10 +121,10 @@ export const WorkCreate = (props) => {
         </div>
         <div className="row">
           <FileInput
-            source="pictures"
+            source="picture"
             label="Images"
             accept="image/*"
-            multiple={true}
+            multiple={false}
           >
             <ImageField source="src" title="title" />
           </FileInput>

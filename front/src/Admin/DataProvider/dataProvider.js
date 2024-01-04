@@ -35,16 +35,40 @@ const dataProvider = {
       throw error;
     }
   },
+
   create: async (resource, params) => {
-    const url = resource === 'work' ? `/${resource}/addWork` : `/${resource}/add${resource.charAt(0).toUpperCase() + resource.slice(1)}`;
+    let url = `/${resource}/addWork`;
+  
     try {
-      const response = await api.post(url, params.data);
+      const formData = new FormData();
+      Object.keys(params.data).forEach(key => {
+        // Vérifiez si le champ est 'picture', qu'il existe et qu'il contient un fichier
+        console.log(Object.keys(params.data));
+        if (key === 'picture') {
+          const picture = params.data[key];
+          if (picture && picture.rawFile instanceof File) {
+         
+            formData.append('picture', picture.rawFile);
+            console.log('Appending file:', picture.rawFile);
+          }
+        } else {
+          // Ajouter d'autres champs
+          formData.append(key, params.data[key]);
+          console.log(`Appending ${key}:`, params.data[key]);
+        }
+      });
+  
+      const response = await api.post(url, formData,{ withCredentials: true });
       return { data: response.data };
     } catch (error) {
       console.error(`Erreur lors de la création d'un ${resource}:`, error);
       throw error;
     }
   },
+  
+  
+  
+
   update: async (resource, params) => {
     try {
       console.log(params.data, "***LES LABELS***")
