@@ -75,7 +75,7 @@ const workModel = {
   },
 
   async update(id, updatedWork) {
-    const { labelIds, ...restOfUpdatedWork } = updatedWork; // Extract labelIds and the rest of updatedWork
+    const { labelIds, urlImage, ...restOfUpdatedWork } = updatedWork; // Extract labelIds and the rest of updatedWork
 
     if (!id || Object.keys(restOfUpdatedWork).length === 0) {
       throw new Error("Invalid parameters");
