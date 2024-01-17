@@ -5,6 +5,7 @@ import {
   fetchComments,
   addComment,
   deleteComment,
+  resetComment
 } from "../../reducers/comment";
 import { fetchWorks } from "../../reducers/work";
 import Comment from "../Comment/Comment";
@@ -27,11 +28,15 @@ export default function Poem() {
   const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchWorks());
-      dispatch(fetchComments(id));
-    }
-  }, [id, status, dispatch]);
+    // Réinitialiser et recharger les commentaires à chaque changement d'ID de poème
+    dispatch(fetchComments(id));
+  
+    // Fonction de nettoyage pour réinitialiser les commentaires
+    return () => {
+      dispatch(resetComment()); // Assurez-vous d'avoir une action 'resetComment' dans votre slice Redux
+    };
+  }, [id, dispatch]);
+  
 
   const poem = works.find((p) => p.id === parseInt(id));
 
@@ -65,7 +70,7 @@ export default function Poem() {
       ) : (
         <div className="container my-5 poem-container" style={{ backgroundImage: `url(${poemBg})` }}>
           <div className="row">
-            <div className="col-lg-6 col-md-12 mb-5 poem-section opacity-80">
+            <div className="col-lg-6 col-md-12 mb-5 poem-section ">
               <div className="card poem-card border-0 bg-custom">
                 <div className="card-body">
                   <div className="d-flex justify-content-center rating-container">
@@ -76,7 +81,7 @@ export default function Poem() {
                     </div>
                   </div>
                   {poem.urlImage && (
-                    <div className="d-flex justify-content-center align-items-end">
+                    <div className="d-flex justify-content-center align-items-end h-40">
                       <img src={poem.urlImage} className="img-fluid poem-image mb-3" alt="Poem" />
                     </div>
                   )}
