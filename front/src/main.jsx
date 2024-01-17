@@ -28,7 +28,8 @@ import '../src/index.scss'
 const Root = () => {
   useEffect(() => {
     const setBodyHeight = () => {
-      document.documentElement.style.height = `${window.innerHeight}px`;
+      // Calculez la hauteur sans la marge/le padding si nécessaire
+      document.documentElement.style.height = `calc(${window.innerHeight}px -68px )`;
     };
     window.addEventListener("resize", setBodyHeight);
     setBodyHeight();

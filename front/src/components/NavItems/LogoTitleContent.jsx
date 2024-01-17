@@ -2,10 +2,12 @@ import React from 'react'
 import logo from '../../assets/logo.png'
 import './LogoTitleContent.scss'
 
+
 export default function LogoTitleContent() {
   return (
  
-      <> 
+     
+     
       <div className='d-flex justify-content-start logo-container'>
 
      
@@ -14,11 +16,12 @@ export default function LogoTitleContent() {
      className='logo' />
 
 
-  <div className='title'>
+  <div className='title '>
   Plume 2.0
   </div>
+
   </div>
-  </>
+ 
 
   
    

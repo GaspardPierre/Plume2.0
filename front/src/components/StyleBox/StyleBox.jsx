@@ -13,7 +13,7 @@ export default function StyleBox({ children }) {
           <Title />
    
 
-        <div className="main-section d-flex w-100 w-md-75  align-items-center my-0 my-md-3 ">
+        <div className="main-section d-flex w-100 w-md-75  align-items-center my-0 my-md-3  ">
           {children}
         </div>
       </div>

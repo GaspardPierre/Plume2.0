@@ -6,9 +6,11 @@
 
 
 .main-container {
+  flex: 1; /* Permet au conteneur principal de se développer pour remplir l'espace disponible */
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height:100%;
+ 
 }
 .content {
   flex: 1;
