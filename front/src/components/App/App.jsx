@@ -29,7 +29,7 @@ export default function App() {
   // }, [isAdmin]);
 
   return (
-    <div className="main-container"> 
+    <div className="main-container "> 
     <div className="content">
 
     
@@ -37,7 +37,7 @@ export default function App() {
         <Header />
       </div>
 
-      <div className="d-flex flex-column  bg-custom-second border-start border-end custom align-items-center">
+      <div className="d-flex flex-column  bg-custom-second border-start border-end custom align-items-center overflow-x-scroll">
         <StyleBox >
         <Routes>
           <Route path="/" element={<Home />} />

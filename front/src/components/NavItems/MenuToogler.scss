@@ -3,4 +3,6 @@
       display: none;
     }
   }
-  
+  .content-blur {
+    filter: blur(5px); // Ajustez la valeur de flou selon vos préférences
+  }

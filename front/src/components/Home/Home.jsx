@@ -40,6 +40,9 @@ export default function Home({  }) {
   return (
     <>
       <div className="d-flex banniere-container  ">
+        <div>
+          
+        </div>
 
 
 
@@ -52,8 +55,8 @@ export default function Home({  }) {
         )}
         <div className='img-container   position-relative border-home  shadow-md '>
           <img src={banniere} alt='banniere' className='img-fluid roundy shadow-md ' />
-          <div className=' section-poem position-absolute   bg-four rounded p-2'>
-            <div className='first-poem-container mx-2 py-2 position-relative'>
+          <div className=' section-poem position-absolute   section-color rounded p-2'>
+            <div className='first-poem-container mx-2 py-2 mx-md-4 my-md-4 position-relative'>
            
               <h2 className='first-poem text-custom font-custom font-color line mb-1   '>CREATION</h2>   
               <div className='third'>
