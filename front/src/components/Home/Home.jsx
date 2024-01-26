@@ -48,7 +48,7 @@ export default function Home({  }) {
 
         {showSeparator && (
           <div className='separator-content d-flex  justify-content-end ms '>
-            <div className='separator-container bg-custom shadow-md '> 
+            <div className='separator-container separator-color shadow-md '> 
               {/* ... */}
             </div>
           </div>

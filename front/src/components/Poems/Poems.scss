@@ -10,7 +10,7 @@
     padding: 2rem;
     min-height: 45vh;
     backdrop-filter: blur(5px);
-    background-image: linear-gradient(to right, #F0E4E4, #6182BC);
+    background-image: linear-gradient(to right,#C2E6FF, #004074);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -88,7 +88,9 @@
     
     .poem-title {
         display : flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
       padding: 10px;
  
       transition: background-color 0.4s ease, padding 0.3s ease, filter 0.3s ease;
