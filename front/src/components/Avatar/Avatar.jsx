@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
-
+import { useSelector } from 'react-redux';
 import './Avatar.scss'
 
 export default function Avatar({ pseudo }) {
+  const role = useSelector((state) => state.member.role)
+  console.log('Role: ' ,role)
   const [bgColor, setBgColor] = useState('#6182BC');
  
   //Function to hash a pseudo
 
   const stringToColor = (str) => {
+  if (str === "undefined") return
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);

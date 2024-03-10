@@ -26,6 +26,7 @@ export default function Poem() {
   const comments = useSelector((state) => state.comment.comments) || [];
   const { pseudo, userId, role } = useMemberState();
   const [showComments, setShowComments] = useState(false);
+ 
 
   useEffect(() => {
     // Réinitialiser et recharger les commentaires à chaque changement d'ID de poème
@@ -104,7 +105,10 @@ export default function Poem() {
                   )}
                   <div className="d-flex my-3">
                     <button className="btn btn-custom text-capitalize" onClick={toggleComments}>
-                      {showComments ? <i className="fa fa-eye-slash large-icon"></i> : <i className="fa fa-comments large-icon"></i>}
+                    {role !== null && (
+    showComments ? <i className="fa fa-eye-slash large-icon"></i> : <i className="fa fa-comments large-icon"></i>
+)}
+
                     </button>
                   </div>
                   {showComments && (
