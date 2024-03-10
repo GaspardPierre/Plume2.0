@@ -4,12 +4,14 @@ import store from "../../store/store";
 import ReactStars from "react-rating-stars-component";
 import { addAverage, fetchAverage } from "../../reducers/average";
 import { useMemberState } from "../../hooks/customHooks";
-
 import './RatingStars.scss';
+import AlertMessage from "../../ui/AlertMessage";
 
 export default function RatingStars({ poemId }) {
 
-
+  //Modal Alert Message
+  const [showAlert, setShowAlert] = useState(false);
+  const handleCloseAlert = () => setShowAlert(false);
 
   //STORE
 
@@ -63,6 +65,12 @@ export default function RatingStars({ poemId }) {
   }, [averages, id]);
 
   const ratingChanged = (newRating) => {
+    if (role.role === null) {
+      setShowAlert(true);
+      return;
+    }
+    setShowAlert(false);
+  
     setRating(newRating);
     setDisplayedAverage(newRating);
     setIsHovered(false);
@@ -86,6 +94,9 @@ export default function RatingStars({ poemId }) {
   };
   return (
     <div className="flex-column  stars-container ">
+ <AlertMessage show={showAlert} handleClose={handleCloseAlert}
+ title={ "⚠️ Attention! "}
+ message={ "Vous devez être connecté pour voter ! ☝️"}  />
       
       
     

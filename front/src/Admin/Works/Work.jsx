@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+
 import { RichTextInput } from "ra-input-rich-text";
 import {
   SelectArrayInput,
@@ -17,8 +17,10 @@ import {
   AutocompleteArrayInput,
   FileInput,
   ImageField,
+  useListController,
+  
 } from "react-admin";
-import useLabels from "../../hooks/useLabels";
+
 import "./Work.scss";
 
 //function to validate the input : number
@@ -42,8 +44,20 @@ const WorkFilter = (props) => (
 );
 
 export const WorkList = (props) => {
+  const {
+    data,
+    page,
+    setPage,
+    perPage,
+    // ... autres propriétés et méthodes retournées par useListController
+  } = useListController();
+
   return (
-    <List {...props} filters={<WorkFilter />}>
+   
+    <List {...props} 
+
+    filters={<WorkFilter />}
+    >
       <Datagrid>
         <TextField source="id" />
         <TextField source="title" />
@@ -51,6 +65,7 @@ export const WorkList = (props) => {
         <DeleteButton basePath="/work" />
       </Datagrid>
     </List>
+
   );
 };
 

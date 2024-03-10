@@ -39,10 +39,13 @@ export default function Home({  }) {
 
   return (
     <>
+      
       <div className="d-flex banniere-container  ">
+    
         <div>
           
         </div>
+     
 
 
 

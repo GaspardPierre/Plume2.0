@@ -59,14 +59,14 @@ const averageSlice = createSlice({
       .addCase(addAverage.fulfilled, (state, action) => {
         state.status = "succeeded";
         console.log("ACTION.PAYLOAD", action.payload);
-        if ("average" in action.payload) {
+        
+        if (typeof action.payload === 'object' && action.payload !== null && "average" in action.payload) {
           state.averages.push(action.payload);
           state.averageByPoem[action.payload.work_id] = action.payload.average;
+        } else {
+          console.error("Payload incorrect or not an object:", action.payload);
         }
-        
-      else {
-          console.error("Payload incorrect:", action.payload);
-        }
+      
         console.log("state.average:", state.averageByPoem);
       })
 
