@@ -22,7 +22,12 @@ const ScrollTop = () => {
 <button
         aria-label="Scroll To Top"
         onClick={handleScrollTop}
-        className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+        className="rounded-circle p-2 your-custom-class"
+  style={{ 
+    backgroundColor: '#e5e7eb', 
+    color: '#6b7280', 
+    transition: 'all 0.2s' 
+  }}
       >
         <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           <path
