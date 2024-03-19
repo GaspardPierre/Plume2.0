@@ -6,6 +6,7 @@ import {  fetchWorksByLabel} from "../../reducers/label";
 import Loading from "../Loading/Loading";
 import LabelFilter from "../LabelFilter/LabelFilter";
 import ReactPaginate from 'react-paginate';
+import ScrollTop  from "../../ui/ScrollTop";
 import './Poems.scss';
 
 
@@ -106,6 +107,7 @@ const labelError = useSelector((state) => state.label.error);
   }
   return (
     <>
+    <ScrollTop />
       <div
         className="container poems-container"
       >

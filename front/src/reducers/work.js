@@ -9,19 +9,18 @@ export const fetchWorks = createAsyncThunk("work/fetchWorks", async () => {
   return response.data;
 
 });
-
-// // FETCH SINGLE POEM ACTION
-// export const fetchWork = createAsyncThunk("work/fetchWork", async (id) => {
-//   console.log(`id dans le Slice: ${id}`);
-//   const response = await api.get(`/work/${id}`);
-//   return response.data;
-// });
+// FETCH SINGLE POEM ACTION
+export const fetchWork = createAsyncThunk("work/fetchWork", async (id) => {
+  console.log(`id dans le Slice: ${id}`);
+  const response = await api.get(`/work/${id}`);
+  return response.data;
+});
 
 // ADD POEM ACTION
 export const addWork = createAsyncThunk("work/addWork", async (work) => {
-  console.log(`work: ${work}`);
+
   const response = await api.post("/work/addwork", work);
-  console.log(`response.data: ${JSON.stringify(response.data)}`);
+
 
   return response.data;
 });
@@ -67,6 +66,22 @@ const workSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
+
+      // Handle fetch single work
+.addCase(fetchWork.pending, (state) => {
+  state.status = "loading";
+})
+.addCase(fetchWork.fulfilled, (state, action) => {
+  state.status = "succeeded";
+  if (!state.works.some(work => work.id === action.payload.id)) {
+    state.works.push(action.payload);
+  }
+  
+})
+.addCase(fetchWork.rejected, (state, action) => {
+  state.status = "failed";
+  state.error = action.error.message;
+})
 
       // Handle add poem actions
       .addCase(addWork.pending, (state) => {
