@@ -1,0 +1,24 @@
+$bg-gray-200: #e5e7eb;
+$text-gray-500: #6b7280;
+$hover-bg-gray-300: #d1d5db;
+$dark-bg-gray-700: #374151;
+$dark-text-gray-400: #9ca3af;
+$dark-hover-bg-gray-600: #4b5563;
+
+.your-custom-class {
+  background-color: $bg-gray-200;
+  color: $text-gray-500;
+
+  &:hover {
+    background-color: $hover-bg-gray-300;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $dark-bg-gray-700;
+    color: $dark-text-gray-400;
+
+    &:hover {
+      background-color: $dark-hover-bg-gray-600;
+    }
+  }
+}
