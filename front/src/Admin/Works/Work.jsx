@@ -1,4 +1,4 @@
-
+import useLabels from "../../hooks/useLabels";
 import { RichTextInput } from "ra-input-rich-text";
 import {
   SelectArrayInput,
