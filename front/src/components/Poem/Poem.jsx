@@ -34,12 +34,13 @@ export default function Poem() {
   
     // Fonction de nettoyage pour réinitialiser les commentaires
     return () => {
-      dispatch(resetComment()); // Assurez-vous d'avoir une action 'resetComment' dans votre slice Redux
+      dispatch(resetComment()); 
     };
   }, [id, dispatch]);
   
 
   const poem = works.find((p) => p.id === parseInt(id));
+  console.log('chemin de l"image :' ,poem.urlImage);
 
   if (status === 'loading') {
     return <div>Chargement...</div>;
