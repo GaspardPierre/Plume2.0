@@ -82,7 +82,7 @@ export default function Poem() {
                       <h6 className="text-muted author-name font-color py-1">{poem.author}</h6>
                     </div>
                   </div>
-                  {poem.urlImage && (
+                  {poem && poem.urlImage && (
                     <div className="d-flex justify-content-center align-items-end h-40">
                       <img src={poem.urlImage} className="img-fluid poem-image mb-3" alt="Poem" />
                     </div>
