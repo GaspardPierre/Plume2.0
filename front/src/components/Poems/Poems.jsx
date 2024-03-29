@@ -2,11 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import work, { fetchWorks } from "../../reducers/work";
-import {  fetchWorksByLabel} from "../../reducers/label";
 import Loading from "../Loading/Loading";
 import LabelFilter from "../LabelFilter/LabelFilter";
-import ReactPaginate from 'react-paginate';
 import ScrollTop  from "../../ui/ScrollTop";
+import { selectPoems, selectWorkStatus } from "../../selectors/workSelector";
 import './Poems.scss';
 
 
@@ -32,8 +31,8 @@ const labelError = useSelector((state) => state.label.error);
 
   //WORKS
   const dispatch = useDispatch();
-  const poems = useSelector((state) => state.work.works);
-  const workStatus = useSelector((state) => state.work.status);
+  const poems = useSelector(selectPoems);
+  const workStatus = useSelector(selectWorkStatus);
   const error = useSelector((state) => state.work.error);
   const navigate = useNavigate();
   const [selectedWork, setSelectedWork] = useState(null);

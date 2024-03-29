@@ -20,6 +20,7 @@ export const fetchWork = createAsyncThunk("work/fetchWork", async (id) => {
 export const addWork = createAsyncThunk("work/addWork", async (work) => {
 
   const response = await api.post("/work/addwork", work);
+  dispatch(fetchWorks()); 
 
 
   return response.data;
