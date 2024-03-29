@@ -18,6 +18,7 @@ import {
   FileInput,
   ImageField,
   useListController,
+  ShowButton
   
 } from "react-admin";
 
@@ -62,6 +63,7 @@ export const WorkList = (props) => {
         <TextField source="id" />
         <TextField source="title" />
         <EditButton basePath="/work" />
+        <ShowButton basePath="/work" /> 
         <DeleteButton basePath="/work" />
       </Datagrid>
     </List>

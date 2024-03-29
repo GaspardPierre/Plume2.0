@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toggleRole } from '../../reducers/member';
+import { WorkShow } from '../Works/WorkShow';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,8 @@ const Dashboard = () => {
       
       <Link to="work"></Link>
       <Link to="work/create"></Link>
-      <Link to="work/edit"></Link>
+      <Link to="work/edit"> </Link>
+      <Link to="/work/:id/show"></Link> 
       <Link to="comment"></Link>
       <Link to="comment/edit"></Link>
       <Link to="member"></Link>

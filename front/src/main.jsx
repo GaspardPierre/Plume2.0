@@ -14,9 +14,11 @@ import Dashboard from './Admin/Dashboard/Dashboard';
 import dataProvider from './Admin/DataProvider/dataProvider';
 import authProvider from './provider/authProvider';
 import { WorkList, WorkEdit, WorkCreate } from './Admin/Works/Work';
+import { WorkShow } from './Admin/Works/WorkShow';
 import { CommentList, CommentEdit } from './Admin/Comments/Comment';
 import { MemberList, MemberEdit, MemberCreate } from './Admin/Members/Member';
 import { LabelList, LabelEdit, LabelCreate } from './Admin/Labels/Label';
+import Layout from './Admin/Layout';
 import './index.scss';
 
 
@@ -49,8 +51,8 @@ const AppLogic = () => {
     <BrowserRouter>
       <React.StrictMode>
         {isAdmin ?
-          (<Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider}>
-            <Resource name="work" list={WorkList} edit={WorkEdit} create={WorkCreate} />
+          (<Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider} layout={Layout}>
+            <Resource name="work" list={WorkList} edit={WorkEdit} create={WorkCreate} show ={WorkShow}/>
             <Resource name="comment" list={CommentList} edit={CommentEdit} />
             <Resource name="member" list={MemberList} edit={MemberEdit} create={MemberCreate} />
             <Resource name="label" list={LabelList} edit={LabelEdit} create={LabelCreate} />
