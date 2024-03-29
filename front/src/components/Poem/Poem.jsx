@@ -15,6 +15,7 @@ import { useMemberState } from "../../hooks/customHooks";
 import Share from "../Share/Share";
 import poemBg from "../../assets/poem.png";
 import DOMPurify from "dompurify";
+import { selectPoems } from "../../selectors/workSelector";
 
 import "./Poem.scss";
 
@@ -22,7 +23,9 @@ export default function Poem() {
   const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { works, status, error } = useSelector((state) => state.work);
+  const works = useSelector(selectPoems);
+  const status = useSelector((state) => state.work.status);
+  const error = useSelector((state) => state.work.error);
   const comments = useSelector((state) => state.comment.comments) || [];
   const { pseudo, userId, role } = useMemberState();
   const [showComments, setShowComments] = useState(false);
@@ -38,9 +41,8 @@ export default function Poem() {
     };
   }, [id, dispatch]);
   
-
   const poem = works.find((p) => p.id === parseInt(id));
-  console.log('chemin de l"image :' ,poem.urlImage);
+ 
 
   if (status === 'loading') {
     return <div>Chargement...</div>;

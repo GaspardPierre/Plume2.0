@@ -91,10 +91,19 @@ const workSlice = createSlice({
       )
       .addCase(addWork.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.works.push(action.payload);
-        console.log(`state.works: ${state.works}`);
-      } 
-      )
+      
+
+        if (action.payload && typeof action.payload === 'object') {
+        
+          state.works.push(action.payload);
+        } else {
+          console.error("Réponse inattendue lors de l'ajout d'un travail", action.payload);
+        }
+      
+        console.log(`state.works: ${JSON.stringify(state.works)}`);
+      })
+      
+      
       .addCase(addWork.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
