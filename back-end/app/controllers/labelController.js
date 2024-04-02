@@ -11,7 +11,7 @@ const labelController = {
        
             const { tag} = req.body;
             console.log(req.body);
-          
+            console.log("**************TAG: " ,tag);
     const existingLabel = await labelModel.findByTag(tag);
     if (existingLabel) {
       return res.status(401).json("Ce label est déjà présent en bdd");

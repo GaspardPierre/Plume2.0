@@ -4,16 +4,33 @@ const prisma = new PrismaClient();
 const workModel = {
   async findByTitle(title) {
     try {
-      const foundTitle = await prisma.work.findFirst({
+      const foundTitles = await prisma.work.findMany({
         where: {
-          title,
+          title: {
+            contains: title,
+            mode: 'insensitive'
+          },
         },
       });
-      return foundTitle;
+      return foundTitles;
     } catch (error) {
       console.log(error);
     }
   },
+  async findTitle(title) {
+    try {
+      const foundWork = await prisma.work.findFirst({
+        where: {
+          title: title,
+        },
+      });
+      return foundWork;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+  ,
   async findByLabelId(labelId) {
     try {
       const works = await prisma.work.findMany({
@@ -61,6 +78,7 @@ const workModel = {
   },
 
   async findById(id) {
+    console.log("*******************************ID DANS MODEL FINDBYID !", id);
     try {
       const work = await prisma.work.findUnique({
         where: {

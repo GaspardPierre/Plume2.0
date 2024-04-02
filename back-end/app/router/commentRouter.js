@@ -3,6 +3,7 @@ const router = express.Router();
 const { commentController } = require ("../controllers/index");
 const security = require ('../service/security');
 
+router.get('/', commentController.getAllComments);
 router.get('/:id', commentController.findAllWorkComments);
 router.post('/addComment', security.checkUser, commentController.addComment);
 router.get('/:id', commentController.getComment);

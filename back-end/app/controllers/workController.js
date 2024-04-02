@@ -13,9 +13,30 @@ const workController = {
 
   async getAllWorks(req, res) {
     const works = await workModel.findAll();
-    console.log(req.session);
+  
     return res.status(200).json(works);
   },
+  async getWorkByTitle(req, res) {
+    try {
+      const { title } = req.query;
+  
+      let works;
+      if (title) {
+        works = await workModel.findByTitle(title);
+        if (!works || works.length === 0) return res.status(404).json({ message: "Work not found" });
+      } else {
+      
+        works = await workModel.findAll();
+      }
+  
+      return res.status(200).json({ data: works, total: works.length });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Server error' });
+    }
+  }
+  ,
+  
   async getWorksByLabel(req, res) {
     try {
       const labelId = req.params.labelId;
@@ -44,13 +65,14 @@ const workController = {
         }
 
         // Verification
-        const existingWork = await workModel.findByTitle(title);
+        const existingWork = await workModel.findTitle(title);
         if (existingWork) {
             return res.status(409).json({ message: "Ce titre est déjà présent en BDD" });
         }
 
         // Construire l'URL de l'image
-        const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}` : null;
+        const imageUrl = req.file ? `$http://${req.get('host')}/uploads/${req.file.filename}` : null;
+        console.log("imageURL*************", imageUrl);
 
         // Préparer les données pour le nouveau travail
         const newWorkData = {
@@ -88,17 +110,21 @@ const workController = {
    
   async getWork(req, res) {
     try {
-      const work = await workModel.findById(req.params.id);
+      if (!req.params.id) {console.log("pas d'id!!!")} else {
+
+      
+      const work = await workModel.findById(parseInt(req.params.id));
       if (!work) {
         return res.status(404).json({ message: 'Work not found' });
       } console.log(work);
-      return res.status(200).json(work);
+      return res.status(200).json(work);}
      
 
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: 'Server error' });
     }
+  
   },
   
   async modifyWork(req, res) {

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@prisma/client": "^5.7.0",
+    "aws-sdk": "^2.1587.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -10,6 +11,7 @@
     "express-session": "^1.17.3",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "multer-s3": "^3.0.1",
     "node": "^19.6.1",
     "nodemon": "^2.0.21",
     "pg": "^8.9.0"

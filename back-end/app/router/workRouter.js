@@ -77,8 +77,11 @@ const multer = require('multer')
 
 router.get('/', workController.getAllWorks);
 
-router.get('/:id', workController.getWork);
+
+router.get('/byTitle', workController.getWorkByTitle);
+
 router.get('/byLabel/:labelId', workController.getWorksByLabel);
+router.get('/:id', workController.getWork);
 
 router.patch('/:id', security.checkAdmin, workController.modifyWork);
 
