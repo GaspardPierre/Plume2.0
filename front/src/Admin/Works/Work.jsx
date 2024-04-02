@@ -18,7 +18,11 @@ import {
   FileInput,
   ImageField,
   useListController,
-  ShowButton
+  ShowButton,
+  TopToolbar,
+  FilterButton,
+  CreateButton ,
+  ExportButton 
   
 } from "react-admin";
 
@@ -41,35 +45,32 @@ const WorkFilter = (props) => (
       source="labelId"
       validate={validateNumber}
     />
+     <TextInput
+      label="Rechercher par titre"
+      source="title" 
+      alwaysOn
+    />
   </Filter>
 );
 
 export const WorkList = (props) => {
-  const {
-    data,
-    page,
-    setPage,
-    perPage,
-    // ... autres propriétés et méthodes retournées par useListController
-  } = useListController();
 
-  return (
+
+
    
-    <List {...props} 
-
-    filters={<WorkFilter />}
-    >
-      <Datagrid>
-        <TextField source="id" />
-        <TextField source="title" />
-        <EditButton basePath="/work" />
+    return (
+      <List {...props} filters={<WorkFilter />} sort={{ field: 'id', order: 'ASC' }}>
+        <Datagrid>
+          <TextField source="id" />
+          <TextField source="title" />
+          <EditButton basePath="/work" />
         <ShowButton basePath="/work" /> 
         <DeleteButton basePath="/work" />
-      </Datagrid>
-    </List>
-
-  );
-};
+        
+        </Datagrid>
+      </List>
+    );
+  };
 
 // WorkEdit Component
 export const WorkEdit = (props) => {

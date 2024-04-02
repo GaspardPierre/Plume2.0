@@ -5,28 +5,38 @@ import api from '../../api';
 
 
 const dataProvider = {
+ 
   getList: async (resource, params) => {
     let response;
     try {
-        if (resource === 'comment' && params.filter && params.filter.workId) {
-            response = await api.get(`/${resource}/${params.filter.workId}`);
-        } 
-        else if (resource === 'work') {
-            if (params.filter && params.filter.labelId) {
-                response = await api.get(`/work/byLabel/${params.filter.labelId}`);
-            } else {
-                response = await api.get(`/${resource}`);
-            }
-        } else {
-            response = await api.get(`/${resource}`);
-        }
-        console.log("Data from API:", response.data); 
+      if (resource !== 'work') {
+        response = await api.get(`/${resource}`);
         return { data: response.data, total: response.data.length };
+      }else if (resource === 'work') {
+        if (params.filter) {
+          if (params.filter.labelId) {
+            response = await api.get(`/work/byLabel/${params.filter.labelId}`);
+          } else if (params.filter.title && params.filter.title.trim().length > 0) {
+            const encodedTitle = encodeURIComponent(params.filter.title.trim());
+            response = await api.get(`/work/byTitle?title=${encodedTitle}`);
+            return { data: response.data.data, total: response.data.total }; 
+          } else {
+            response = await api.get(`${resource}/`);
+          }
+        } else {
+          response = await api.get(`/work`);
+        }
+      } else {
+        response = await api.get(`/${resource}`);
+      }
+      return { data: response.data, total: response.data.length};
     } catch (error) {
-        console.error(`Erreur lors de la récupération des ${resource}:`, error);
-        throw error;
+      console.error(`Erreur lors de la récupération des ${resource}:`, error);
+      throw error;
     }
-},
+  },
+
+  
   getOne: async (resource, params) => {
     try {
       const response = await api.get(`/${resource}/${params.id}`);
@@ -38,13 +48,15 @@ const dataProvider = {
   },
 
   create: async (resource, params) => {
-    let url = `/${resource}/addWork`;
+    let url = `/${resource}/add${resource.charAt(0).toUpperCase() + resource.slice(1)}`;
   
     try {
       const formData = new FormData();
       Object.keys(params.data).forEach(key => {
         // Vérifiez si le champ est 'picture', qu'il existe et qu'il contient un fichier
         console.log(Object.keys(params.data));
+        console.log('Params data:', params.data);
+
         if (key === 'picture') {
           const picture = params.data[key];
           if (picture && picture.rawFile instanceof File) {
@@ -58,7 +70,7 @@ const dataProvider = {
           console.log(`Appending ${key}:`, params.data[key]);
         }
       });
-  
+  console.log("***Requete****:", url,formData);
       const response = await api.post(url, formData,{ withCredentials: true });
       return { data: response.data };
     } catch (error) {

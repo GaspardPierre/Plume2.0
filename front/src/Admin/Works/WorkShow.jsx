@@ -18,7 +18,7 @@ export const WorkShow = (props) => (
             <TextField source="author" />
             <RichTextField source="content" />
             <DateField source="create_at" />
-            <ImageField source="picture" label="Images" /> 
+            <ImageField source="urlImage" label="Images" /> 
             <ArrayField source="labels">
                 <SingleFieldList>
                     <ChipField source="name" />

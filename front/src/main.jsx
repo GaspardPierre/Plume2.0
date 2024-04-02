@@ -15,17 +15,14 @@ import dataProvider from './Admin/DataProvider/dataProvider';
 import authProvider from './provider/authProvider';
 import { WorkList, WorkEdit, WorkCreate } from './Admin/Works/Work';
 import { WorkShow } from './Admin/Works/WorkShow';
+import { CommentShow } from './Admin/Comments/CommentShow';
 import { CommentList, CommentEdit } from './Admin/Comments/Comment';
 import { MemberList, MemberEdit, MemberCreate } from './Admin/Members/Member';
 import { LabelList, LabelEdit, LabelCreate } from './Admin/Labels/Label';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Layout from './Admin/Layout';
 import './index.scss';
 
-
-
-import '../src/index.scss'
-
-// Set the height of the body to the height of the window
 
 const Root = () => {
   useEffect(() => {
@@ -39,9 +36,11 @@ const Root = () => {
   }, []);
 
   return (
+    
     <Provider store={store} >
       <AppLogic />
     </Provider>
+  
   );
 };
 
@@ -49,11 +48,11 @@ const AppLogic = () => {
   const isAdmin = useSelector((state) => state.member.role) === 'admin';
   return (
     <BrowserRouter>
-      <React.StrictMode>
+     {/*  <React.StrictMode> */}
         {isAdmin ?
           (<Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider} layout={Layout}>
             <Resource name="work" list={WorkList} edit={WorkEdit} create={WorkCreate} show ={WorkShow}/>
-            <Resource name="comment" list={CommentList} edit={CommentEdit} />
+            <Resource name="comment" list={CommentList} edit={CommentEdit} show={CommentShow}/>
             <Resource name="member" list={MemberList} edit={MemberEdit} create={MemberCreate} />
             <Resource name="label" list={LabelList} edit={LabelEdit} create={LabelCreate} />
           </Admin>) :
@@ -61,7 +60,7 @@ const AppLogic = () => {
             <App />
           )
         }
-      </React.StrictMode>,
+     {/*  </React.StrictMode>, */}
     </BrowserRouter>
 
   );

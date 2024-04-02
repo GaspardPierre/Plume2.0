@@ -1,4 +1,4 @@
-import { List, Datagrid, TextField, EditButton, DeleteButton, Edit, SimpleForm, TextInput, NumberInput, Create , required } from 'react-admin';
+import { List, Datagrid, TextField, EditButton,ShowButton, DeleteButton, Edit, SimpleForm, TextInput, NumberInput, Create , required } from 'react-admin';
 import TextareaAutosize from 'react-textarea-autosize';
 // LabelList Component
 export const LabelList = (props) => {
@@ -11,6 +11,7 @@ export const LabelList = (props) => {
                 <TextField source='id' />
                 <TextField source='tag' />
                 <EditButton basePath='/label' />
+                <ShowButton basePath="/label" /> 
                 <DeleteButton basePath='/label' />
             </Datagrid>
         </List>
