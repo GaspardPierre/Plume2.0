@@ -5,6 +5,13 @@ import commentReducer from'../reducers/comment';
 import averageReducer from'../reducers/average';  
 import labelReducer from'../reducers/label';
 
+const preloadedState = () => {
+  const savedState = localStorage.getItem('loginState');
+  if (savedState) {
+    return { member: JSON.parse(savedState) };
+  }
+  return {};
+};
 
 export default configureStore({
   reducer: {
@@ -14,4 +21,5 @@ export default configureStore({
     average : averageReducer,
     label: labelReducer,
   },
+  preloadedState: preloadedState(),
 });

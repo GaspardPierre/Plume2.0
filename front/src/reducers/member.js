@@ -79,6 +79,12 @@ const memberSlice = createSlice({
         state.role = action.payload.role;
         state.pseudo = action.payload.pseudo;
         state.id = action.payload.id;
+
+        localStorage.setItem('loginState', JSON.stringify({
+          role: action.payload.role,
+          pseudo: action.payload.pseudo,
+          id: action.payload.id
+        }));
         // dispatch the setMemberRole action creator with the role of the member
       })
       .addCase(login.rejected, (state, action) => {
@@ -90,6 +96,7 @@ const memberSlice = createSlice({
         state.role = null;
         state.pseudo = null;
         state.id = null;
+        localStorage.removeItem('loginState');
       })
     
     
