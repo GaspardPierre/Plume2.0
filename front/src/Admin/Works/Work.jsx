@@ -17,16 +17,24 @@ import {
   AutocompleteArrayInput,
   FileInput,
   ImageField,
-  useListController,
+ DateField,
   ShowButton,
   TopToolbar,
-  FilterButton,
-  CreateButton ,
-  ExportButton 
+  CreateButton,
   
 } from "react-admin";
 
 import "./Work.scss";
+
+
+export const WorkListActions = (props) => {
+  return (
+    <TopToolbar>
+      <CreateButton label="Create Work" className="mobile" />
+    </TopToolbar>
+  );
+};
+
 
 //function to validate the input : number
 const validateNumber = (value) => {
@@ -45,11 +53,15 @@ const WorkFilter = (props) => (
       source="labelId"
       validate={validateNumber}
     />
-     <TextInput
+
+    <TextInput
+   
       label="Rechercher par titre"
       source="title" 
       alwaysOn
     />
+ 
+  
   </Filter>
 );
 
@@ -59,10 +71,11 @@ export const WorkList = (props) => {
 
    
     return (
-      <List {...props} filters={<WorkFilter />} sort={{ field: 'id', order: 'ASC' }}>
+      <List {...props} filters={<WorkFilter />} actions={<WorkListActions />} sort={{ field: 'id', order: 'DESC' }}>
         <Datagrid>
           <TextField source="id" />
           <TextField source="title" />
+  
           <EditButton basePath="/work" />
         <ShowButton basePath="/work" /> 
         <DeleteButton basePath="/work" />
@@ -109,7 +122,8 @@ export const WorkCreate = (props) => {
     <Create title="Create a Work" {...props}>
       <SimpleForm>
         <div className="row">
-          <div className="col-md-12">
+   
+          <div className="col-12 col-md-12">
             <TextInput
               source="title"
               validate={[required()]}
@@ -117,7 +131,7 @@ export const WorkCreate = (props) => {
               fullWidth
             />
           </div>
-          <div className="col-md-12">
+          <div className="col-12 col-md-12">
             <TextInput
               source="author"
               validate={[required()]}
@@ -126,9 +140,9 @@ export const WorkCreate = (props) => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-12 col-md-12">
             <RichTextInput
-            label="Contenu du poème"
+              label="Contenu du poème"
               source="content"
               validate={[required()]}
               className="form-control rounded rich-text-input-responsive"
@@ -138,23 +152,25 @@ export const WorkCreate = (props) => {
           </div>
         </div>
         <div className="row">
-          <FileInput
-            source="picture"
-            label="Images"
-            accept="image/*"
-            multiple={false}
-          >
-            <ImageField source="src" title="title" />
-          </FileInput>
-
-          <div className="col-md-6">
+          <div className="col-12 col-md-12">
+            <FileInput
+              source="picture"
+              label="Images"
+              accept="image/*"
+              multiple={false}
+            >
+              <ImageField source="src" title="title" />
+            </FileInput>
+          </div>
+     
+          <div className="col-12 col-md-6">
             <SelectArrayInput
               label="Labels"
               source="labelIds"
               choices={labels}
             />
           </div>
-          <div className="col-md-6">
+          <div className="col-12 col-md-6">
             <NumberInput
               source="member_id"
               validate={[required()]}

@@ -24,6 +24,7 @@ export default function Poem() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const works = useSelector(selectPoems);
+  console.log("Works dans POEM " , works);
   const status = useSelector((state) => state.work.status);
   const error = useSelector((state) => state.work.error);
   const comments = useSelector((state) => state.comment.comments) || [];

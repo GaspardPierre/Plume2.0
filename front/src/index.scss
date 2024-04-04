@@ -39,4 +39,33 @@ html, body {
     padding:0 !important;
   }
 
- 
+  text-sm {
+    font-size: 0.875rem;
+  }
+  
+
+
+  .max-h-screen {
+    max-height: 100vh;
+  }
+  
+  .min-w-280px {
+    min-width: 280px;
+  }
+  
+  .max-w-280px {
+    max-width: 280px;
+  }
+  
+  .bg-gray-50 {
+    background-color: #f9fafb; /* This is an approximation of Tailwind's bg-gray-50 */
+  }
+  
+  .dark .bg-gray-900-70 {
+    background-color: rgba(17, 24, 39, 0.7); /* Tailwind's bg-gray-900 with 70% opacity */
+  }
+  
+  .dark .shadow-gray-800-40 {
+    box-shadow: 0 0 0 0 rgba(31, 41, 55, 0.4); /* Approximation of Tailwind's shadow-gray-800 with 40% opacity */
+  }
+  

@@ -1,40 +1,40 @@
 .dropdown-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #F0E4E4;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #F0E4E4;
 
-    ul {
-        li {
-          padding: 10px;
-          border-bottom: 1px solid #2870BD;
-          &:hover {
-            background-color: white;
-            cursor:pointer;
-       
-          }
+  ul {
+      li {
+        padding: 10px;
+        border-bottom: 1px solid #2870BD;
+        &:hover {
+          background-color: white;
+          cursor:pointer;
+     
         }
       }
+    }
 
 }
 li.active{
-    background-color: #fcf9f9;
+  background-color: #fcf9f9;
 
 }
-   
-      .categorie-container{
-        list-style: none;
-        color :#4C4C4C;
  
+    .categorie-container{
+      list-style: none;
+      color :#4C4C4C;
 
-       
+
+     
+    }
+    .categories-title{
+    
+      @media screen and (max-width: 778px) {
+    
+        display: none;
+        
       }
-      .categories-title{
-      
-        @media screen and (max-width: 778px) {
-      
-          display: none;
-          
-        }
-      }
+    }

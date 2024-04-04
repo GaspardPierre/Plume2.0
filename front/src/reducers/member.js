@@ -35,6 +35,7 @@ export const login = createAsyncThunk(
 // LOGOUT ACTION
 export const logout = createAsyncThunk("logout", async () => {
   const response = await api.post("/login/logout");
+  localStorage.removeItem('loginState');
   return response.data
 });
 

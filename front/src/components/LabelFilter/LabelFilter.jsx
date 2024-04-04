@@ -16,7 +16,7 @@ export default function LabelFilter({ setSelectedWork, scrollToPoemsContainer })
  
   const handleLabelClick = async (id) => {
     setLabelId(id);
-    await dispatch(fetchWorksByLabel(id));
+   dispatch(fetchWorksByLabel(id));
     scrollToPoemsContainer();
   };
 
@@ -36,22 +36,22 @@ export default function LabelFilter({ setSelectedWork, scrollToPoemsContainer })
     }
   }, [labelStatus, dispatch]);
 
-  return (
-    <div className="dropdown-container w-50 opacity-80">
-      <h2 className="display-6 text-center font-custom fw-bold categories-title mx-3">
-        Catégories
-      </h2>
-      <ul className="categorie-container">
-        {labels.map((label) => (
-          <li
-            key={label.id}
-            onClick={() => handleLabelClick(label.id)}
-            className={labelId === label.id ? "active" : ""}
-          >
-            {label.tag}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+    return (
+      <div className="dropdown-container w-50 opacity-80">
+        <h2 className="display-6 text-center font-custom fw-bold categories-title mx-3">
+          Catégories
+        </h2>
+        <ul className="categorie-container">
+          {labels.map((label) => (
+            <li
+              key={label.id}
+              onClick={() => handleLabelClick(label.id)}
+              className={labelId === label.id ? "active" : ""}
+            >
+              {label.tag}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }

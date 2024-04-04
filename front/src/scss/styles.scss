@@ -189,3 +189,14 @@ color-third{
   border: none !important;
 box-shadow: none;
 }
+.badge-custom {
+  background-color: transparent; 
+  color: #000; 
+  
+}
+bg-dark{
+  background-color: $dark!important;
+}
+bg-dark-current{
+  background-color: $dark-active !important;
+}
