@@ -3,7 +3,7 @@ name: Deploy Node.js Backend
 on:
   push:
     branches:
-      - main 
+      - back 
 
 jobs:
   deploy_backend:
