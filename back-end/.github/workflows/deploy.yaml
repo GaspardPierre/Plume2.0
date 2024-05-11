@@ -3,7 +3,7 @@ name: Deploy Node.js Backend
 on:
   push:
     branches:
-      - master  # Assurez-vous que cette branche correspond à votre branche de production
+      - main 
 
 jobs:
   deploy_backend:
