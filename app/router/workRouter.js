@@ -2,6 +2,11 @@ const express = require('express');
 const {workController} = require('../controllers/index.js');
 const router = express.Router();
 const security = require('../service/security.js');
+const upload = require ('../../uploader/uploader.js')
+const multer = require('multer')
+const authenticateJWT = require('../service/authenticateJWT.js')
+
+
 
 //Toutes les url commencent par oeuvres //
 
@@ -73,14 +78,18 @@ const security = require('../service/security.js');
 
 router.get('/', workController.getAllWorks);
 
-router.get('/:id', workController.getWork);
+router.get('/latest', workController.fetchLastWork); 
+router.get('/byTitle', workController.getWorkByTitle);
+
 router.get('/byLabel/:labelId', workController.getWorksByLabel);
-
-
-router.post('/addWork', security.checkAdmin, workController.addWork);
-
-router.patch('/:id', security.checkAdmin, workController.modifyWork);
-
-router.delete('/:id', security.checkAdmin, workController.deleteWork);
+router.get('/:id', workController.getWork);
+router.patch('/:id', authenticateJWT, security.checkAdmin, workController.modifyWork);
+router.post('/addWork', (req, res, next) => {
+    console.log("Requête reçue :", req.method, req.url);
+    console.log("Headers :", req.headers);
+    console.log("Body :", req.body);
+    next();
+},authenticateJWT, security.checkAdmin, upload.single('picture'), workController.addWork);
+router.delete('/:id', authenticateJWT, security.checkAdmin, workController.deleteWork);
 
 module.exports = router;
