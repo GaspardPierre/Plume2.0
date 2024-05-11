@@ -25,7 +25,15 @@ html, body {
   padding: 0;
  
 }
+a {
+  color: inherit; /* Removes the default blue color */
+  text-decoration: none; /* Removes the underline */
+}
 
+a:hover, a:focus {
+  color: inherit; /* Keeps the color the same on hover/focus */
+  text-decoration: none; /* Keeps no underline on hover/focus */
+}
  
 
   .body {

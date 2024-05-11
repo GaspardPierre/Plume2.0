@@ -12,3 +12,13 @@ export const selectWorkStatus = createSelector(
   [selectWorkState],
   workState => workState.status
 );
+
+export const selectLatestWork = createSelector(
+  [selectWorkState],
+  workState => workState.latestWork
+);
+
+export const selectPoemById = createSelector(
+  [selectPoems, (_, poemId) => poemId],
+  (poems, poemId) => poems.find(poem => poem.id === poemId)
+);

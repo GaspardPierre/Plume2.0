@@ -1,4 +1,4 @@
-import api from '../../api';
+import getApi from "../../utils/getApi.JS";
 
 
 
@@ -7,6 +7,7 @@ import api from '../../api';
 const dataProvider = {
  
   getList: async (resource, params) => {
+    const api = getApi();
     let response;
     try {
       if (resource !== 'work') {
@@ -38,6 +39,7 @@ const dataProvider = {
 
   
   getOne: async (resource, params) => {
+    const api = getApi();
     try {
       const response = await api.get(`/${resource}/${params.id}`);
       return { data: response.data };
@@ -48,6 +50,7 @@ const dataProvider = {
   },
 
   create: async (resource, params) => {
+    const api = getApi(true);
     let url = `/${resource}/add${resource.charAt(0).toUpperCase() + resource.slice(1)}`;
   
     try {
@@ -83,6 +86,7 @@ const dataProvider = {
   
 
   update: async (resource, params) => {
+    const api = getApi(true);
     try {
       console.log(params.data, "***LES LABELS***")
       const response = await api.patch(`/${resource}/${params.id}`, params.data);
@@ -95,6 +99,7 @@ const dataProvider = {
     }
   },
   delete: async (resource, params) => {
+    const api = getApi(true);
     console.log(`Tentative de suppression de la ressource '${resource}' avec l'ID`, params.id);
     try {
       const response = await api.delete(`/${resource}/${params.id}`);

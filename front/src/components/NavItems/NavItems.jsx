@@ -3,12 +3,16 @@ import { Link, useLocation , useNavigate}  from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import { useSelector, useDispatch} from 'react-redux';
 import { logout } from '../../reducers/member'
+import { jwtDecode } from 'jwt-decode';
 import './NavItems.scss';
 
 export default function NavItems() {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
-  const isLogged = useSelector((state) => state.member.role);
+  const token = localStorage.getItem('token');
+  const user = token ? jwtDecode(token) : {};
+  const { role, pseudo } = user;
+  console.log('role dans navitems', role, pseudo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -19,7 +23,7 @@ export default function NavItems() {
 
   return (
     <>
-      {isLogged !== null ? (
+      {role !== undefined ? (
         <Nav className="nav-items" activeKey="/home">
           <Nav.Item className={`nav-item-hover ${isActive('/') ? 'active-tab' : ''}`}>
             <Link to="#" className=' border-end font-nav text-uppercase second cursor-link nav-link'

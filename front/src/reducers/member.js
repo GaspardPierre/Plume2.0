@@ -1,16 +1,40 @@
+import { jwtDecode } from "jwt-decode";  
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../api";
 
+// Handle token
+function getToken() {
+  return localStorage.getItem('token');
+}
 
+
+function setToken(token) {
+  localStorage.setItem('token', token);
+}
+
+function removeToken() {
+  localStorage.removeItem('token');
+}
 
 // REGISTER ACTION
-export const addMember = createAsyncThunk("member/addMember", async (data ) => {
+export const addMember = createAsyncThunk("member/addMember", async (data) => {
   const response = await api.post("/member/addMember", data);
   return response.data;
 });
-
-
-
+// VERIFYTOKEN ACTION
+export const verifyToken = createAsyncThunk("member/verifyToken", () => {
+  const token = getToken();
+  if (token) {
+    const decoded = jwtDecode(token);
+    const currentTime = Date.now() / 1000;
+    if (decoded.exp < currentTime) {
+      removeToken(); 
+      return { isLoggedIn: false };
+    }
+    return { isLoggedIn: true, token, user: decoded };
+  }
+  return { isLoggedIn: false };
+});
 
 // LOGIN ACTION
 export const login = createAsyncThunk(
@@ -18,109 +42,84 @@ export const login = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await api.post("/login", data);
-
-      return {
-        status: response.status,
-        message: response.data,
-        payload: response.data,
-        role: response.data.member.role,
-        pseudo: response.data.member.pseudo,
-        id: response.data.member.id,
-      };
+      if (response.data.token) {
+        const token = response.data.token;
+        setToken(token);
+        const user = jwtDecode(token);  
+        console.log(("role dans le reducer", user.role))
+        return { user, token };
+      }
+      return rejectWithValue('No token received');
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
   }
 );
+
 // LOGOUT ACTION
-export const logout = createAsyncThunk("logout", async () => {
+export const logout = createAsyncThunk("member/logout", async () => {
   const response = await api.post("/login/logout");
-  localStorage.removeItem('loginState');
-  return response.data
+  localStorage.removeItem('token');  
+  return {};
 });
-
-
-
 
 const memberSlice = createSlice({
   name: "member",
   initialState: {
-    status: "idle",
-    error: null,
-    role: null,
+    status: 'idle',
+    token: '',
+    isLoggedIn: false,
+    user: null,  
   },
   reducers: {
-// TOOGLE ROLE ACTION
-    toggleRole : (state) => {
-      state.role = state.role === 'admin' ? 'visiteur' : 'admin';
+    toggleRole: (state) => {
+      if (state.user) {
+        state.user.role = state.user.role === 'admin' ? 'visiteur' : 'admin';
+      }
     },
   },
-
   extraReducers: (builder) => {
     builder
-
-
-      // Handle register actions
+      //ADDMEMBER
       .addCase(addMember.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(addMember.fulfilled, (state, action) => {  
+      .addCase(addMember.fulfilled, (state, action) => {
         state.status = "succeeded";
       })
       .addCase(addMember.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })
-      // Handle login actions
-      .addCase(login.pending, (state) => {
-        state.status = "loading";
+      //VERIFYTOKEN
+      .addCase(verifyToken.fulfilled, (state, action) => {
+        state.isLoggedIn = action.payload.isLoggedIn;
+        state.token = action.payload.token || '';
+        state.user = action.payload.user || null;
       })
+      //LOGIN
       .addCase(login.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.role = action.payload.role;
-        state.pseudo = action.payload.pseudo;
-        state.id = action.payload.id;
-
-        localStorage.setItem('loginState', JSON.stringify({
-          role: action.payload.role,
-          pseudo: action.payload.pseudo,
-          id: action.payload.id
-        }));
-        // dispatch the setMemberRole action creator with the role of the member
+        state.isLoggedIn = true;
+        state.token = action.payload.token;
+        state.user = action.payload.user;
+        state.status = 'succeeded';
       })
       .addCase(login.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
+        state.error = action.payload;
+        state.isLoggedIn = false;
+        state.token = '';
+        state.user = null;
+        state.status = 'failed';
       })
-      // Handle logout actions
+      //LOGOUT
       .addCase(logout.fulfilled, (state) => {
-        state.role = null;
-        state.pseudo = null;
-        state.id = null;
-        localStorage.removeItem('loginState');
-      })
-    
-    
-  },  
+        state.isLoggedIn = false;
+        state.token = '';
+        state.user = null;
+        removeToken();
+      });
+  },
 });
+
 export const { toggleRole } = memberSlice.actions;
-
-
-
-      
-      
-    
-      
-
- 
-  
-
-
-      
-
-
-
-
-
-  
 export default memberSlice.reducer;

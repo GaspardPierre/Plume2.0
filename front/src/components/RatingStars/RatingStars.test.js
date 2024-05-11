@@ -1,58 +1,50 @@
-// Importation des bibliothèques nécessaires
+// Import libraries
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import store from '../../store/store';
+import configureStore from '../../store/configureStore'; // Ensure this imports a function to configure the store
 import RatingStars from './RatingStars';
 
 // Test to check if a user can vote twice
-test('To check if a user can vote twice', () => {
-  // Initialing the component with false value
+test('To check if a user can vote twice', async () => {
+  // Initialize the Redux store
+  const store = configureStore(); // Make sure this sets up the initial state as expected
+
+  // Render the component within the Provider
   const { getByRole } = render(
     <Provider store={store}>
       <RatingStars poemId={1} />
     </Provider>
   );
 
-  // Getting the star button
-  const star = getByRole('button');
+  // Get the star button
+  const starButton = getByRole('button', { name: /star/i }); // Adjust the role or name to match your actual button
 
-  // Simulation of a click on the star
-  fireEvent.click(star);
+  // Simulate a click on the star button
+  fireEvent.click(starButton);
 
-  // getting the state of the store after the first click
-  const state = store.getState();
+  // Wait for any state updates that occur as a result of the click
+  await waitFor(() => {
+    const stateAfterFirstClick = store.getState();
+    expect(stateAfterFirstClick.average.averages.some(
+      avg => avg.member_id === stateAfterFirstClick.member.id && avg.work_id === 1
+    )).toBe(true);
+  });
 
-  // Checking if the user has already voted
-  const userHasAlreadyVoted = state.average.averages.some(
-    (avg) => avg.member_id === state.member.id && avg.work_id === 1
-  );
+  // Simulate a second click on the star button
+  fireEvent.click(starButton);
 
-  // IF the user has already voted, the test should pass
-  expect(userHasAlreadyVoted).toBe(true);
+  // Check the state after the second click
+  await waitFor(() => {
+    const newState = store.getState();
+    const userHasVotedAgain = newState.average.averages.some(
+      avg => avg.member_id === newState.member.id && avg.work_id === 1
+    );
+    expect(userHasVotedAgain).toBe(true);
 
-  // Simulation of a second click on the star
-  fireEvent.click(star);
-
-  // GETTING the state of the store after the second click
-  const newState = store.getState();
-
-  // VérifY if the user has voted again
-  const userHasVotedAgain = newState.average.averages.some(
-    (avg) => avg.member_id === newState.member.id && avg.work_id === 1
-  );
-
-  // userHasVotedAgain should be true
-  expect(userHasVotedAgain).toBe(true);
-
-  // Vérification si le nombre de votes est le même après le deuxième clic
-  const initialVotesCount = state.average.averages.filter(
-    (avg) => avg.member_id === state.member.id && avg.work_id === 1
-  ).length;
-  const newVotesCount = newState.average.averages.filter(
-    (avg) => avg.member_id === newState.member.id && avg.work_id === 1
-  ).length;
-
-  // Le nombre de votes ne devrait pas avoir changé
-  expect(newVotesCount).toBe(initialVotesCount);
+    const initialVotesCount = newState.average.averages.filter(
+      avg => avg.member_id === newState.member.id && avg.work_id === 1
+    ).length;
+    expect(initialVotesCount).toBe(1); // Assuming that the user cannot vote twice, the count should still be 1
+  });
 });

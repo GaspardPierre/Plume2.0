@@ -1,48 +1,36 @@
 import React, { useState } from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { unwrapResult } from '@reduxjs/toolkit';
 import { login } from "../../reducers/member";
-
 import "./Login.scss";
 
-
 export default function Login() {
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, setValue, formState: { errors }, reset } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState(""); // State errorMessage
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setValue(name, value.toLowerCase());
   };
-  
+
   const onSubmit = async (data) => {
     try {
-      const response = await dispatch(login(data));
-
-
-      // Vérify if the user is admin or not
-      if (response.payload && response.payload.role) {
-        // if (response.payload.role === "admin") {
- 
-          navigate("/");
-        // }
-      } else {
-        setErrorMessage("Erreur d'email ou de mot de passe");
-        reset();
+      const resultAction = await dispatch(login(data));
+      const user = unwrapResult(resultAction);
+      const role = user.role
+    
+      if(role=== 'admin') { 
+      navigate("/admin"); }else{
+        navigate("/");
       }
     } catch (error) {
-      console.log(error);
-      setErrorMessage(error.message);
+      console.error('Login error:', error);
+      setErrorMessage(error.message || "Erreur d'email ou de mot de passe");
+      reset();  
     }
   };
   

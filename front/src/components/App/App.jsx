@@ -17,7 +17,6 @@ import Footer from "../StyleBox/Footer";
 
 export default function App() {
   const role = useSelector((state) => state.member.role);
-  const navigate = useNavigate();
   const isAdmin = role === 'admin';
   console.log('isAdmin', isAdmin);
 

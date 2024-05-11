@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import './Title.scss'
+import Writting from "../../svg/Writting";
 
 export default function Title() {
 
@@ -16,7 +17,7 @@ export default function Title() {
                 return 'Inscription'
             case '/poems':
                 return 'Poèmes'
-            case '/poem/{id}':
+            case '/poem/':
                 return 'Poème'
                 case '/about':
                     return 'A propos'
@@ -32,12 +33,13 @@ export default function Title() {
     const title = currentTitle(path);
 
   return (
-<div className='title-container'>
+<div className='title-container d-flex'>
 
-
+<Writting/>
 <h1
  className=' display-5 font-title text-center font-custom fw-bold mt-1 color-four line border-title' >
     {title}</h1>
+ 
     </div>
  
 

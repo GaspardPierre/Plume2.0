@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import checkAuthAndRole from "../utils/checkAuthAndRole ";
 import api from "../api";
 
 // FETCH COMMENT ACTION
@@ -16,12 +17,18 @@ export const fetchComments = createAsyncThunk(
 // ADD COMMENT ACTION
 export const addComment = createAsyncThunk(
   "comment/addMember",
-  async (data) => {
-    console.log("Data:", data);
-    const response = await api.post("/comment/addComment", data);
-    return response.data;
-  }
-);
+  async (data, { dispatch } ) => {
+    try {
+      checkAuthAndRole();
+      const response = await api.post("/comment/addComment", data, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+
+      return response.data;
+    } catch (error) {
+      return dispatch(showAlert(error.message)); 
+    }
+  });
 
 // DELETE COMMENT ACTION
 export const deleteComment = createAsyncThunk(

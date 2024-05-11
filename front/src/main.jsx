@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter , Link} from 'react-router-dom';
 import App from './components/App/App'
-import { Provider, useSelector } from 'react-redux';
+import { Provider, useSelector, useDispatch } from 'react-redux'
+import { verifyToken } from './reducers/member';
 import '../src/scss/styles.scss';
-import store from './store/store';
+import { store } from './store/store';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -21,49 +22,70 @@ import { MemberList, MemberEdit, MemberCreate } from './Admin/Members/Member';
 import { LabelList, LabelEdit, LabelCreate } from './Admin/Labels/Label';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Layout from './Admin/Layout';
+import AlertMessage from './ui/AlertMessage';
 import './index.scss';
 
 
 const Root = () => {
-  useEffect(() => {
-    const setBodyHeight = () => {
-      // Calcul la hauteur sans la marge/le padding si nécessaire
-      document.documentElement.style.height = `calc(${window.innerHeight}px -68px )`;
-    };
-    window.addEventListener("resize", setBodyHeight);
-    setBodyHeight();
-    return () => window.removeEventListener("resize", setBodyHeight);
-  }, []);
-
   return (
-    
-    <Provider store={store} >
+    <Provider store={store}>
       <AppLogic />
     </Provider>
-  
   );
 };
 
 const AppLogic = () => {
-  const isAdmin = useSelector((state) => state.member.role) === 'admin';
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(state => state.member.isLoggedIn);
+  const user = useSelector(state => state.member.user);
+  const isAdmin = user && user.role === 'admin';
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    dispatch(verifyToken());
+    if (!isLoggedIn) {
+      setShowModal(true);
+    }
+
+    const setBodyHeight = () => {
+      document.documentElement.style.height = `calc(${window.innerHeight}px -68px)`;
+    };
+    window.addEventListener("resize", setBodyHeight);
+    setBodyHeight();
+    return () => window.removeEventListener("resize", setBodyHeight);
+  }, [dispatch, isLoggedIn]);
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
   return (
     <BrowserRouter>
-     {/*  <React.StrictMode> */}
-        {isAdmin ?
-          (<Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider} layout={Layout}>
-            <Resource name="work" list={WorkList} edit={WorkEdit} create={WorkCreate} show ={WorkShow}/>
-            <Resource name="comment" list={CommentList} edit={CommentEdit} show={CommentShow}/>
-            <Resource name="member" list={MemberList} edit={MemberEdit} create={MemberCreate} />
-            <Resource name="label" list={LabelList} edit={LabelEdit} create={LabelCreate} />
-          </Admin>) :
-          (
-            <App />
-          )
-        }
-     {/*  </React.StrictMode>, */}
+     <AlertMessage 
+  show={showModal} 
+  handleClose={handleClose}
+  title="⚠️ Attention! Session expirée 🕒"
+  message={
+    <>
+       🏠
+      <Link to="/" onClick={handleClose}> Accueil </Link> ou 
+      <Link to="/login" onClick={handleClose}> vous connecter 🔓 ?</Link>
+    </>
+  }
+/>
+ {isAdmin ? (
+        <Admin dashboard={Dashboard} dataProvider={dataProvider} authProvider={authProvider} layout={Layout}>
+          <Resource name="work" list={WorkList} edit={WorkEdit} create={WorkCreate} show={WorkShow}/>
+          <Resource name="comment" list={CommentList} edit={CommentEdit} show={CommentShow}/>
+          <Resource name="member" list={MemberList} edit={MemberEdit} create={MemberCreate}/>
+          <Resource name="label" list={LabelList} edit={LabelEdit} create={LabelCreate}/>
+        </Admin>
+      ) : (
+        <App />
+      )}
     </BrowserRouter>
-
   );
-}
+};
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(<Root />);

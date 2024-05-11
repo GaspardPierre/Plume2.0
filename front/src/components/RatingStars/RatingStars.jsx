@@ -1,6 +1,6 @@
 import React, { useEffect, useState , useRef} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import store from "../../store/store";
+import {store }from "../../store/store";
 import ReactStars from "react-rating-stars-component";
 import { addAverage, fetchAverage } from "../../reducers/average";
 import { useMemberState } from "../../hooks/customHooks";
@@ -16,6 +16,7 @@ export default function RatingStars({ poemId }) {
   //STORE
 
   const role = useMemberState();
+  console.log('role dans RatingStars', role.role);
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.member.id);
   const id = poemId;
@@ -65,7 +66,7 @@ export default function RatingStars({ poemId }) {
   }, [averages, id]);
 
   const ratingChanged = (newRating) => {
-    if (role.role === null) {
+    if (role.role === null || role.role === "") {
       setShowAlert(true);
       return;
     }

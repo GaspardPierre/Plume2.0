@@ -1,9 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import checkAuthAndRole from "../utils/checkAuthAndRole ";
 import api from "../api";
 
 // FETCH POEMS ACTION
 export const fetchWorks = createAsyncThunk("work/fetchWorks", async () => {
   const response = await api.get("/work");
+  console.log(`response.data: ${response.data}`);
+
+  return response.data;
+
+});
+
+// FETCH lATEST POEM ACTION
+export const fetchLatestWork = createAsyncThunk("work/fetchLatestWork", async () => {
+  const response = await api.get("/work/latest");
   console.log(`response.data: ${response.data}`);
 
   return response.data;
@@ -17,25 +27,39 @@ export const fetchWork = createAsyncThunk("work/fetchWork", async (id) => {
 });
 
 // ADD POEM ACTION
-export const addWork = createAsyncThunk("work/addWork", async (work) => {
 
-  const response = await api.post("/work/addwork", work);
-  dispatch(fetchWorks()); 
+  export const addWork = createAsyncThunk("work/addWork", async (work, { dispatch }) => {
+    try {
+      checkAuthAndRole();
+      const response = await api.post("/work/addwork", work, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      dispatch(fetchWorks()); // Assuming fetchWorks is an action that needs to be imported
+      return response.data;
+    } catch (error) {
+      return dispatch(showAlert(error.message)); // showAlert should be an action that handles displaying errors
+    }
+  });
 
-
-  return response.data;
-});
 //DELETE POEM ACTION
-export const deleteWork = createAsyncThunk("work/deleteWork", async ({id}) => {
-  const response = await api.delete(`/work/${id}`);
-  return id;
-});
 
+export const deleteWork = createAsyncThunk("work/deleteWork", async ({ id }, { dispatch }) => {
+  try {
+    checkAuthAndRole();
+    const response = await api.delete(`/work/${id}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+    return id;
+  } catch (error) {
+    return dispatch(showAlert(error.message)); // Handling errors similarly
+  }
+});
 
 const workSlice = createSlice({
   name: "work",
   initialState: {
     works: [],
+    latestWork: null, 
     status: "idle",
     error: null,
     
@@ -69,6 +93,7 @@ const workSlice = createSlice({
       })
 
       // Handle fetch single work
+
 .addCase(fetchWork.pending, (state) => {
   state.status = "loading";
 })
@@ -83,6 +108,21 @@ const workSlice = createSlice({
   state.status = "failed";
   state.error = action.error.message;
 })
+
+// Handle fetch latest work
+.addCase(fetchLatestWork.pending, (state) => {
+  state.status = "loading";
+})
+.addCase(fetchLatestWork.fulfilled, (state, action) => {
+  state.status = "succeeded";
+  state.latestWork = action.payload;
+  
+})
+.addCase(fetchLatestWork.rejected, (state, action) => {
+  state.status = "failed";
+  state.error = action.error.message;
+})
+
 
       // Handle add poem actions
       .addCase(addWork.pending, (state) => {

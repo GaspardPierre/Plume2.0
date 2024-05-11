@@ -1,13 +1,13 @@
-import { useEffect , useState } from 'react';
-import { useDispatch , useSelector} from 'react-redux';
-import { fetchComments, addComment, deleteComment } from '../reducers/comment';
-import { fetchAverage } from '../reducers/average';
+
+import { useSelector } from 'react-redux';
+
 
 
 export const useMemberState = () => {
-    const pseudo = useSelector((state) => state.member.pseudo);
-    const userId = useSelector((state) => state.member.id);
-    const role = useSelector((state) => state.member.role);
+
+  const memberState = useSelector(state => state.member) || {}; 
+  
+  const { pseudo = '', userId = '', role = '' } = memberState.user || {};
   
     return { pseudo, userId, role };
   };
