@@ -4,17 +4,19 @@
     "aws-sdk": "^2.1587.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
+    "connect-pg-simple": "^9.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-jsdoc-swagger": "^1.8.0",
     "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "multer-s3": "^3.0.1",
     "node": "^19.6.1",
     "nodemon": "^2.0.21",
-    "pg": "^8.9.0"
+    "pg": "^8.11.5"
   },
   "devDependencies": {
     "prisma": "^5.7.0"

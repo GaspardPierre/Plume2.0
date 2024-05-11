@@ -1,0 +1,66 @@
+name: Deploy Node.js Backend
+
+on:
+  push:
+    branches:
+      - master  # Assurez-vous que cette branche correspond à votre branche de production
+
+jobs:
+  deploy_backend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.20.2'
+        cache: 'npm'
+
+    - name: Cache npm modules
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Check for updates in backend
+      id: check_updates
+      run: |
+        echo "Checking for updates in the backend directory..."
+        UPDATES=$(git diff --name-only HEAD..origin/master -- 'back-end/')
+        echo "::set-output name=has_updates::${UPDATES}"
+
+    - name: Deploy updates if necessary
+      if: steps.check_updates.outputs.has_updates != ''
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /var/www/plumeblog-back
+          if [ -f ".env" ]; then
+            cp .env /tmp/.env_backup
+          fi
+          git fetch origin master
+          git reset --hard
+          git sparse-checkout init --cone
+          git sparse-checkout set back-end
+          git pull origin master
+          rsync -av --exclude='.git/' --exclude='.env' --exclude='uploader/' back-end/ ./
+          rm -rf back-end
+          if [ -f "/tmp/.env_backup" ]; then
+          mv /tmp/.env_backup .env
+          fi    
+          npm install
+          pm2 restart plumeblog-back
+          echo "Back-end deployment completed successfully."
+
+    - name: No updates to deploy
+      if: steps.check_updates.outputs.has_updates == ''
+      run: echo "No updates found for the back-end."
+

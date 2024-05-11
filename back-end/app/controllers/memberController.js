@@ -12,6 +12,36 @@ const memberController = {
         res.status(500).send('Erreur lors de la récupération des membres');
       }
     },
+    async verifyRole(req, res) {
+
+      console.log("requête reçue!!!!");
+   
+      if (!req.session.user || !req.session.role) {
+          console.log(`Session invalid: ${req.session.id}`);
+          return res.status(401).json({
+              error: "authentication_required",
+              message: "Authentication required or session expired",
+              detail: {
+                  userExists: !!req.session.user,
+                  roleExists: !!req.session.role
+              }
+          });
+      }
+  
+ 
+      const response = res.status(200).json({
+          member: {
+              id: req.session.user.id,
+              role: req.session.role,
+              pseudo: req.session.user.pseudo
+          },
+          sessionExpiresAt: req.session.cookie._expires  
+      });
+      console.log("Session invalid: ", req.session.id, " User: ", !!req.session.user, " Role: ", !!req.session.role);
+
+      return response;
+  }
+,  
     async addMember(req,res) {
         const { pseudo, email, password } = req.body;
         console.log(req.body);

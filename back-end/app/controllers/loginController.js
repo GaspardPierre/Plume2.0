@@ -1,5 +1,6 @@
 const { memberModel } = require("../models");
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 require("dotenv").config();
 
 const loginControlleur = {
@@ -20,34 +21,25 @@ const loginControlleur = {
                 return res.status(401).json({ message: "Mot de passe incorrect" });
             }
 
-            delete member.password;
+            const token = jwt.sign(
+                { id: member.id, role: member.role, email: member.email,pseudo: member.pseudo},
+                process.env.JWT_SECRET,
+                { expiresIn: process.env.JWT_EXPIRATION || '1h' } // Utiliser une valeur par défaut si non spécifiée
+            );
+            
 
-            if (member.id) {
-                req.session.user = { id: member.id };
-                req.session.role = member.role;
-                console.log(`Après connexion, req.session: ${JSON.stringify(req.session)}`);
-            }
-
-            res.status(200).json({ member });
+    
+            res.status(200).json({ message: "Connexion réussie", token });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: "Une erreur est survenue lors de la vérification de l'utilisateur." });
         }
     },
-
     async logout(req, res) {
-        try {
-            req.session.destroy((err) => {
-                if (err) {
-                    throw err;
-                }
-                res.status(200).send({ message: "Logout successful" });
-            });
-        } catch (err) {
-            console.error(err);
-            res.status(500).send({ error: "Failed to logout" });
-        }
+       
+        res.status(200).send({ message: "Déconnexion réussie. Supprimez le token côté client." });
     }
+    
 };
 
 module.exports = loginControlleur;

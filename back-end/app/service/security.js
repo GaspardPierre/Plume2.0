@@ -1,30 +1,25 @@
-// ATTRIBUTION DROITS ADMIN ET UTILISATEUR**********************************
-
+const jwt = require('jsonwebtoken');
 
 const security = {
     checkAdmin(req, res, next) {
-      console.log('REQ.SESSION',req.session);
-        console.log('REQ.SESSION.USER.ROLE ',req.session.role);
-    //   Si l'utilisateur n'et pas connecté => 401
-        if (!req.session.user) {
-          return res.status(401).json('vous devez vous connecter');
+        if (!req.user) {
+            return res.status(401).json('Vous devez vous connecter');
         }
-    //   Si l'utilisateur n'est pas admin =>401
-        if (req.session.role !== 'admin') {
-          return res.status(401).json('vous n\'etes pas administrateur');
+
+        if (req.user.role !== 'admin') {
+            return res.status(401).json('Vous n\'êtes pas administrateur');
         }
-    //   Si Admin, on passe au midlleware suivant
+
         next();
-      },
-      
-      checkUser(req, res, next) {
-        console.log(req.session);
-        if (req.session.user &&(req.session.role === 'visiteur'|| req.session.role === 'admin')) {
-          next();
+    },
+
+    checkUser(req, res, next) {
+        if (req.user && (req.user.role === 'visiteur' || req.user.role === 'admin')) {
+            next();
         } else {
-          res.status(401).json('Vous n\'êtes pas autorisé à accéder à cette ressource.');
+            res.status(401).json('Vous n\'êtes pas autorisé à accéder à cette ressource.');
         }
-      }
-      
-}   
-module.exports = security;  
+    }
+};
+
+module.exports = security;

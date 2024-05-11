@@ -1,12 +1,12 @@
 const express = require('express');
 const router = require('./app/router');
-const session = require('express-session');
 const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
 
-// Configuration des variables d'environnement en fonction de l'environnement
+
 if (process.env.NODE_ENV === 'production') {
     dotenv.config({ path: '.env.production' });
 } else {
@@ -15,17 +15,6 @@ if (process.env.NODE_ENV === 'production') {
 
 const app = express();
 const port = process.env.PORT || 3000;
-
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-        maxAge: 2013210,
-        sameSite: false,
-        httpOnly: false
-    }
-}));
 
 app.use(express.static('public'));
 app.use('/uploads', express.static('uploads')); 
@@ -42,11 +31,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+// Middleware JWT
 
-app.use((req, res, next) => {
-    console.log("my Middleware", req.session);
-    next();
-});
+app.use('/api', router);
 
 app.use('/api', router);
 

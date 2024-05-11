@@ -2,6 +2,19 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 const workModel = {
+  async getLatestWork() {
+    try {
+        const latestWork = await prisma.work.findFirst({
+            orderBy: { create_at: 'desc' }
+        });
+        return latestWork;
+    } catch (error) {
+      console.error("Error fetching the latest work from DB: ", error);
+        throw error;
+      
+    }
+}
+,
   async findByTitle(title) {
     try {
       const foundTitles = await prisma.work.findMany({

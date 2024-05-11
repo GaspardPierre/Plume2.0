@@ -50,7 +50,18 @@ const workController = {
       return res.status(500).json({ message: 'Server error' });
     }
   },
-  
+  async fetchLastWork(req, res) {
+    try {
+      const work = await workModel.getLatestWork();
+      if(!work) return
+      return   res.status(200).json(work);
+    } catch (error) {
+      console.error("Error fetching the latest work: ", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  },
+
+
 
   async addWork(req, res) {
     console.log("req.file :", req.file);
@@ -60,9 +71,9 @@ const workController = {
         const { title, author, content, note, member_id, labelIds } = req.body;
 
       
-        if (!(req.session.role === "admin" && req.session.user.id)) {
-            return res.status(401).json({ message: "Vous devez être admin pour ajouter une œuvre" });
-        }
+        if (!req.user || req.user.role !== "admin") {
+          return res.status(401).json({ message: "Vous devez être admin pour ajouter une œuvre" });
+      }
 
         // Verification
         const existingWork = await workModel.findTitle(title);
@@ -80,7 +91,7 @@ const workController = {
             author,
             content,
             note,
-            member_id: req.session.user.id,
+            member_id: req.user.id,
             urlImage: imageUrl
         };
 
