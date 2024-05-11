@@ -27,11 +27,26 @@ const labelModel = {
     }
   },
 
+  async createWorkLabel(workId, labelId) {
+    try {
+      const workLabel = await prisma._workLabel.create({
+        data: {
+          workId: workId,
+          labelId: labelId,
+        },
+      });
+      return workLabel;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+
   async findById(id) {
     try {
       const label = await prisma.label.findUnique({
         where: {
-          id: id,
+          id: parseInt(id, 10) ,
         },
       });
       return label;
@@ -42,7 +57,7 @@ const labelModel = {
 
   async findByTag(tag) {
     try {
-      const label = await prisma.label.findUnique({
+      const label = await prisma.label.findFirst({
         where: {
           tag: tag,
         },
@@ -50,6 +65,7 @@ const labelModel = {
       return label;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   },
 
@@ -57,7 +73,7 @@ const labelModel = {
     try {
       const updatedLabel = await prisma.label.update({
         where: {
-          id: label.id,
+          id: parseInt(label.id),
         },
         data: {
           tag: label.tag,
@@ -65,19 +81,23 @@ const labelModel = {
       });
       return updatedLabel;
     } catch (error) {
-      console.log(error);
+      console.error('Erreur lors de la mise à jour du label:', error);
+    throw error;
     }
   },
+  
 
   async delete(id) {
     try {
-      await prisma.label.delete({
+      const deletedLabel = await prisma.label.delete({
         where: {
-          id: id,
+          id: parseInt(id, 10) ,
         },
       });
+      return deletedLabel;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   },
 };
