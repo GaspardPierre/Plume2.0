@@ -1,6 +1,16 @@
 const { commentModel } = require("../models");
 
 const commentController = {
+
+    async getAllComments(req, res) {
+        try {
+            const comments = await commentModel.findAll();
+            return res.status(200).json(comments);
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({ error });
+        }
+    },
     async findAllWorkComments (req, res) {
         try { 
        const { id } = req.params;
@@ -14,15 +24,16 @@ const commentController = {
     
     },
     async addComment(req, res) {
-        console.log("req.session:", req.session);
+    
         console.log("req.body:", req.body);
         const { comment : content, poemId } = req.body;
 
         // Verify if user is connected
-        if(req.session.role && req.session.user.id){
+        console.log("role********************************", req.user.role)
+        if (!req.user || req.user.role !== "admin" || req.user.role !== "visiteur") {
         const comment = {
           content: content,
-          member_id: req.session.user.id,
+          member_id: req.user.id,
           work_id: poemId,
         };
         const newComment = await commentModel.insert(comment);
@@ -54,4 +65,3 @@ const commentController = {
     }   
 };
 module.exports = commentController;
-
