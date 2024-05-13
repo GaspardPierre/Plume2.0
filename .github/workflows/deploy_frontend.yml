@@ -1,0 +1,65 @@
+name: Deploy React Frontend
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy_frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.20.2'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Cache build artifacts
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./node_modules
+            ./build
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+
+      - name: Check for updates in dist
+        id: check_updates
+        run: |
+          echo "Checking for updates in the dist directory..."
+          UPDATES=$(git diff --name-only ${{ github.sha }} origin/main -- 'dist/')
+          echo "::set-output name=has_updates::${UPDATES}"
+        
+      - name: Deploy updates if necessary
+        if: steps.check_updates.outputs.has_updates != ''
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /var/www/front
+            git fetch origin main
+            git reset --hard
+            git sparse-checkout init --cone
+            git sparse-checkout set dist
+            git pull origin main
+            rsync -av --exclude='.git/' dist/ ./dist/
+            rm -rf dist
+            echo "Front-end deployment completed successfully."
+
+      - name: No updates to deploy
+        if: steps.check_updates.outputs.has_updates == ''
+        run: echo "No updates found for the front-end."
