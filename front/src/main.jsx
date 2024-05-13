@@ -60,7 +60,7 @@ const AppLogic = () => {
   };
 
   return (
-    <BrowserRouter>
+     <BrowserRouter>
      <AlertMessage 
   show={showModal} 
   handleClose={handleClose}
