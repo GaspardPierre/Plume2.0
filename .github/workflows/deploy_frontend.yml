@@ -65,7 +65,7 @@ jobs:
           script: |
             cd /var/www/front
             git fetch origin master
-            git reset --hard
+            git reset --hard origin/master
             git sparse-checkout init --cone
             git sparse-checkout set dist
             git pull origin master
@@ -74,5 +74,5 @@ jobs:
             echo "Front-end deployment completed successfully."
 
       - name: No updates to deploy
-        if: steps.check_updates.outputs.has_updates == ''
+        if: steps.check_update.outputs.has_updates == ''
         run: echo "No updates found for the front-end."
