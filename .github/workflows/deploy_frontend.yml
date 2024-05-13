@@ -36,6 +36,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-
 
+      - name: Determine last deployed commit
+        id: last_commit
+        run: |
+          echo "Fetching last deployed commit hash from production..."
+          LAST_COMMIT=$(ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'cat /var/www/front/LAST_DEPLOYED_COMMIT')
+          echo "::set-output name=last_commit::$LAST_COMMIT"
+
       - name: Check for updates in dist
         id: check_updates
         run: |
@@ -44,7 +51,7 @@ jobs:
           echo "::set-output name=has_updates::${UPDATES}"
         
       - name: Deploy updates if necessary
-        if: steps.check_updates.outputs.has_updates != ''
+        if: steps.check_updates.outputs.has_updates == 'true'
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.SERVER_IP }}
