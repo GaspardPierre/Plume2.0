@@ -64,13 +64,13 @@ const AppLogic = () => {
      <AlertMessage 
   show={showModal} 
   handleClose={handleClose}
-  title="⚠️ Commenter et noter les poèmes => Vous connecter
+  title="⚠️ Commenter et noter les poèmes => Connexion
   continuer la navigation => Accueil 🕒"
   message={
     <>
        🏠
       <Link to="/" onClick={handleClose}> Accueil </Link> ou 
-      <Link to="/login" onClick={handleClose}> vous connecter 🔓 ?</Link>
+      <Link to="/login" onClick={handleClose}> Connexion 🔓 ?</Link>
     </>
   }
 />
