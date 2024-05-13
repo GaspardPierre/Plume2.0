@@ -64,7 +64,8 @@ const AppLogic = () => {
      <AlertMessage 
   show={showModal} 
   handleClose={handleClose}
-  title="⚠️ Attention! Session expirée 🕒"
+  title="⚠️ Commenter et noter les poèmes => Vous connecter
+  continuer la navigation => Accueil 🕒"
   message={
     <>
        🏠
