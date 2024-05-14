@@ -40,8 +40,9 @@ jobs:
         id: last_commit
         run: |
           echo "Fetching last deployed commit hash from production..."
-          # Try to fetch the last deployed commit hash. If the file doesn't exist, set an empty string as default.
+          set -x
           LAST_COMMIT=$(ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'if [ -f /var/www/front/LAST_DEPLOYED_COMMIT ]; then cat /var/www/front/LAST_DEPLOYED_COMMIT; else echo ""; fi')
+          set +x
           echo "::set-output name=last_commit::$LAST_COMMIT"
 
       - name: Check for updates in dist
