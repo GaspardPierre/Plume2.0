@@ -71,7 +71,7 @@ jobs:
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key:  ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
             cd /var/www/front
