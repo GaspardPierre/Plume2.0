@@ -35,13 +35,17 @@ jobs:
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-
+      - name: Debug SSH Connection
+        run: |
+          echo "Checking SSH connection and listing directory..."
+          ssh -v -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'ls -la /var/www/front'        
 
       - name: Determine last deployed commit
         id: last_commit
         run: |
           echo "Fetching last deployed commit hash from production..."
           set -x
-          LAST_COMMIT=$(ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'if [ -f /var/www/front/LAST_DEPLOYED_COMMIT ]; then cat /var/www/front/LAST_DEPLOYED_COMMIT; else echo ""; fi')
+          LAST_COMMIT=$(ssh -o StrictHostKeyChecking=no -v ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'if [ -f /var/www/front/LAST_DEPLOYED_COMMIT ]; then cat /var/www/front/LAST_DEPLOYED_COMMIT; else echo ""; fi')
           set +x
           echo "::set-output name=last_commit::$LAST_COMMIT"
 
