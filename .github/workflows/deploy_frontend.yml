@@ -38,19 +38,19 @@ jobs:
       - name: Debug Secrets
         run: |
           echo "Checking SSH connection and listing directory..."
-          echo "SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}"
-          echo "SERVER_IP: ${{ secrets.SERVER_IP }}"
+          echo "SERVER_USERNAME: ${{ secrets.SERVER__USERNAME }}"
+          echo "SERVER_IP: ${{ secrets.SERVER__IP }}"
       - name: Debug SSH Connection
         run: |
           echo "Checking SSH connection and listing directory..."
-          ssh -v -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'ls -la /var/www/front'        
+          ssh -v -o StrictHostKeyChecking=no ${{ secrets.SERVER__USERNAME }}@${{ secrets.SERVER__IP }} 'ls -la /var/www/front'        
 
       - name: Determine last deployed commit
         id: last_commit
         run: |
           echo "Fetching last deployed commit hash from production..."
           set -x
-          LAST_COMMIT=$(ssh -v -o StrictHostKeyChecking=no  ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'if [ -f /var/www/front/LAST_DEPLOYED_COMMIT ]; then cat /var/www/front/LAST_DEPLOYED_COMMIT; else echo ""; fi')
+          LAST_COMMIT=$(ssh -v -o StrictHostKeyChecking=no  ${{ secrets.SERVER__USERNAME }}@${{ secrets.SERVER__IP }} 'if [ -f /var/www/front/LAST_DEPLOYED_COMMIT ]; then cat /var/www/front/LAST_DEPLOYED_COMMIT; else echo ""; fi')
           set +x
           echo "::set-output name=last_commit::$LAST_COMMIT"
 
@@ -68,9 +68,9 @@ jobs:
         if: steps.check_update.outputs.has_updates == 'true'
         uses: appleboy/ssh-action@v0.1.4
         with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.SERVER__IP }}
+          username: ${{ secrets.SERVER__USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE__KEY }}
           port: 22
           script: |
             cd /var/www/front
