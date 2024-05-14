@@ -40,7 +40,7 @@ jobs:
           echo "Checking SSH connection and listing directory..."
           echo "SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}"
           echo "SERVER_IP: ${{ secrets.SERVER_IP }}"
-          echo "OP" : $ {{ secre}}
+          echo "OP" : ${{ secrets.OP}}
       - name: Debug SSH Connection
         run: |
           echo "Checking SSH connection and listing directory..."
