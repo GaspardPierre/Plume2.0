@@ -41,10 +41,15 @@ jobs:
           echo   "SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}"
           echo  "SERVER_IP: ${{ secrets.SERVER_IP }}"
           echo "OP : ${{ secrets.OP}}"
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Debug SSH Connection
         run: |
           echo "Checking SSH connection and listing directory..."
-          ssh -v -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'ls -la /var/www/front'        
+          ssh -i ~/.ssh/id_rsa -v -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'ls -la /var/www/front'    
 
       - name: Determine last deployed commit
         id: last_commit
