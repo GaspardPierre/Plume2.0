@@ -1,6 +1,6 @@
 
 import { List, Datagrid, TextField, EditButton, DeleteButton, SimpleForm , Edit, TextInput, NumberInput,Filter} from 'react-admin';
-// CommentList Component
+
 
 export const CommentList = (props) => {
     return (
@@ -15,7 +15,7 @@ export const CommentList = (props) => {
         </List>
     );
 };
-// CommentEdit Component
+
 
 export const CommentEdit = (props) => {
     return (
