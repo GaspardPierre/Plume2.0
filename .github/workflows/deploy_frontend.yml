@@ -41,6 +41,7 @@ jobs:
           echo   "SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}"
           echo  "SERVER_IP: ${{ secrets.SERVER_IP }}"
           echo "OP : ${{ secrets.OP}}"
+
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.5.3
         with:
@@ -85,9 +86,9 @@ jobs:
             git sparse-checkout init --cone
             git sparse-checkout set dist
             git pull origin master
-            rsync -av --exclude='.git/' front/dist/ ./dist/
-            rm -rf dist
+            rsync -av --exclude='.git/' ~/front/build/ ./dist/
             echo "Front-end deployment completed successfully."
+            echo "${{ github.sha }}" > LAST_DEPLOYED_COMMIT
 
       - name: No updates to deploy
         if: steps.check_update.outputs.has_updates == ''
