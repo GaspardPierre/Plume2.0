@@ -7,28 +7,34 @@ import ReadMore from "../ReadMore/ReadMore";
 import "../../scss/styles.scss";
 import "./Home.scss";
 
-const LatestWork = ({ latestWork}) => {
+const LatestWork = ({ latestWork }) => {
   if (!latestWork) {
     return <p>Pas de nouveau travail pour l'instant.</p>;
   }
+
   const formattedContent = latestWork.content
-    //Replace <p> with \n
-  .replace(/<\/p>/g, '\n')
-  .replace(/<p>/g, '');
+    // Replace <p> with \n
+    .replace(/<\/p>/g, '\n')
+    .replace(/<p>/g, '');
 
-  //Display first 3 lines of content
+  
+  const maxLength = 300; 
+  let truncatedContent = formattedContent;
+  
+  if (formattedContent.length > maxLength) {
+    truncatedContent = formattedContent.substring(0, maxLength) + '...';
+  }
 
-  const firstThreeLines = formattedContent.split('\n').slice(0, 3);
+  // Display the truncated content
   return (
     <div>
-      {firstThreeLines.map((line, index) => (
-        <p className='text-custom font-custom font-color line mt-3 mt-md-1 mt-lg-3' key={index}>
-          {line}
-        </p>
-      ))}
+      <p className='text-custom font-custom font-color line mt-3 mt-md-1 mt-lg-3'>
+        {truncatedContent}
+      </p>
     </div>
   );
 };
+
 
 export default function Home({  }) {
   const [showSeparator, setShowSeparator] = useState(false);
