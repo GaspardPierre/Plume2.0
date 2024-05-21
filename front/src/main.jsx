@@ -64,8 +64,7 @@ const AppLogic = () => {
      <AlertMessage 
   show={showModal} 
   handleClose={handleClose}
-  title="⚠️ Commenter et noter les poèmes => Connexion
-  continuer la navigation => Accueil 🕒"
+  title="⚠️ Connectez vous pour commenter les poèmes! 🕒"
   message={
     <>
        🏠
