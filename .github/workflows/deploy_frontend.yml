@@ -55,7 +55,7 @@ jobs:
           set +x
           echo "::set-output name=last_commit::$LAST_COMMIT"
 
-      - name: Check for updates in dist
+      - name:  Check for updates in dist
         id: check_update
         run: |
           echo "Checking if current commit is different from last deployed or if there is no last deployed commit..."
