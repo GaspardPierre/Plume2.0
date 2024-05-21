@@ -18,7 +18,7 @@ const LatestWork = ({ latestWork }) => {
     .replace(/<p>/g, '');
 
   
-  const maxLength = 300; 
+  const maxLength = 250; 
   let truncatedContent = formattedContent;
   
   if (formattedContent.length > maxLength) {
