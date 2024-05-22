@@ -1,0 +1,86 @@
+name: Deploy React Frontend
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy_frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.20.2'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./front
+
+      - name: Run tests
+        run: npm test
+        working-directory: ./front
+
+      - name: Build
+        run: npm run build
+        working-directory: ./front
+
+      - name: Cache build artifacts
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./front/node_modules
+            ./front/build
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+
+
+      - name: Debug SSH Connection
+        run: |
+          echo "Checking SSH connection and listing directory..."
+          ssh -v -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'ls -la /var/www/front'        
+
+      - name: Determine last deployed commit
+        id: last_commit
+        run: |
+          echo "Fetching last deployed commit hash from production..."
+          set -x
+          LAST_COMMIT=$(ssh -v -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'if [ -f /var/www/front/LAST_DEPLOYED_COMMIT ]; then cat /var/www/front/LAST_DEPLOYED_COMMIT; else echo ""; fi')
+          set +x
+          echo "::set-output name=last_commit::$LAST_COMMIT"
+
+      - name: Check for updates in dist
+        id: check_update
+        run: |
+          echo "Checking if current commit is different from last deployed or if there is no last deployed commit..."
+          if [ -z "${{ steps.last_commit.outputs.last_commit }}" ] || [ "${{ github.sha }}" != "${{ steps.last_commit.outputs.last_commit }}" ]; then
+            echo "::set-output name=has_updates::true"
+          else
+            echo "::set-output name=has_updates::false"
+          fi
+
+      - name: Deploy updates if necessary
+        if: steps.check_update.outputs.has_updates == 'true'
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key:  ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            echo "Deploying front-end..."
+            cd /var/www/front
+            bash deploy_frontend.sh
+            echo ${{ github.sha }} > /var/www/front/LAST_DEPLOYED_COMMIT
+            echo "Front-end deployment completed successfully."
+
+      - name: No updates to deploy
+        if: steps.check_update.outputs.has_updates == 'false'
+        run: echo "No updates found for the front-end."
