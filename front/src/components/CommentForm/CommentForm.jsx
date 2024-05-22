@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import 'react-quill/dist/quill.snow.css';
 import './CommentForm.scss';
 import logo from'../../assets/logo.png';
 
